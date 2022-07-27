@@ -1,0 +1,151 @@
+.bg {
+  position: absolute;
+  width: 80vw;
+  height: 70vh;
+}
+
+.loader0 {
+  font-size: 48px;
+  font-weight: 600;
+  position: relative;
+  top: 52%;
+  left: 40%;
+  display: inline-block;
+  letter-spacing: 2px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(50, 48, 51);
+  box-sizing: border-box;
+  animation: spotlight 2s linear infinite alternate;
+}
+
+@keyframes spotlight {
+  0%,
+  20% {
+    opacity: 1;
+    letter-spacing: 2px;
+  }
+  80%,
+  100% {
+    opacity: 0;
+    letter-spacing: 32px;
+  }
+}
+
+.loader {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  top: 49%;
+  left: 42%;
+  animation: rotate 4s linear infinite;
+}
+.loader:before,
+.loader:after {
+  content: "";
+  display: block;
+  border: 24px solid;
+  border-color: transparent transparent rgb(108, 18, 205) rgb(18, 11, 230);
+  position: absolute;
+  left: 0;
+  top: 0;
+  animation: mvx 1s infinite ease-in;
+}
+.loader:before {
+  left: -1px;
+  top: 1px;
+  border-color: #ff3d00 #ff3d00 transparent transparent;
+  animation-name: mvrx;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes mvx {
+  0%,
+  15% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(-50%, 50%) rotate(180deg);
+  }
+  80%,
+  100% {
+    opacity: 0;
+    transform: translate(0%, 0%) rotate(180deg);
+  }
+}
+@keyframes mvrx {
+  0%,
+  15% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(50%, -50%) rotate(180deg);
+  }
+  80%,
+  100% {
+    opacity: 0;
+    transform: translate(0%, 0%) rotate(180deg);
+  }
+}
+.loader1 {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  top: 49%;
+  left: 34%;
+  animation: rotate 4s linear infinite;
+}
+.loader1:before,
+.loader1:after {
+  content: "";
+  display: block;
+  border: 24px solid;
+  border-color: transparent transparent rgb(108, 18, 205) rgb(18, 11, 230);
+  position: absolute;
+  left: 0;
+  top: 0;
+  animation: mvx 1s infinite ease-in;
+}
+.loader1:before {
+  left: -1px;
+  top: 1px;
+  border-color: #ff3d00 #ff3d00 transparent transparent;
+  animation-name: mvrx;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes mvx {
+  0%,
+  15% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(-50%, 50%) rotate(180deg);
+  }
+  80%,
+  100% {
+    opacity: 0;
+    transform: translate(0%, 0%) rotate(180deg);
+  }
+}
+@keyframes mvrx {
+  0%,
+  15% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(50%, -50%) rotate(180deg);
+  }
+  80%,
+  100% {
+    opacity: 0;
+    transform: translate(0%, 0%) rotate(180deg);
+  }
+}

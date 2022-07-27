@@ -1,0 +1,347 @@
+/* Login start  */
+
+.quote-section {
+  background-image: url(../public/Imgs/login-bg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 100vh;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+}
+
+@media (max-width: 575px) {
+  .quote-section {
+    min-height: auto;
+    padding: 24px;
+  }
+}
+
+.quote-section .blockquote {
+  width: 307px;
+  font-size: 26px;
+  font-weight: bold;
+  line-height: 1.15;
+  color: #000000;
+}
+
+.quote-section .blockquote .blockquote-text {
+  margin-bottom: 24px;
+}
+
+.quote-section .blockquote .blockquote-footer {
+  font-size: 18px;
+  color: #000000;
+  font-weight: normal;
+}
+
+.form-section {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+}
+
+@media (max-width: 575px) {
+  .form-section {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
+
+.login-wrapper {
+  width: 370px;
+  max-width: 100%;
+  margin: auto;
+}
+
+.login-wrapper .form-group {
+  margin-bottom: 26px;
+}
+
+.login-wrapper .form-control {
+  min-height: 55px;
+  padding: 18px 25px;
+  border-radius: 27.5px;
+  border: solid 1px #d5dae2;
+  font-size: 15px;
+}
+
+.login-wrapper .form-control::-webkit-input-placeholder {
+  color: #919aa3;
+}
+
+.login-wrapper .form-control::-moz-placeholder {
+  color: #919aa3;
+}
+
+.login-wrapper .form-control:-ms-input-placeholder {
+  color: #919aa3;
+}
+
+.login-wrapper .form-control::-ms-input-placeholder {
+  color: #919aa3;
+}
+
+.login-wrapper .form-control::placeholder {
+  color: #919aa3;
+}
+
+.login-wrapper .login-btn {
+  width: 100%;
+  border-radius: 27.5px;
+  background-color: #000000;
+  font-size: 17px;
+  font-weight: bold;
+  color: #ffffff;
+  padding: 18px 20px;
+  height: 55px;
+  line-height: 20px;
+  margin-bottom: 28px;
+}
+
+@media (max-width: 575px) {
+  .login-wrapper .login-btn {
+    margin-bottom: 24px;
+  }
+}
+
+.login-wrapper .login-btn:hover {
+  border: 1px solid #000;
+  color: #000;
+  background-color: transparent;
+}
+
+.login-wrapper .forgot-password-link {
+  font-size: 14px;
+  color: #919aa3;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 575px) {
+  .login-wrapper .forgot-password-link {
+    margin-bottom: 6px;
+  }
+}
+
+.login-img {
+  width: 100%;
+  border-radius: 50%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  margin-bottom: 26px;
+}
+
+.login-wrapper-footer-text {
+  font-size: 18px;
+  color: #0d2366;
+  text-align: center;
+}
+
+@media (max-width: 575px) {
+  .login-wrapper-footer-text {
+    margin-bottom: 12px;
+  }
+}
+
+.footer-nav {
+  font-size: 14px;
+  color: #919aa3;
+  text-align: center;
+  margin-top: auto;
+  padding-bottom: 100px;
+}
+
+.footer-nav a {
+  color: inherit;
+}
+
+@media (max-width: 575px) {
+  .footer-nav {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+/* Login End  */
+
+/* *****************************************Sidebar  start********************************/
+.appBar {
+  border: 1px solid #ced4da;
+  -webkit-box-shadow: none;
+  box-shadow: none !important;
+  background-color: #f9f9f9 !important;
+}
+.appBarcom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.css-1hsz34s-MuiDrawer-docked .MuiDrawer-paper {
+  background-color: #f9f9f9 !important;
+}
+
+.navLeft {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: black;
+}
+
+.username {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.sidebarcontainer {
+  display: flex;
+  align-items: center;
+}
+
+.linkNAme {
+  width: 175px !important;
+  font-family: "Mulish";
+  cursor: pointer;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 24px;
+  color: #bfbfbf;
+  width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  
+}
+.chileldText{
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  word-wrap: break-word;
+  cursor: pointer;
+  text-decoration: none;
+  color: #000;
+  
+}
+.chileldTextActive{
+  font-size: 14px;
+  font-weight: 800;
+  word-wrap: break-word;
+  cursor: pointer;
+  text-decoration: none;
+
+}
+
+.linkNAme:hover {
+  color: #000 !important;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 16px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.marginleft {
+  margin-left: 20px;
+  margin-right: 5px;
+}
+.iconstyle {
+  width: 20px;
+}
+.iconcontainer {
+  border-radius: 50%;
+}
+
+.iconActive {
+  background: #1eaae7;
+}
+
+.activeClass {
+  color: #000 !important;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 16px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.openClose {
+  position: absolute;
+  top: 20rem;
+  z-index: 9999;
+  left: 215px;
+}
+.openClose2 {
+  position: absolute;
+  top: 20rem;
+  z-index: 9999;
+  left: 45px;
+}
+
+.parentAll {
+  position: relative;
+}
+
+.bgcolor {
+  background-color: #f9f9f9 !important;
+}
+
+/* width */
+.css-1hsz34s-MuiDrawer-docked .MuiDrawer-paper::-webkit-scrollbar {
+  width: 0px !important;
+}
+/* width */
+.css-2dum1v-MuiDrawer-docked .MuiDrawer-paper::-webkit-scrollbar {
+  width: 0px !important;
+}
+
+.mainBlockSideBar {
+  width: 80%;
+}
+
+
+.showcom{
+  display: flex;
+  margin-left: 2.5rem;
+ 
+
+}
+.hidecom{
+  display: none;
+}
+
+
+
+/* Sidebar End*/
+
+.headingAll{
+  font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 43px;
+    color: #000000;
+}
+
+
+.SvaeButtonAdmin{
+  background-color: #ccc466;
+  border-radius: 30px;
+  color: #fff;
+  font-family: 'Mulish';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 24px;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 30px;
+}
