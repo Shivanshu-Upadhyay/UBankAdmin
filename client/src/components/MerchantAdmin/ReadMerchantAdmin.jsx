@@ -24,7 +24,7 @@ function ReadMerchantAdmin() {
         formData,
         config
       );
-      console.log(result.data.data);
+      console.log(result.data);
       setData(result.data.data);
     } catch (error) {
       console.log(error);

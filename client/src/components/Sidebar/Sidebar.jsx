@@ -195,8 +195,8 @@ export default function Sidebar({ modulePesmission }) {
       name: "Settlement Module",
       iconUrl:
         "https://www.bankconnect.online/assets/merchants/img/business-settings.svg",
-      path: "/BusinessSetting",
-      children: [{ name: "Banner Admin ", path: "/MerchantsTransaction" }],
+      path: "/Settlement",
+      children: [{ name: "Settlement", path: "/Settlement" }],
       authPermission: modulePesmission[10] ? modulePesmission[10].status : 0,
     },
     {

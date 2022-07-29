@@ -17,6 +17,7 @@ const transactionMTController = require("../modules/login/Controller/transaction
 const transactionMRController = require("../modules/login/Controller/transactionMRController");
 const transactionMEODController = require("../modules/login/Controller/transactionMEODController");
 const transactionPMController = require("../modules/login/Controller/transactionPMController");
+const settlementController = require("../modules/login/Controller/settlementController");
 // END SATBIR CODE
 const route = require("express").Router();
 const multer = require("multer");
@@ -154,6 +155,14 @@ route.post('/getCurrency',uploads.none(),transactionPMController.getCurrency);
 route.post('/allMerchant',uploads.none(),transactionMTController.allMerchant);
 
 // ************************************* END ALL MERCHANT ********************************
+
+// defaultSettlement
+route.post('/defaultSettlement',uploads.none(),helper.verify,settlementController.defaultSettlement);
+route.post('/toggleSettlement',uploads.none(),helper.verify,settlementController.toggleSettlement);
+route.post('/createSettlement',uploads.none(),helper.verify,settlementController.createSettlement);
+route.post('/detailSettlement',uploads.none(),helper.verify,settlementController.detailSettlement);
+route.post('/updateSettlement',uploads.none(),settlementController.updateSettlement);
+route.post('/getById',uploads.none(),settlementController.getById);
 
 //🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚
 // 😎😎😎😎😎😎😎😎😎😎😎😎SATBIR API END😎😎😎😎😎😎😎😎😎😎😎😎😎

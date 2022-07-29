@@ -55,6 +55,8 @@ import CreatePayout from "../TransactionMod/MerchantPayout/CreatePayout";
 import baseUrl from "../config/baseUrl";
 import axios from "axios";
 import Dashboard from "../Dashboard/Dashboard";
+import Settlement from "../Settlement/Settlement";
+import Common from "../Settlement/Common";
 
 function Routers() {
   const [auth, setAuth] = useState(localStorage.getItem("admin"));
@@ -365,7 +367,23 @@ function Routers() {
                         <></>
                       ) : item.module === "Settlement Module" &&
                         item.status === 1 ? (
-                        <></>
+                        <>
+                        <Route
+                            path="/Settlement"
+                            element={
+                              <Settlement
+                                authCreate={item.m_add}
+                                authRead={item.m_view}
+                                authUpdate={item.m_edit}
+                                authDelete={item.m_delete}
+                              />
+                            }
+                          /> 
+                          <Route
+                            path="/lolo"
+                            element={<Common />}
+                          />
+                        </>
                       ) : item.module === "Activity Logs" &&
                         item.status === 1 ? (
                         <></>
