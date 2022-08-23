@@ -81,7 +81,7 @@ function BankCodeAkonto({ authCreate, authRead, authUpdate, authDelete }) {
           progress: undefined,
         });
         ReadData();
-        console.log(result);
+        
       }
     } catch (error) {
       console.log(error);
@@ -110,7 +110,7 @@ function BankCodeAkonto({ authCreate, authRead, authUpdate, authDelete }) {
         formData,
         config
       );
-      console.log(result);
+      
       toast.success(result.data.message, {
         position: "bottom-right",
         autoClose: 5000,
@@ -121,7 +121,7 @@ function BankCodeAkonto({ authCreate, authRead, authUpdate, authDelete }) {
         progress: undefined,
       });
       ReadData();
-      console.log(result);
+     
     } catch (error) {
       console.log(error);
     }

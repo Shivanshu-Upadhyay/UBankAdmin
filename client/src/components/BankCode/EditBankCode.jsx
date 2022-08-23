@@ -33,7 +33,7 @@ function EditBankCode() {
           formData,
           config
         );
-         console.log(result.data.data);
+         
         setType1(result.data.data.payment_gate);
         setTitle(result.data.data.title);
         setCode(result.data.data.code);
@@ -82,7 +82,7 @@ function EditBankCode() {
         config
       );
    
-      console.log(result);
+     
 
 
       toast.success(result.data.message, {

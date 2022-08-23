@@ -54,7 +54,7 @@ function AddNewMerchantAdmin() {
         formData,
         config
       );
-      console.log(result);
+     
       navigate("/merchantAdmin")
       toast.success(result.data.message, {
         position: "bottom-right",

@@ -221,7 +221,7 @@ module.exports.toggleStatusMEOD = async function(req,res){
         let {status,id} = req.body;
         // status = Number(status);
 
-        console.log(status,id)
+       
 
         // if(status !== '1'){
         //     return res.json(201,{

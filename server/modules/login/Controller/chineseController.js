@@ -154,7 +154,7 @@ module.exports.getIdChinese = async function (req, res) {
 module.exports.editChinese = async function (req, res) {
   try {
     let { type, title, title_en, id } = req.body;
-    console.log(type);
+    
 
     type = typeof type === "string" ? Number(type) : type;
 
@@ -194,7 +194,7 @@ module.exports.deleteChinese = async function (req, res) {
     let sql = "DELETE FROM tbl_chinese_banks_list WHERE id = ?";
     let result = await mysqlcon(sql, [id]);
 
-    console.log(result);
+    
 
     if (result.affectedRows > 0) {
       return res.json(200, {

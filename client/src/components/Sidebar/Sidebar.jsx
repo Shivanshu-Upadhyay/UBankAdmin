@@ -86,7 +86,6 @@ export default function Sidebar({ modulePesmission }) {
 
   const userTokenExp = () => {
     if (localStorage.getItem("admin")) {
-      console.log("admin");
     } else {
       setIsLoginUser(!isLoginUser);
       navigate("/login-admin");
@@ -119,7 +118,7 @@ export default function Sidebar({ modulePesmission }) {
     {
       name: "Mid Module",
       iconUrl:
-        "	https://www.bankconnect.online/assets/merchants/img/sattlement.svg",
+        "https://www.bankconnect.online/assets/merchants/img/sattlement.svg",
       path: "/Mid",
       children: [{ name: "Mid", path: "/Mid" }],
       authPermission: modulePesmission[2] ? modulePesmission[2].status : 0,
@@ -144,7 +143,7 @@ export default function Sidebar({ modulePesmission }) {
     {
       name: "BankCode Module",
       iconUrl:
-        "	https://www.bankconnect.online/assets/merchants/img/billing.svg",
+        "https://www.bankconnect.online/assets/merchants/img/billing.svg",
       path: "/BankCode",
       children: [{ name: "BankCode", path: "/BankCode" }],
       authPermission: modulePesmission[5] ? modulePesmission[5].status : 0,
@@ -195,8 +194,13 @@ export default function Sidebar({ modulePesmission }) {
       name: "Settlement Module",
       iconUrl:
         "https://www.bankconnect.online/assets/merchants/img/business-settings.svg",
-      path: "/Settlement",
-      children: [{ name: "Settlement", path: "/Settlement" }],
+      path: "/LocalSettlement",
+      children: [
+        { name: "Local Settlement", path: "/LocalSettlement" },
+        { name: "Add Funds", path: "/AddFunds" },
+        { name: "International Settlement", path: "/InternationalSettlement" },
+        { name: "Reports", path: "/SettlementReports" },
+      ],
       authPermission: modulePesmission[10] ? modulePesmission[10].status : 0,
     },
     {
@@ -223,7 +227,7 @@ export default function Sidebar({ modulePesmission }) {
       name: "CMS Module",
       iconUrl:
         "https://www.bankconnect.online/assets/merchants/img/change-password.svg",
-      path: "/ChangePassword",
+      path: "/CMSModule",
       children: [{ name: "CMS", path: "/MerchantsTransaction" }],
       authPermission: modulePesmission[13] ? modulePesmission[13].status : 0,
     },
@@ -231,7 +235,7 @@ export default function Sidebar({ modulePesmission }) {
       name: "Meta Module",
       iconUrl:
         "https://www.bankconnect.online/assets/merchants/img/change-password.svg",
-      path: "/ChangePassword",
+      path: "/MetaModule",
       children: [{ name: "Meta", path: "/MerchantsTransaction" }],
       authPermission: modulePesmission[14] ? modulePesmission[14].status : 0,
     },
@@ -261,7 +265,6 @@ export default function Sidebar({ modulePesmission }) {
   const sideBarPermissionLink = sidebarLink.filter(
     (item) => item.authPermission === 1
   );
-  console.log(sideBarPermissionLink);
 
   return (
     <Box sx={{ display: "flex" }} className="parentAll">
@@ -284,7 +287,7 @@ export default function Sidebar({ modulePesmission }) {
               <img
                 src="https://www.bankconnect.online/assets/merchants/img/logo.png"
                 alt=""
-                width="120px"
+                width="40px"
               />
             ) : (
               <img src="./imges/fav-icon.png" alt="" width="36px" />

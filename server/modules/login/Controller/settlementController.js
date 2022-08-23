@@ -81,9 +81,7 @@ module.exports.toggleSettlement = async function(req,res){
 
         let {id} = req.body;
         let {group_id} = req.user;
-        // console.log("group is :");
-        // console.log(group_id);
-        // console.log(typeof(group_id));
+        
 
         let sql="";
 

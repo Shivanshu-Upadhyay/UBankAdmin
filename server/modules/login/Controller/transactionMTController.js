@@ -281,7 +281,7 @@ module.exports.getIdMT = async function (req, res) {
 module.exports.toggleStatusMT = async function (req, res) {
   try {
     let { status, id } = req.body;
-    console.log(status, id);
+   
 
     if (status > 5 || status < 0) {
       return res.json(201, {
@@ -330,7 +330,7 @@ module.exports.createMT = async function (req, res) {
   try {
     let { merchantId, currency_id, trx_type, transaction_id, name, amount } =
       req.body;
-    console.log(req.body);
+    
 
     let sqlF = "SELECT * FROM tbl_merchant_charges WHERE currency_id = ?";
     let resultF = await mysqlcon(sqlF, [currency_id]);

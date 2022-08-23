@@ -78,8 +78,7 @@ module.exports.subAdmin = async function (req, res) {
 module.exports.toggleSubAdmin = async function (req, res) {
   try {
     let { status, id } = req.body;
-    // status = Number(status);
-    // console.log(status,id)
+    
 
     if (status !== "0" && status !== "1") {
       return res.json(201, {
@@ -118,7 +117,6 @@ module.exports.deleteSubAdmin = async function (req, res) {
     let sql = "DELETE FROM tbl_login WHERE user_id = ?";
     let result = await mysqlcon(sql, [id]);
 
-    console.log(result);
 
     if (result.affectedRows > 0) {
       return res.json(200, {
@@ -141,7 +139,7 @@ module.exports.deleteSubAdmin = async function (req, res) {
 module.exports.createSubAdmin = async function (req, res) {
   try {
     let { fname, lname, email, password, role } = req.body;
-    console.log(req.body);
+   
     password = md5(password);
 
     let details = {
@@ -291,7 +289,7 @@ module.exports.getPermissionDetails = async function (req, res) {
 module.exports.permissionSubAdmin = async function (req, res) {
   try {
     let { id, actionData } = req.body;
-    console.log(req.body);
+    
     let modules = [
       "Sub Admin Module",
       "PG Module",
@@ -316,7 +314,6 @@ module.exports.permissionSubAdmin = async function (req, res) {
 
     actionData = JSON.parse(actionData);
 
-    console.log(actionData);
 
     let result;
 

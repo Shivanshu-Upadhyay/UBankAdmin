@@ -18,7 +18,7 @@ function NewBankCode() {
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(type, title, code);
+    
     try {
       let formData = new FormData();
       formData.append("type", type);

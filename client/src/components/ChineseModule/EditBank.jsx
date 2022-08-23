@@ -33,7 +33,7 @@ function EditBank() {
           config
         );
 
-        console.log(result.data.data.title_en)
+       
      
         setPayment_gate(result.data.data.payment_gate);
         setTitle(result.data.data.title);
@@ -65,7 +65,6 @@ function EditBank() {
       formData.append("title", title);
       formData.append("title_en", title_en);
 
-      console.log(payment_gate)
       const config = {
         headers: {
           "content-type": "multipart/form-data",

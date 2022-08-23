@@ -62,7 +62,7 @@ function BankCode({ authCreate, authRead, authUpdate, authDelete }) {
   }, [page, searchVal, limitVal]);
 
   const deleteRow = async (id) => {
-    console.log(id);
+    
     try {
       let answer = window.confirm("Are you sure you want to delete this row?");
       if (answer) {
@@ -91,7 +91,7 @@ function BankCode({ authCreate, authRead, authUpdate, authDelete }) {
           progress: undefined,
         });
         ReadData();
-        console.log(result);
+        
       }
     } catch (error) {
       console.log(error);
@@ -99,7 +99,7 @@ function BankCode({ authCreate, authRead, authUpdate, authDelete }) {
   };
 
   const toggleStatus = async (id, status) => {
-    console.log(id, status);
+    
     try {
       let formData = new FormData();
       formData.append("id", id);
@@ -121,7 +121,7 @@ function BankCode({ authCreate, authRead, authUpdate, authDelete }) {
         formData,
         config
       );
-      console.log(result);
+    
       toast.success(result.data.message, {
         position: "bottom-right",
         autoClose: 5000,
@@ -132,7 +132,7 @@ function BankCode({ authCreate, authRead, authUpdate, authDelete }) {
         progress: undefined,
       });
       ReadData();
-      console.log(result);
+     
     } catch (error) {
       console.log(error);
     }

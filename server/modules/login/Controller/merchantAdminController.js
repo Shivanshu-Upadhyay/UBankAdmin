@@ -287,7 +287,7 @@ module.exports.createMerchantAdmin = async function (req, res) {
       currencies_req,
     };
 
-    console.log(details);
+   
 
     let sql = "INSERT INTO tbl_user SET ?";
     let result = await mysqlcon(sql, [details]);

@@ -77,7 +77,7 @@ function Contact({ authCreate, authRead, authUpdate, authDelete }) {
           progress: undefined,
         });
         ReadData();
-        console.log(result);
+        
       }
     } catch (error) {
       console.log(error);

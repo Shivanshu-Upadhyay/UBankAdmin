@@ -24,7 +24,7 @@ function ReadContact() {
           formData,
           config
         );
-         console.log(result.data.data);
+        
          setData(result.data.data)
       } catch (error) {
         console.log(error);

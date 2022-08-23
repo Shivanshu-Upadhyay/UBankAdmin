@@ -1,25 +1,35 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
+import { useStateContext } from "../../context/ContextProvider";
 import Login from "../Login/Login";
 import Sidebar from "../Sidebar/Sidebar";
+import Dashboard from "../Dashboard/Dashboard";
+//Api Helper
+import baseUrl from "../config/baseUrl";
+import axios from "axios";
+// MID Module
 import Mid from "../Mid/Mid";
 import NewMID from "../Mid/NewMID";
 import EditMid from "../Mid/EditMid";
+// Bankcode Akonto Module
 import BankCodeAkonto from "../BankCodeAkonto/BankCodeAkonto";
 import NewBankCodeAkonto from "../BankCodeAkonto/NewBankCodeAkonto";
 import EditBankCodeAkonto from "../BankCodeAkonto/EditBankCodeAkonto";
+// Bankcode Module
 import BankCode from "../BankCode/BankCode";
 import NewBankCode from "../BankCode/NewBankCode";
 import EditBankCode from "../BankCode/EditBankCode";
+// Contact Module
 import Contact from "../contact/Contact";
 import ReadContact from "../contact/ReadContact";
+// Marchant Module
 import MerchantAdmin from "../MerchantAdmin/MerchantAdmin";
-import { useStateContext } from "../../context/ContextProvider";
-import { useEffect } from "react";
 import ReadMerchantAdmin from "../MerchantAdmin/ReadMerchantAdmin";
 import AddNewMerchantAdmin from "../MerchantAdmin/AddNewMerchantAdmin";
 import EditMerchantAdmin from "../MerchantAdmin/EditMerchantAdmin";
+// Change Password Module
 import ChangePassword from "../ChangePassword/ChangePassword";
+// Site Setting Module
 import SiteSetting from "../Setting/siteSetting/SiteSetting";
 import EditSiteSetting from "../Setting/siteSetting/EditSiteSetting";
 import CurrencyRate from "../Setting/currency/CurrencyRate";
@@ -51,10 +61,8 @@ import MerchantRefunds from "../TransactionMod/MerchantRefund/MerchantRefunds";
 import EndOfDay from "../TransactionMod/MerchantEnd/EndOfDay";
 import PayoutMerchants from "../TransactionMod/MerchantPayout/PayoutMerchants";
 import CreatePayout from "../TransactionMod/MerchantPayout/CreatePayout";
-//Api Helper
-import baseUrl from "../config/baseUrl";
-import axios from "axios";
-import Dashboard from "../Dashboard/Dashboard";
+
+// Settlemt Module
 import Settlement from "../Settlement/Settlement";
 import Common from "../Settlement/Common";
 
@@ -83,7 +91,7 @@ function Routers() {
         );
         if (result.status === 200) {
           setModulePesmission(result.data.permission);
-          console.log(result.data.permission);
+          
         }
       } catch (error) {
         console.log(error);
@@ -162,7 +170,7 @@ function Routers() {
                           <Route path="/EditGate/:id" element={<EditGate />} />
                           {/* End PG Module */}
                         </>
-                      ) : item.module === "MID Module" && item.status === 1 ? (
+                      ) : item.module ==="MID Module" && item.status === 1 ? (
                         <>
                           <Route
                             path="/Mid"
@@ -368,8 +376,8 @@ function Routers() {
                       ) : item.module === "Settlement Module" &&
                         item.status === 1 ? (
                         <>
-                        <Route
-                            path="/Settlement"
+                          <Route
+                            path="/LocalSettlement"
                             element={
                               <Settlement
                                 authCreate={item.m_add}
@@ -378,11 +386,8 @@ function Routers() {
                                 authDelete={item.m_delete}
                               />
                             }
-                          /> 
-                          <Route
-                            path="/lolo"
-                            element={<Common />}
                           />
+                          <Route path="/LocalSettlementCreate" element={<Common />} />
                         </>
                       ) : item.module === "Activity Logs" &&
                         item.status === 1 ? (

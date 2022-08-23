@@ -63,7 +63,7 @@ const ChangePassForm = () => {
         formData,
         config
       );
-      console.log(result.data);
+     
       if (result.status === 200) { 
         toast.success(result.data.message, {
           position: "bottom-right",

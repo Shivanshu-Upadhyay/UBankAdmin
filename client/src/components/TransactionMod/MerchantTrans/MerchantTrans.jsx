@@ -59,8 +59,8 @@ function MerchantTrans({ authCreate, authRead, authUpdate, authDelete }) {
       formData.append("page", page);
       formData.append("searchText", searchVal);
       formData.append("limit", limitVal);
-      formData.append("to", to);
-      formData.append("from", from);
+      formData.append("to",from );
+      formData.append("from",to );
       formData.append("merchantName", merchantSelect);
 
       const config = {

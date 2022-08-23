@@ -20,7 +20,7 @@ function FilterMerchant({setMerchantSelect}) {
           formData,
           config
         );
-        console.log(result.data.Data);
+        
         if (result.data.Data) {
           setMerchant(result.data.Data);
         }

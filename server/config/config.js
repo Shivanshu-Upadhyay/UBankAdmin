@@ -4,7 +4,6 @@ const config = {
   DB_USERNAME: "appuser",
   DB_PASSWORD: "#E1wM9uQ",
   DB_NAME: "payamtdb",
-
   DB_HOST: "localhost",
   DB_PORT: "3306",
   DB_USERNAME: "root",

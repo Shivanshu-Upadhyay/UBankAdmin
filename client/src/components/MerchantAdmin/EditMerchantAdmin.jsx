@@ -134,7 +134,6 @@ function EditMerchantAdmin() {
         MerchantURL: result.data.data.merchant_url,
       });
 
-      console.log(result.data);
     } catch (error) {
       console.log(error);
     }
@@ -160,7 +159,7 @@ function EditMerchantAdmin() {
 
 const MiddleBlock = ({ check, setCheck, inputdata, setInputdata, country,bankName }) => {
   const [selectedOption, setSelectedOption] = useState(null);
-  console.log(selectedOption);
+  
   const checkHandleChange = (e) => {
     setCheck({ ...check, [e.target.name]: e.target.checked ? 1 : 0 });
   };

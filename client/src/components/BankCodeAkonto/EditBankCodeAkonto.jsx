@@ -28,7 +28,7 @@ function EditBankCodeAkonto() {
           formData,
           config
         );
-         console.log(result.data.data);
+       
         setTitle(result.data.data.title);
         setCode(result.data.data.code);
         setType(result.data.data.type);
@@ -71,7 +71,7 @@ function EditBankCodeAkonto() {
         config
       );
    
-      console.log(result);
+     
 
 
       toast.success(result.data.message, {

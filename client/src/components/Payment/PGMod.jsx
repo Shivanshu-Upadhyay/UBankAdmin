@@ -153,7 +153,7 @@ function PGMod({ authCreate, authRead, authUpdate, authDelete }) {
                   <TableCell align="center">
                     {item.status === 1 ? (
                       <button
-                        className="btn btn-success"
+                        className="btn btn-primary"
                         onClick={() => toggleStatus(item.id, item.status)}
                       >
                         Enable

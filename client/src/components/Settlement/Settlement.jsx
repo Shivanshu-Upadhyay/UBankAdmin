@@ -13,8 +13,9 @@ import { toast } from "react-toastify";
 
 function Settlement({ authCreate, authRead, authUpdate, authDelete }) {
   const tableHeading = [
-    "Final Status Super Admin",
-    "Status",
+    "Final Authorization",
+    "Admin Status",
+    "Settlement Date",
     "Merchant Id",
     "Merchant Name",
     "Source",
@@ -23,7 +24,7 @@ function Settlement({ authCreate, authRead, authUpdate, authDelete }) {
     "Bank Name",
     "From Currency",
     "Exchange Rate",
-    "Requested Amount",
+    "Amount",
     "Settlement Fee",
     "Net Amount For Settlement",
     "Settlement Amount",
@@ -132,6 +133,7 @@ function Settlement({ authCreate, authRead, authUpdate, authDelete }) {
                       </button>
                     )}
                   </TableCell>
+                  <TableCell align="center">{item.created_on}</TableCell>
                   <TableCell align="center">{item.user_id}</TableCell>
                   <TableCell align="center">{item.merchant_name}</TableCell>
                   <TableCell align="center">{item.source}</TableCell>
@@ -198,7 +200,7 @@ function Settlement({ authCreate, authRead, authUpdate, authDelete }) {
           </div>
           <div className="col-3 mb-3 text-end">
             {authCreate ? (
-              <Link to="/lolo">
+              <Link to="/LocalSettlementCreate">
                 <button
                   style={{
                     background: "#ff6600",

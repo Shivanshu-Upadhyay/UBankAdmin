@@ -204,7 +204,7 @@ module.exports.delete = async function (req, res) {
     let sql = "DELETE FROM payment_gateway WHERE id = ?";
     let result = await mysqlcon(sql, [id]);
 
-    console.log(result);
+    
 
     if (result.affectedRows > 0) {
       return res.json(200, {
