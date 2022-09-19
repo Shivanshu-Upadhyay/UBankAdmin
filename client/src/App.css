@@ -260,6 +260,14 @@
 
 .iconActive {
   background: #1eaae7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  padding: 10px 20px;
+  transition: 0.5s;
 }
 
 .activeClass {

@@ -103,7 +103,7 @@ export default function Sidebar({ modulePesmission }) {
     {
       name: "Dashboard",
       iconUrl:
-        "https://www.bankconnect.online/assets/merchants/img/dashboard.svg",
+        "	https://payoway.com/web/assets/admin/icons/dashboard.svg",
       path: "/",
       children: [{ name: "Sub Admin", path: "/subAdmin" }],
       authPermission:1,
@@ -118,7 +118,7 @@ export default function Sidebar({ modulePesmission }) {
     },
     {
       name: "Bank/Acquireres",
-      iconUrl: "https://www.bankconnect.online/assets/merchants/img/payout.svg",
+      iconUrl: "https://payoway.com/web/assets/admin/icons/banks.svg",
       path: "/PGMod",
       children: [{ name: "Payment Gates", path: "/PGMod" }],
       authPermission: modulePesmission[1] ? modulePesmission[1].status : 0,
@@ -126,7 +126,7 @@ export default function Sidebar({ modulePesmission }) {
     {
       name: "Merchants Info",
       iconUrl:
-        "https://www.bankconnect.online/assets/merchants/img/sattlement.svg",
+        "	https://payoway.com/web/assets/admin/icons/merinfo.svg",
       path: "/Mid",
       children: [{ name: "Mid", path: "/Mid" }],
       authPermission: modulePesmission[2] ? modulePesmission[2].status : 0,
@@ -370,7 +370,7 @@ export default function Sidebar({ modulePesmission }) {
                     to={item.path}
                     className={({ isActive }) =>
                       isActive || (toggel && active === index)
-                        ? "iconcontainer iconActive mx-1 my-1"
+                        ? "iconcontainer iconActive mx-2 my-1"
                         : "iconcontainer mx-1 my-1"
                     }
                   >

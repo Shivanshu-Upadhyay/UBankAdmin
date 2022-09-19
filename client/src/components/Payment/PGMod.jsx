@@ -217,7 +217,7 @@ function PGMod({ authCreate, authRead, authUpdate, authDelete }) {
     <>
       <Box component="main" className="allcol restBody">
         <div className="row align-items-center">
-          <h4 className="mb-3 headingAll"> Manage Our Gate > List</h4>
+          <h4 className="mb-3 headingAll"> Manage Our Gate List</h4>
           <div className="col-6 mb-3">
             <Search searchVal={searchVal} setSearchval={setSearchval} />
           </div>
