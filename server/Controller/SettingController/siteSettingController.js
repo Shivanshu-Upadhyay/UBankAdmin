@@ -1,4 +1,4 @@
-const mysqlcon = require("../../../../config/db_connection");
+const mysqlcon = require("../../config/db_connection");
 
 // Default Api 👇
 module.exports.siteSetting = async (req, res) => {

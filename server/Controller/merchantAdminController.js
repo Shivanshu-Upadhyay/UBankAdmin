@@ -1,4 +1,4 @@
-const mysqlcon = require("../../../config/db_connection");
+const mysqlcon = require("../config/db_connection");
 const crypto = require("crypto");
 // 👇Read Api 👇
 module.exports.merchantAdmin = async (req, res) => {

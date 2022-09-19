@@ -1,31 +1,32 @@
-const mysqlcon = require("../../../config/db_connection");
+const mysqlcon = require("../config/db_connection");
 
 let pagination = (total, page, limit) => {
   let numOfPages = Math.ceil(total / limit);
   let start = page * limit - limit;
+
   return { limit, start, numOfPages };
 };
 
-module.exports.paymentGateway = async function (req, res) {
+module.exports.defaultChinese = async function (req, res) {
   try {
     let { searchText } = req.body;
-    // 0 means payin 1 means status
-    let searchTextType;
+
     if (
-      searchText === "Payin" ||
-      searchText === "payin" ||
-      searchText === "PAYIN"
+      searchText === "YTpay" ||
+      searchText === "ytpay" ||
+      searchText === "YTPAY" ||
+      searchText === "Ytpay"
     ) {
-      searchText = 0;
+      searchText = 19;
       searchTextType = 0;
     }
 
     if (
-      searchText === "Payout" ||
-      searchText === "payout" ||
-      searchText === "PAYOUT"
+      searchText === "Gate8" ||
+      searchText === "gate8" ||
+      searchText === "GATE8"
     ) {
-      searchText = 1;
+      searchText = 16;
       searchTextType = 0;
     }
 
@@ -43,17 +44,17 @@ module.exports.paymentGateway = async function (req, res) {
       searchText === "Disable" ||
       searchText === "DISABLE"
     ) {
-      searchText = 1;
+      searchText = 0;
       searchTextType = 1;
     }
 
-    let sql = "SELECT COUNT(*) as Total FROM payment_gateway";
+    let sql = "SELECT COUNT(*) as Total FROM tbl_chinese_banks_list";
 
     if (
-      (searchText === 0 && searchTextType === 0) ||
-      (searchText === 1 && searchTextType === 0)
+      (searchText === 19 && searchTextType === 0) ||
+      (searchText === 16 && searchTextType === 0)
     ) {
-      sql += " WHERE type LIKE '%" + searchText + "%'";
+      sql += " WHERE payment_gate LIKE '%" + searchText + "%'";
     } else if (
       (searchText === 0 && searchTextType === 1) ||
       (searchText === 1 && searchTextType === 1)
@@ -61,15 +62,9 @@ module.exports.paymentGateway = async function (req, res) {
       sql += " WHERE status LIKE '%" + searchText + "%'";
     } else if (searchText) {
       sql +=
-        " WHERE ((gateway_name LIKE '%" +
+        " WHERE ((title LIKE '%" +
         searchText +
-        "%') OR (merNo LIKE '%" +
-        searchText +
-        "%') OR (gateway_number LIKE '%" +
-        searchText +
-        "%') OR (DATE(created_on) LIKE '%" +
-        searchText +
-        "%') OR (DATE(updated_on) LIKE '%" +
+        "%') OR (title_en LIKE '%" +
         searchText +
         "%'))";
     }
@@ -82,13 +77,13 @@ module.exports.paymentGateway = async function (req, res) {
 
     let page = pagination(total, Page, limit);
 
-    let sql1 = "SELECT * FROM payment_gateway";
+    let sql1 = "SELECT * FROM tbl_chinese_banks_list";
 
     if (
-      (searchText === 0 && searchTextType === 0) ||
-      (searchText === 1 && searchTextType === 0)
+      (searchText === 19 && searchTextType === 0) ||
+      (searchText === 16 && searchTextType === 0)
     ) {
-      sql1 += " WHERE type LIKE '%" + searchText + "%'";
+      sql1 += " WHERE payment_gate LIKE '%" + searchText + "%'";
     } else if (
       (searchText === 0 && searchTextType === 1) ||
       (searchText === 1 && searchTextType === 1)
@@ -96,15 +91,9 @@ module.exports.paymentGateway = async function (req, res) {
       sql1 += " WHERE status LIKE '%" + searchText + "%'";
     } else if (searchText) {
       sql1 +=
-        " WHERE ((gateway_name LIKE '%" +
+        " WHERE ((title LIKE '%" +
         searchText +
-        "%') OR (merNo LIKE '%" +
-        searchText +
-        "%') OR (gateway_number LIKE '%" +
-        searchText +
-        "%') OR (DATE(created_on) LIKE '%" +
-        searchText +
-        "%') OR (DATE(updated_on) LIKE '%" +
+        "%') OR (title_en LIKE '%" +
         searchText +
         "%'))";
     }
@@ -135,11 +124,11 @@ module.exports.paymentGateway = async function (req, res) {
   }
 };
 
-module.exports.getId = async function (req, res) {
+module.exports.getIdChinese = async function (req, res) {
   try {
     let { id } = req.body;
 
-    let sql = "SELECT * FROM payment_gateway WHERE id = ?";
+    let sql = "SELECT * FROM tbl_chinese_banks_list WHERE id = ?";
 
     let result = await mysqlcon(sql, [id]);
 
@@ -162,19 +151,20 @@ module.exports.getId = async function (req, res) {
   }
 };
 
-module.exports.edit = async function (req, res) {
+module.exports.editChinese = async function (req, res) {
   try {
-    let { type, gateway_name, merchantN, gatewayN, key, id } = req.body;
+    let { type, title, title_en, id } = req.body;
+    
+
+    type = typeof type === "string" ? Number(type) : type;
 
     let details = {
-      type: type,
-      gateway_name: gateway_name,
-      merNo: merchantN,
-      gateway_number: gatewayN,
-      key: key,
+      payment_gate: type,
+      title: title,
+      title_en: title_en,
     };
 
-    let sql = "UPDATE payment_gateway SET ? WHERE id = ?";
+    let sql = "UPDATE tbl_chinese_banks_list SET ? WHERE id = ?";
 
     let result = await mysqlcon(sql, [details, id]);
 
@@ -197,11 +187,11 @@ module.exports.edit = async function (req, res) {
   }
 };
 
-module.exports.delete = async function (req, res) {
+module.exports.deleteChinese = async function (req, res) {
   try {
     let { id } = req.body;
 
-    let sql = "DELETE FROM payment_gateway WHERE id = ?";
+    let sql = "DELETE FROM tbl_chinese_banks_list WHERE id = ?";
     let result = await mysqlcon(sql, [id]);
 
     
@@ -214,6 +204,7 @@ module.exports.delete = async function (req, res) {
     } else {
       return res.json(201, {
         message: "Error while Deleting",
+        data: result,
       });
     }
   } catch (error) {
@@ -224,19 +215,19 @@ module.exports.delete = async function (req, res) {
   }
 };
 
-module.exports.create = async function (req, res) {
+module.exports.createChinese = async function (req, res) {
   try {
-    let { type, gateway_name, merchantN, gatewayN, key } = req.body;
+    let { type, title, title_en } = req.body;
+
+    type = typeof type === "string" ? Number(type) : type;
 
     let details = {
-      type: type,
-      gateway_name: gateway_name,
-      merNo: merchantN,
-      gateway_number: gatewayN,
-      key: key,
+      payment_gate: type,
+      title: title,
+      title_en: title_en,
     };
 
-    let sql = "INSERT INTO payment_gateway SET ?";
+    let sql = "INSERT INTO tbl_chinese_banks_list SET ?";
 
     let result = await mysqlcon(sql, [details]);
 
@@ -259,13 +250,28 @@ module.exports.create = async function (req, res) {
   }
 };
 
-module.exports.togglePayment = async function (req, res) {
+module.exports.toggleChinese = async function (req, res) {
   try {
     let { status, id } = req.body;
-    // status = Number(status);
 
-    let sql = "UPDATE payment_gateway SET status = ? WHERE id = ?";
+    let sql = "UPDATE tbl_chinese_banks_list SET status = ? WHERE id = ?";
+    // let sql1 ="update tbl_chinese_banks_list SET status = ? WHERE id  =  ?";
+    // let result1 = await mysqlcon(sql,[status,id]);
     let result = await mysqlcon(sql, [status, id]);
+
+    // if(result){
+    //     return res.json(200,{
+    //         message: "Row Updated",
+
+    //     })
+    // }else{
+
+    //     return res.json(201,{
+    //         message: "Error while updating",
+
+    //     })
+
+    // }
 
     if (result.affectedRows > 0) {
       return res.json(200, {

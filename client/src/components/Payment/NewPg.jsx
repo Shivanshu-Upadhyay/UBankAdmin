@@ -52,7 +52,7 @@ function NewPg() {
 
   return (
     <>
-      <Header title="Our Gate" path="/PGMod" />
+      <Header title=" Manage Our Gate > List" path="/PGMod" />
       <Common
         type={type}
         setType={setType}

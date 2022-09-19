@@ -210,10 +210,11 @@
   cursor: pointer;
   font-style: normal;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 24px;
   color: #bfbfbf;
   width: 100%;
+  margin: 5px 0px;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -224,11 +225,12 @@
   font-weight: 600;
   word-wrap: break-word;
   cursor: pointer;
+  margin: 40px;
   text-decoration: none;
   color: #000;
 }
 .chileldTextActive {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 800;
   word-wrap: break-word;
   cursor: pointer;
@@ -240,7 +242,7 @@
   font-family: "Mulish";
   font-style: normal;
   font-weight: 800;
-  font-size: 16px;
+  font-size: 18px;
   -webkit-transition: 0.5s;
   transition: 0.5s;
 }

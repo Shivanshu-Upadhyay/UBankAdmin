@@ -1,8 +1,7 @@
-const mysqlcon = require("../../../config/db_connection");
+const mysqlcon = require("../config/db_connection");
 
 // 👇Read Api 👇
-
-module.exports.readMid = async (req, res) => {
+module.exports.readBankCodeAkonto = async (req, res) => {
   // 👇Pagination 👇
   let pagination = (total, page, limit) => {
     let numOfPages = Math.ceil(total / limit);
@@ -10,48 +9,30 @@ module.exports.readMid = async (req, res) => {
     return { limit, start, numOfPages };
   };
 
-  
   try {
     let searchItem = req.body.searchItem;
-    let sql = "select count (*) as Total from tbl_ingenico_mid";
+    let sql = "select count (*) as Total from tbl_akonto_banks_code";
     let sqlCount =
-      "select count (*) as Total FROM tbl_ingenico_mid WHERE sec_key  LIKE '%" +
+      "select count (*) as Total FROM tbl_akonto_banks_code WHERE title  LIKE '%" +
       searchItem +
-      "%' OR  mid  LIKE '%" +
-      searchItem +
-      "%' or  iv  LIKE '%" +
-      searchItem +
-      "%' or  merchant_url  LIKE '%" +
-      searchItem +
-      "%' or  merchant_otherurl  LIKE '%" +
-      searchItem +
-      "%' or  title  LIKE '%" +
+      "%' OR  code  LIKE '%" +
       searchItem +
       "%'";
-    
-   
-    let result = await mysqlcon(searchItem ? sqlCount:sql);
+
+    let result = await mysqlcon(searchItem ? sqlCount : sql);
     let total = result[0].Total;
     let page = req.body.page ? Number(req.body.page) : 1;
     let limit = req.body.limit ? Number(req.body.limit) : 10;
     let { start, numOfPages } = pagination(total, page, limit);
-   
+    
 
-    let sql1 = "SELECT * FROM tbl_ingenico_mid LIMIT ?,?";
+    let sql1 = "SELECT * FROM tbl_akonto_banks_code LIMIT ?,?";
     let sql2 =
-      "SELECT * FROM tbl_ingenico_mid WHERE sec_key  LIKE '%" +
+      "SELECT * FROM tbl_akonto_banks_code WHERE title  LIKE '%" +
       searchItem +
-      "%' OR  mid  LIKE '%" +
+      "%' OR  code  LIKE '%" +
       searchItem +
-      "%' or  iv  LIKE '%" +
-      searchItem +
-      "%' or  merchant_url  LIKE '%" +
-      searchItem +
-      "%' or  merchant_otherurl  LIKE '%" +
-      searchItem +
-      "%' or  title  LIKE '%" +
-      searchItem +
-      "%' LIMIT ?,?";
+      "%'  LIMIT ?,?";
 
     let result1 = await mysqlcon(searchItem ? sql2 : sql1, [start, limit]);
 
@@ -79,25 +60,19 @@ module.exports.readMid = async (req, res) => {
     });
   }
 };
-
 // 👇 Update Api 👇
-
-module.exports.updateMid = async function (req, res) {
+module.exports.updateBankCodeAkonto = async function (req, res) {
   try {
-    let { title, mid, sec_key, iv, merchant_url, merchant_otherurl, id } =
-      req.body;
-
+    let { type, title, code, id } = req.body;
+    
     let details = {
+      type,
       title,
-      mid,
-      sec_key,
-      iv,
-      merchant_url,
-      merchant_otherurl,
+      code,
     };
 
     if (id) {
-      let sql = "UPDATE tbl_ingenico_mid SET ? where id = ?";
+      let sql = "UPDATE tbl_akonto_banks_code SET ? where id = ?";
       let result = await mysqlcon(sql, [details, id]);
       if (result) {
         return res.json(200, {
@@ -120,14 +95,16 @@ module.exports.updateMid = async function (req, res) {
     });
   }
 };
-
 // Read Update Api 👇
-module.exports.readUpdateMid = async function (req, res) {
+module.exports.readUpdateBankCodeAkonto = async function (req, res) {
   try {
     let { id } = req.body;
-    let sql = "SELECT * FROM tbl_ingenico_mid WHERE id = ?";
+    let sql = "SELECT * FROM tbl_akonto_banks_code WHERE id = ?";
     let result = await mysqlcon(sql, [id]);
-    res.json(result[0]);
+    return res.json(200, {
+      message: "Data Fetched Successfully✅",
+      data: result[0],
+    });
   } catch (error) {
     return res.json(500, {
       message: "error occurered",
@@ -135,15 +112,14 @@ module.exports.readUpdateMid = async function (req, res) {
     });
   }
 };
-
 // 👇Delete Api 👇
-
-module.exports.deleteMid = async function (req, res) {
+module.exports.deleteBankCodeAkonto = async function (req, res) {
   try {
     let { id } = req.body;
 
-    let sql = "DELETE FROM tbl_ingenico_mid WHERE id = ?";
+    let sql = "DELETE FROM tbl_akonto_banks_code WHERE id = ?";
     let result = await mysqlcon(sql, [id]);
+
 
     if (result) {
       return res.json(200, {
@@ -161,23 +137,18 @@ module.exports.deleteMid = async function (req, res) {
     });
   }
 };
-
 // 👇 Create Api👇
-
-module.exports.createMid = async function (req, res) {
+module.exports.createBankCodeAkonto = async function (req, res) {
   try {
-    let { title, mid, sec_key, iv, merchant_url, merchant_otherurl } = req.body;
+    let { type, title, code } = req.body;
 
     let details = {
+      type,
       title,
-      mid,
-      sec_key,
-      iv,
-      merchant_url,
-      merchant_otherurl,
+      code,
     };
 
-    let sql = "INSERT INTO tbl_ingenico_mid SET ?";
+    let sql = "INSERT INTO tbl_akonto_banks_code SET ?";
 
     let result = await mysqlcon(sql, [details]);
 
@@ -197,5 +168,28 @@ module.exports.createMid = async function (req, res) {
     });
   }
 };
+// 👇 TOGGLE Api👇
+module.exports.toggleBankCodeAkonto = async function (req, res) {
+  try {
+    let { id, status } = req.body;
+    let sql = "UPDATE tbl_akonto_banks_code SET status = ? WHERE id = ?";
 
+    let result = await mysqlcon(sql, [status, id]);
+
+    if (result) {
+      return res.json(200, {
+        message: "Data Updated Successfully✅",
+      });
+    } else {
+      return res.json(201, {
+        message: "Error While Updating",
+      });
+    }
+  } catch (error) {
+    return res.json(500, {
+      message: "error occurered",
+      error: error,
+    });
+  }
+};
 // 🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚

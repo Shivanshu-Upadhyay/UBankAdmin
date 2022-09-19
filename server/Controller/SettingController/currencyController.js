@@ -1,8 +1,8 @@
-const mysqlcon = require("../../../../config/db_connection");
+const mysqlcon = require("../../config/db_connection");
 
 // Default Api 👇
 
-module.exports.defaultExchange = async (req, res) => {
+module.exports.defaultCurrency = async (req, res) => {
   // 👇Pagination 👇
   let pagination = (total, page, limit) => {
     let numOfPages = Math.ceil(total / limit);
@@ -12,13 +12,13 @@ module.exports.defaultExchange = async (req, res) => {
 
   try {
     let searchItem = req.body.searchItem;
-    let sql = "select count (*) as Total from tbl_settlement_exchange_rate";
+    let sql = "select count (*) as Total from tbl_settled_currency";
     let sqlCount =
-      "select count (*) as Total FROM tbl_settlement_exchange_rate WHERE rate  LIKE '%" +
+      "select count (*) as Total FROM tbl_settled_currency WHERE rate  LIKE '%" +
       searchItem +
-      "%' OR  exchange_title  LIKE '%" +
+      "%' OR  deposit_currency  LIKE '%" +
       searchItem +
-      "%' or  created_on  LIKE '%" +
+      "%' or  settled_currency  LIKE '%" +
       searchItem +
       "%'";
 
@@ -28,13 +28,13 @@ module.exports.defaultExchange = async (req, res) => {
     let limit = req.body.limit ? Number(req.body.limit) : 10;
     let { start, numOfPages } = pagination(total, page, limit);
 
-    let sql1 = "SELECT * FROM tbl_settlement_exchange_rate LIMIT ?,?";
+    let sql1 = "SELECT * FROM tbl_settled_currency LIMIT ?,?";
     let sql2 =
-      "SELECT * FROM tbl_settlement_exchange_rate WHERE rate  LIKE '%" +
+      "SELECT * FROM tbl_settled_currency WHERE rate  LIKE '%" +
       searchItem +
-      "%' OR  exchange_title  LIKE '%" +
+      "%' OR  deposit_currency  LIKE '%" +
       searchItem +
-      "%' or  created_on  LIKE '%" +
+      "%' or  settled_currency  LIKE '%" +
       searchItem +
       "%' LIMIT ?,?";
 
@@ -63,18 +63,20 @@ module.exports.defaultExchange = async (req, res) => {
       error: error,
     });
   }
-};   
+};
+
 // 👇 Update Api 👇
-module.exports.updateExchange = async function (req, res) {
+module.exports.updateCurrency = async function (req, res) {
   try {
-    let { exchange_title,  rate, id } = req.body;
- 
+    let { deposit_currency, settled_currency, rate, id } =
+      req.body;
+
     let details = {
-        exchange_title, rate
+        deposit_currency, settled_currency, rate
     };
 
     if (id) {
-      let sql = "UPDATE tbl_settlement_exchange_rate SET ? where id = ?";
+      let sql = "UPDATE tbl_settled_currency SET ? where id = ?";
       let result = await mysqlcon(sql, [details, id]);
       if (result) {
         return res.json(200, {
@@ -99,10 +101,10 @@ module.exports.updateExchange = async function (req, res) {
 };
 
 // Read One Api 👇
-module.exports.readOneExchange = async function (req, res) {
+module.exports.readOneCurrency = async function (req, res) {
   try {
     let { id } = req.body;
-    let sql = "SELECT * FROM tbl_settlement_exchange_rate WHERE id = ?";
+    let sql = "SELECT * FROM tbl_settled_currency WHERE id = ?";
     let result = await mysqlcon(sql, [id]);
     res.json(result[0]);
   } catch (error) {
@@ -114,11 +116,11 @@ module.exports.readOneExchange = async function (req, res) {
 };
 
 // 👇Delete Api 👇
-module.exports.deleteExchange = async function (req, res) {
+module.exports.deleteCurrency = async function (req, res) {
   try {
     let { id } = req.body;
 
-    let sql = "DELETE FROM tbl_settlement_exchange_rate WHERE id = ?";
+    let sql = "DELETE FROM tbl_settled_currency WHERE id = ?";
     let result = await mysqlcon(sql, [id]);
 
     if (result) {
@@ -139,16 +141,17 @@ module.exports.deleteExchange = async function (req, res) {
 };
 
 // 👇 Create Api👇
-module.exports.createExchange = async function (req, res) {
+module.exports.createCurrency = async function (req, res) {
   try {
-    let { exchange_title, rate } = req.body;
+    let { deposit_currency, settled_currency, rate } = req.body;
 
     let details = {
-     exchange_title,
+      deposit_currency,
+      settled_currency,
       rate,
     };
 
-    let sql = "INSERT INTO tbl_settlement_exchange_rate SET ?";
+    let sql = "INSERT INTO tbl_settled_currency SET ?";
 
     let result = await mysqlcon(sql, [details]);
 

@@ -1,4 +1,4 @@
-const mysqlcon = require("../../../config/db_connection");
+const mysqlcon = require("../config/db_connection");
 var md5 = require("md5");
 let pagination = (total, page, limit) => {
   let numOfPages = Math.ceil(total / limit);

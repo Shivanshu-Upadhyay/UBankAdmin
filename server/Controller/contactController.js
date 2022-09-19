@@ -1,8 +1,7 @@
-const mysqlcon = require("../../../../config/db_connection");
+const mysqlcon = require("../config/db_connection");
 
-// Default Api 👇
-
-module.exports.defaultAllUpi = async (req, res) => {
+// 👇All read Api 👇
+module.exports.Contact = async (req, res) => {
   // 👇Pagination 👇
   let pagination = (total, page, limit) => {
     let numOfPages = Math.ceil(total / limit);
@@ -12,13 +11,17 @@ module.exports.defaultAllUpi = async (req, res) => {
 
   try {
     let searchItem = req.body.searchItem;
-    let sql = "select count (*) as Total from tbl_upi_block";
+    let sql = "select count (*) as Total from tbl_contact_us";
     let sqlCount =
-      "select count (*) as Total FROM tbl_upi_block WHERE rate  LIKE '%" +
+      "select count (*) as Total FROM tbl_contact_us WHERE name  LIKE '%" +
       searchItem +
-      "%' OR  deposit_currency  LIKE '%" +
+      "%' OR  mobile  LIKE '%" +
       searchItem +
-      "%' or  settled_currency  LIKE '%" +
+      "%' OR  email  LIKE '%" +
+      searchItem +
+      "%' OR  message  LIKE '%" +
+      searchItem +
+      "%' OR  created_on  LIKE '%" +
       searchItem +
       "%'";
 
@@ -27,22 +30,27 @@ module.exports.defaultAllUpi = async (req, res) => {
     let page = req.body.page ? Number(req.body.page) : 1;
     let limit = req.body.limit ? Number(req.body.limit) : 10;
     let { start, numOfPages } = pagination(total, page, limit);
+    
 
-    let sql1 = "SELECT * FROM tbl_upi_block LIMIT ?,?";
+    let sql1 = "SELECT * FROM tbl_contact_us LIMIT ?,?";
     let sql2 =
-      "SELECT * FROM tbl_upi_block WHERE rate  LIKE '%" +
+      "SELECT * FROM tbl_contact_us WHERE name  LIKE '%" +
       searchItem +
-      "%' OR  deposit_currency  LIKE '%" +
+      "%' OR  mobile  LIKE '%" +
       searchItem +
-      "%' or  settled_currency  LIKE '%" +
+      "%' OR  email  LIKE '%" +
       searchItem +
-      "%' LIMIT ?,?";
+      "%' OR  message  LIKE '%" +
+      searchItem +
+      "%' OR  created_on  LIKE '%" +
+      searchItem +
+      "%'  LIMIT ?,?";
 
     let result1 = await mysqlcon(searchItem ? sql2 : sql1, [start, limit]);
 
     if (result1.length === 0) {
       return res.json(201, {
-        message: `Showing ${total} from ${limit} data `,
+        message: `Showing ${limit} data from ${total}  `,
         currentPage: page,
         totalPages: numOfPages,
         pageLimit: limit,
@@ -50,7 +58,7 @@ module.exports.defaultAllUpi = async (req, res) => {
       });
     } else {
       return res.json(200, {
-        message: `Showing ${total} from ${limit} data `,
+        message: `Showing ${limit}  data from ${total} `,
         currentPage: page,
         totalPages: numOfPages,
         pageLimit: limit,
@@ -65,28 +73,39 @@ module.exports.defaultAllUpi = async (req, res) => {
   }
 };
 
-// 👇 Create Api👇
-module.exports.createAllUpi = async function (req, res) {
+// Read Update Api 👇
+module.exports.readContact = async function (req, res) {
   try {
-    let { deposit_currency, settled_currency, rate } = req.body;
+    let { id } = req.body;
+    let sql = "SELECT * FROM tbl_contact_us WHERE id = ?";
+    let result = await mysqlcon(sql, [id]);
+    return res.json(200, {
+      message: "Data Fetched Successfully✅",
+      data: result[0],
+    });
+  } catch (error) {
+    return res.json(500, {
+      message: "error occurered",
+      error: error,
+    });
+  }
+};
+// 👇Delete Api 👇
+module.exports.deleteContact = async function (req, res) {
+  try {
+    let { id } = req.body;
 
-    let details = {
-      deposit_currency,
-      settled_currency,
-      rate,
-    };
+    let sql = "DELETE FROM tbl_contact_us WHERE id = ?";
+    let result = await mysqlcon(sql, [id]);
 
-    let sql = "INSERT INTO tbl_upi_block SET ?";
-
-    let result = await mysqlcon(sql, [details]);
 
     if (result) {
       return res.json(200, {
-        message: "Data Inserted Successfully✅",
+        message: "Delete Successfully✅",
       });
     } else {
       return res.json(201, {
-        message: "Error While Creating",
+        message: "Error while Deleting",
       });
     }
   } catch (error) {
@@ -96,5 +115,7 @@ module.exports.createAllUpi = async function (req, res) {
     });
   }
 };
+
+
 
 // 🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚

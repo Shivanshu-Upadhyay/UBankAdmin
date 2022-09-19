@@ -1,4 +1,8 @@
-const mysqlcon = require("../../../config/db_connection");
+var dateTime = require("node-datetime");
+const mysqlcon = require("../config/db_connection");
+
+var dt = dateTime.create();
+var formatted_date = dt.format("Y-m-d H:M:S");
 
 let pagination = (total, page, limit) => {
   let numOfPages = Math.ceil(total / limit);
@@ -7,62 +11,75 @@ let pagination = (total, page, limit) => {
   return { limit, start, numOfPages };
 };
 
-module.exports.defaultPM = async function (req, res) {
+//completed with the serach filter module
+module.exports.defaultMT = async function (req, res) {
   try {
-    let { from, to, merchantName, status, searchText } = req.body;
+    let { from, to, merchantName, status, statusType, searchText } = req.body;
+
+    let sqlM =
+      "SELECT id,name from tbl_user WHERE status = 1 AND complete_profile = 1";
+    let resultM = await mysqlcon(sqlM);
 
     let sqld;
 
     if (from && to) {
       sqld = "";
       sqld +=
-        " AND DATE(tbl_icici_payout_transaction_response_details.created_on) >= '" +
+        " WHERE DATE(created_on) >= '" +
         from +
-        "' AND DATE(tbl_icici_payout_transaction_response_details.created_on) <= '" +
+        "' AND DATE(created_on) <= '" +
         to +
         "'";
 
       if (merchantName) {
-        sqld +=
-          " AND tbl_icici_payout_transaction_response_details.users_id = '" +
-          merchantName +
-          "'";
+        sqld += " AND user_id = '" + merchantName + "'";
 
-        if (status) {
+        if (status && statusType === "0") {
+          sqld += " AND status = '" + status + "'";
+        } else if (status && statusType === "1") {
           sqld +=
-            " AND tbl_icici_payout_transaction_response_details.status = '" +
-            status +
-            "'";
+            " AND status = '" + status + "' AND pending_hit_response_by = 1";
+        } else if (status && statusType === "2") {
+          sqld +=
+            " AND status = '" + status + "' AND pending_hit_response_by = 2";
         }
-      } else if (status) {
+      }
+      if (status && statusType === "0") {
+        sqld += " AND status = '" + status + "'";
+      } else if (status && statusType === "1") {
         sqld +=
-          " AND tbl_icici_payout_transaction_response_details.status = '" +
-          status +
-          "'";
+          " AND status = '" + status + "' AND pending_hit_response_by = 1";
+      } else if (status && statusType === "2") {
+        sqld +=
+          " AND status = '" + status + "' AND pending_hit_response_by = 2";
       }
     } else if (merchantName) {
       sqld = "";
 
-      sqld +=
-        " AND tbl_icici_payout_transaction_response_details.users_id = '" +
-        merchantName +
-        "'";
-      if (status) {
+      sqld += " WHERE user_id = '" + merchantName + "'";
+      if (status && statusType === "0") {
+        sqld += " AND status = '" + status + "'";
+      } else if (status && statusType === "1") {
         sqld +=
-          " AND tbl_icici_payout_transaction_response_details.status = '" +
-          status +
-          "'";
+          " AND status = '" + status + "' AND pending_hit_response_by = 1";
+      } else if (status && statusType === "2") {
+        sqld +=
+          " AND status = '" + status + "' AND pending_hit_response_by = 2";
       }
-    } else if (status) {
+    } else if (status && statusType === "0") {
+      sqld = "";
+      sqld += " WHERE status = '" + status + "'";
+    } else if (status && statusType === "1") {
       sqld = "";
       sqld +=
-        " AND tbl_icici_payout_transaction_response_details.status = '" +
-        status +
-        "'";
+        " WHERE status = '" + status + "' AND pending_hit_response_by = 1";
+    } else if (status && statusType === "2") {
+      sqld = "";
+      sqld +=
+        " WHERE status = '" + status + "' AND pending_hit_response_by = 2";
     }
 
-    let sql =
-      "SELECT COUNT(*) as Total FROM tbl_user INNER JOIN tbl_icici_payout_transaction_response_details ON tbl_user.id = tbl_icici_payout_transaction_response_details.users_id WHERE tbl_user.status = 1 AND complete_profile = 1";
+    let sql = "SELECT COUNT(*) as Total FROM tbl_merchant_transaction";
 
     if (from || to || merchantName || status) {
       sql += sqld;
@@ -71,14 +88,26 @@ module.exports.defaultPM = async function (req, res) {
     if (searchText) {
       if (from || to || merchantName || status) {
         sql +=
-          " AND tbl_icici_payout_transaction_response_details.uniqueid LIKE '%" +
+          " AND ((order_no LIKE '%" +
           searchText +
-          "%'";
+          "%') OR (payment_type LIKE '%" +
+          searchText +
+          "%') OR (transaction_id LIKE '%" +
+          searchText +
+          "%') OR (ammount_type LIKE '%" +
+          searchText +
+          "%'))";
       } else {
         sql +=
-          " AND tbl_icici_payout_transaction_response_details.uniqueid LIKE '%" +
+          " WHERE ((order_no LIKE '%" +
           searchText +
-          "%'";
+          "%') OR (payment_type LIKE '%" +
+          searchText +
+          "%') OR (transaction_id LIKE '%" +
+          searchText +
+          "%') OR (ammount_type LIKE '%" +
+          searchText +
+          "%'))";
       }
     }
 
@@ -90,10 +119,7 @@ module.exports.defaultPM = async function (req, res) {
 
     let page = pagination(total, Page, limit);
 
-    let sql1 =
-      "SELECT tbl_user.name,tbl_icici_payout_transaction_response_details.* FROM tbl_user INNER JOIN tbl_icici_payout_transaction_response_details ON tbl_user.id = tbl_icici_payout_transaction_response_details.users_id WHERE tbl_user.status = 1 AND complete_profile = 1";
-
-    // "SELECT COUNT(*) as Total FROM tbl_user INNER JOIN tbl_icici_payout_transaction_response_details ON tbl_user.id = tbl_icici_payout_transaction_response_details.users_id WHERE tbl_user.status = 1 AND complete_profile = 1"
+    let sql1 = "SELECT * FROM tbl_merchant_transaction";
 
     if (from || to || merchantName || status) {
       sql1 += sqld;
@@ -102,14 +128,26 @@ module.exports.defaultPM = async function (req, res) {
     if (searchText) {
       if (from || to || merchantName || status) {
         sql1 +=
-          " AND tbl_icici_payout_transaction_response_details.uniqueid LIKE '%" +
+          " AND ((order_no LIKE '%" +
           searchText +
-          "%'";
+          "%') OR (payment_type LIKE '%" +
+          searchText +
+          "%') OR (transaction_id LIKE '%" +
+          searchText +
+          "%') OR (ammount_type LIKE '%" +
+          searchText +
+          "%'))";
       } else {
         sql1 +=
-          " AND tbl_icici_payout_transaction_response_details.uniqueid LIKE '%" +
+          " WHERE ((order_no LIKE '%" +
           searchText +
-          "%'";
+          "%') OR (payment_type LIKE '%" +
+          searchText +
+          "%') OR (transaction_id LIKE '%" +
+          searchText +
+          "%') OR (ammount_type LIKE '%" +
+          searchText +
+          "%'))";
       }
     }
 
@@ -117,17 +155,9 @@ module.exports.defaultPM = async function (req, res) {
 
     let result1 = await mysqlcon(sql1, [page.start, page.limit]);
 
-    let sqlM =
-      "SELECT id,name FROM tbl_user WHERE status = 1 AND complete_profile = 1";
-    let resultM = await mysqlcon(sqlM);
-
     if (result1.length === 0) {
       return res.json(201, {
-        message: `No record found.`,
-        currentPage: Page,
-        totalPages: page.numOfPages,
-        pageLimit: page.limit,
-        merchants: resultM,
+        message: `No Record Found`,
         data: result1,
       });
     } else {
@@ -212,6 +242,8 @@ module.exports.defaultPM = async function (req, res) {
       });
     }
   } catch (error) {
+    console.log(error);
+
     return res.json(500, {
       message: "error occurered",
       error: error,
@@ -219,35 +251,65 @@ module.exports.defaultPM = async function (req, res) {
   }
 };
 
-// for toggle the status
+module.exports.getIdMT = async function (req, res) {
+  try {
+    let { id } = req.body;
 
-module.exports.toggleStatusPM = async function (req, res) {
+    let sql = "SELECT * FROM tbl_merchant_transaction WHERE invoice_id = ?";
+
+    let result = await mysqlcon(sql, [id]);
+
+    if (result.length !== 0) {
+      return res.json(200, {
+        message: `Records for id =  ${id}`,
+        data: result[0],
+      });
+    } else {
+      return res.json(201, {
+        message: `No Record Found`,
+        data: result[0],
+      });
+    }
+  } catch (error) {
+    return res.json(500, {
+      message: "error occurered",
+      error: error,
+    });
+  }
+};
+
+module.exports.toggleStatusMT = async function (req, res) {
   try {
     let { status, id } = req.body;
-    // status = Number(status);
-    
+   
 
-    if (status !== "PENDING" && status !== "SUCCESS" && status !== "FAILURE") {
+    if (status > 5 || status < 0) {
       return res.json(201, {
         message: `Status Not Updated`,
       });
     }
 
     let sql =
-      "UPDATE tbl_icici_payout_transaction_response_details SET status = ? WHERE id = ?";
+      "UPDATE tbl_merchant_transaction SET status = ? WHERE invoice_id = ?";
     let result = await mysqlcon(sql, [status, id]);
 
     if (result.affectedRows > 0) {
       return res.json(200, {
         message: `Status ${
-          status === "SUCCESS"
+          status === "0"
+            ? "Failed"
+            : status === "1"
             ? "Success"
-            : status === "PENDING"
+            : status === "2"
+            ? "Waiting"
+            : status === "3"
             ? "Pending"
-            : status === "FAILURE"
-            ? "Failure"
+            : status === "4"
+            ? "Refund"
+            : status === "5"
+            ? "ChargeBack"
             : ""
-        } Successfully `,
+        } `,
         data: result,
       });
     } else {
@@ -264,74 +326,88 @@ module.exports.toggleStatusPM = async function (req, res) {
   }
 };
 
-// for creating
-module.exports.createPM = async function (req, res) {
+module.exports.createMT = async function (req, res) {
   try {
-    let { id, currency_id, trx_type, transaction_id, payee_name, amount } =
+    let { merchantId, currency_id, trx_type, transaction_id, name, amount } =
       req.body;
-
-      
     
+
     let sqlF = "SELECT * FROM tbl_merchant_charges WHERE currency_id = ?";
     let resultF = await mysqlcon(sqlF, [currency_id]);
+
     let charge = 0;
+
     if (resultF.length === 0) {
       let sqlU = "SELECT * FROM tbl_user WHERE user_id = ?";
-      let resultU = await mysqlcon(sqlU, [id]);
+      let resultU = await mysqlcon(sqlU, [merchantId]);
       if (resultU.length !== 0) {
         if (trx_type === "CASH") {
-          charge = resultU[0].payout_imps;
+          charge = resultU[0].payin_card_credit;
         } else {
-          charge = resultU[0].payout_rtgs;
+          charge = resultU[0].payin_card_credit;
         }
       }
     } else {
-      charge = resultF[0].payout_amount;
+      charge = resultF[0].payin_amount;
     }
+
     let akonto_charge = (amount * charge) / 100;
     let gst_amount = 0;
-    let bank_charges = 0;
+
     if (currency_id === "53") {
       gst_amount = (amount * 18) / 100;
     }
-    let wallet_deduct = amount + akonto_charge + gst_amount + bank_charges;
+
+    let settle_amount = amount - akonto_charge + gst_amount;
+
     let details = {
-      users_id: id,
-      trx_type,
-      uniqueid: transaction_id,
-      payee_name,
-      amount,
-      status: "SUCCESS",
-      akonto_charge: akonto_charge,
+      ammount: amount,
+      user_id: merchantId,
+      i_flname: name,
+      order_no: transaction_id,
+      payment_type: trx_type,
+      payment_status: `Success by ${trx_type}`,
+      status: 1,
+      payin_charges: akonto_charge,
       merchant_db_response: 1,
-      tnx_status_check: 1,
-      bank_request: 2,
-      gst_amount: gst_amount,
-      bank_charges: bank_charges,
-      wallet_deduct: wallet_deduct,
+      sales_from: 1,
+      pending_hit_response_by: 2,
+      gst_charges: gst_amount,
+      trx_live_test: 1,
+      settle_amount: settle_amount,
+      created_on: formatted_date,
+      updated_on: formatted_date,
+      settlement_on: formatted_date,
     };
-    
 
+    if (
+      merchantId !== undefined &&
+      trx_type !== undefined &&
+      transaction_id !== undefined &&
+      name !== undefined &&
+      amount !== undefined
+    ) {
+      let sql = "INSERT INTO tbl_merchant_transaction SET ?";
 
+      let result = await mysqlcon(sql, [details]);
 
-    let sql = "INSERT INTO tbl_icici_payout_transaction_response_details SET ?";
-
-    let result = await mysqlcon(sql, [details]);
-
-    if (result.affectedRows > 0) {
-      return res.json(200, {
-        message: "Row Created",
-        data: result,
-      });
+      if (result.affectedRows > 0) {
+        return res.json(200, {
+          message: "Row Created",
+          data: result,
+        });
+      } else {
+        return res.json(201, {
+          message: "Error While Creating",
+          data: result,
+        });
+      }
     } else {
       return res.json(201, {
-        message: "Error While Creating",
-        data: result,
+        message: "Error While Creating! Enter All 5 Parameter",
       });
     }
   } catch (error) {
-
-    console.log(error);
     return res.json(500, {
       message: "error occurered",
       error: error,
@@ -339,8 +415,7 @@ module.exports.createPM = async function (req, res) {
   }
 };
 
-// for getting currency dropdown according to the merchant id selected
-module.exports.getCurrency = async function (req, res) {
+module.exports.getCurrencyMT = async function (req, res) {
   try {
     let { id } = req.body;
 
@@ -356,7 +431,7 @@ module.exports.getCurrency = async function (req, res) {
 
     let currA = currencyId.split(",");
 
-    let sql1 = "SELECT id as currencyID,currency FROM countries WHERE id IN (";
+    let sql1 = "SELECT id as currencyID,sortname FROM countries WHERE id IN (";
 
     for (let i = 0; i < currA.length; i++) {
       sql1 += "'";
@@ -387,4 +462,21 @@ module.exports.getCurrency = async function (req, res) {
       error: error,
     });
   }
+};
+
+module.exports.allMerchant = async function (req, res) {
+  try{
+    let sqlM ="SELECT id,name from tbl_user WHERE status = 1 AND complete_profile = 1";
+  let resultM = await mysqlcon(sqlM);
+  res.status(200).json({
+    Data:resultM
+  })
+
+  }
+  catch(err){
+    res.status(500).json({
+      message:"Server Error"
+    })
+  }
+  
 };

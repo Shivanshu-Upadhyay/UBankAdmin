@@ -1,4 +1,4 @@
-const mysqlcon = require('../../../config/db_connection');
+const mysqlcon = require('../config/db_connection');
 
 // tbl_per_day_payin_records
 

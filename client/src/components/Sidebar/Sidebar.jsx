@@ -101,39 +101,47 @@ export default function Sidebar({ modulePesmission }) {
 
   const sidebarLink = [
     {
+      name: "Dashboard",
+      iconUrl:
+        "https://www.bankconnect.online/assets/merchants/img/dashboard.svg",
+      path: "/",
+      children: [{ name: "Sub Admin", path: "/subAdmin" }],
+      authPermission:1,
+    },
+    {
       name: "Sub Admin",
       iconUrl:
-        "https://www.bankconnect.online/assets/merchants/img/transactions.svg",
+        "https://payoway.com/web/assets/admin/icons/subadmin.svg",
       path: "/subAdmin",
       children: [{ name: "Sub Admin", path: "/subAdmin" }],
       authPermission: modulePesmission[0] ? modulePesmission[0].status : 0,
     },
     {
-      name: "PG Module",
+      name: "Bank/Acquireres",
       iconUrl: "https://www.bankconnect.online/assets/merchants/img/payout.svg",
       path: "/PGMod",
       children: [{ name: "Payment Gates", path: "/PGMod" }],
       authPermission: modulePesmission[1] ? modulePesmission[1].status : 0,
     },
     {
-      name: "Mid Module",
+      name: "Merchants Info",
       iconUrl:
         "https://www.bankconnect.online/assets/merchants/img/sattlement.svg",
       path: "/Mid",
       children: [{ name: "Mid", path: "/Mid" }],
       authPermission: modulePesmission[2] ? modulePesmission[2].status : 0,
     },
-    {
-      name: "Chines  Module",
-      iconUrl:
-        "https://www.bankconnect.online/assets/merchants/img/reports.svg",
-      path: "/Chinese",
-      children: [{ name: "Chines Bank", path: "/Chinese" }],
-      authPermission: modulePesmission[3] ? modulePesmission[3].status : 0,
-    },
+    // {
+    //   name: "Chines  Module",
+    //   iconUrl:
+    //     "https://www.bankconnect.online/assets/merchants/img/reports.svg",
+    //   path: "/Chinese",
+    //   children: [{ name: "Chines Bank", path: "/Chinese" }],
+    //   authPermission: modulePesmission[3] ? modulePesmission[3].status : 0,
+    // },
 
     {
-      name: "BankCode Akonto",
+      name: "BankCode Bankconnect",
       iconUrl:
         "https://www.bankconnect.online/assets/merchants/img/statements.svg",
       path: "/bankcodeakonto",
@@ -151,58 +159,91 @@ export default function Sidebar({ modulePesmission }) {
     {
       name: "Merchant Module",
       iconUrl:
-        "https://www.bankconnect.online/assets/merchants/img/virtual-terminal.svg",
+        "https://payoway.com/web/assets/admin/icons/managemer.svg",
       path: "/merchantAdmin",
       children: [{ name: "Merchant Admin", path: "/merchantAdmin" }],
       authPermission: modulePesmission[6] ? modulePesmission[6].status : 0,
     },
     {
-      name: "Transaction Module",
+      name: "Deposits",
       iconUrl:
-        "https://www.bankconnect.online/assets/merchants/img/employes.svg",
+        "https://payoway.com/web/assets/admin/icons/transaction.svg",
       path: "/MerchantTrans",
       children: [
         { name: "Merchants Transaction ", path: "/MerchantTrans" },
-        { name: "Merchants End Of Tran... ", path: "/EndOfDay" },
-        { name: "Merchant Refund ", path: "/MerchantRefunds" },
-        { name: "Payout Merchant ", path: "/PayoutMerchants" },
       ],
       authPermission: modulePesmission[7] ? modulePesmission[7].status : 0,
     },
     {
-      name: "SandBox Module",
+      name: "Refunds",
       iconUrl:
-        "https://www.bankconnect.online/assets/merchants/img/employes.svg",
-      path: "/Teams",
+        "https://payoway.com/web/assets/admin/icons/refund.svg",
+      path: "/MerchantRefunds",
       children: [
-        { name: "Merchants Transaction ", path: "/MerchantsTransaction" },
-        { name: "Merchants End Of Tran... ", path: "/BankCode" },
-        { name: "Merchant Refund ", path: "/BankCode" },
-        { name: "Payout Merchant ", path: "/BankCode" },
+        { name: "Merchant Refund ", path: "/MerchantRefunds" },
       ],
-      authPermission: modulePesmission[8] ? modulePesmission[8].status : 0,
+      authPermission: modulePesmission[7] ? modulePesmission[7].status : 0,
     },
     {
-      name: "Banner Module",
+      name: "Payouts",
       iconUrl:
-        "https://www.bankconnect.online/assets/merchants/img/business-settings.svg",
-      path: "/BusinessSetting",
-      children: [{ name: "Banner Admin ", path: "/MerchantsTransaction" }],
-      authPermission: modulePesmission[9] ? modulePesmission[9].status : 0,
-    },
-    {
-      name: "Settlement Module",
-      iconUrl:
-        "https://www.bankconnect.online/assets/merchants/img/business-settings.svg",
-      path: "/LocalSettlement",
+        "https://payoway.com/web/assets/admin/icons/payout.svg",
+      path: "/PayoutMerchants",
       children: [
-        { name: "Local Settlement", path: "/LocalSettlement" },
-        { name: "Add Funds", path: "/AddFunds" },
-        { name: "International Settlement", path: "/InternationalSettlement" },
-        { name: "Reports", path: "/SettlementReports" },
+        { name: "Payout Merchant ", path: "/PayoutMerchants" },
       ],
-      authPermission: modulePesmission[10] ? modulePesmission[10].status : 0,
+      authPermission: modulePesmission[7] ? modulePesmission[7].status : 0,
     },
+    // {
+    //   name: "Transaction Module",
+    //   iconUrl:
+    //     "https://www.bankconnect.online/assets/merchants/img/employes.svg",
+    //   path: "/MerchantTrans",
+    //   children: [
+    //     { name: "Merchants Transaction ", path: "/MerchantTrans" },
+    //     { name: "Merchants End Of Tran... ", path: "/EndOfDay" },
+    //     { name: "Merchant Refund ", path: "/MerchantRefunds" },
+    //     { name: "Payout Merchant ", path: "/PayoutMerchants" },
+    //   ],
+    //   authPermission: modulePesmission[7] ? modulePesmission[7].status : 0,
+    // },
+
+    // {
+    //   name: "SandBox Module",
+    //   iconUrl:
+    //     "https://www.bankconnect.online/assets/merchants/img/employes.svg",
+    //   path: "/Teams",
+    //   children: [
+    //     { name: "Merchants Transaction ", path: "/MerchantsTransaction" },
+    //     { name: "Merchants End Of Tran... ", path: "/BankCode" },
+    //     { name: "Merchant Refund ", path: "/BankCode" },
+    //     { name: "Payout Merchant ", path: "/BankCode" },
+    //   ],
+    //   authPermission: modulePesmission[8] ? modulePesmission[8].status : 0,
+    // },
+    // {
+    //   name: "Banner Module",
+    //   iconUrl:
+    //     "https://www.bankconnect.online/assets/merchants/img/business-settings.svg",
+    //   path: "/BusinessSetting",
+    //   children: [{ name: "Banner Admin ", path: "/MerchantsTransaction" }],
+    //   authPermission: modulePesmission[9] ? modulePesmission[9].status : 0,
+    // },
+
+    // {
+    //   name: "Settlement Module",
+    //   iconUrl:
+    //     "https://www.bankconnect.online/assets/merchants/img/business-settings.svg",
+    //   path: "/LocalSettlement",
+    //   children: [
+    //     { name: "Local Settlement", path: "/LocalSettlement" },
+    //     { name: "Add Funds", path: "/AddFunds" },
+    //     { name: "International Settlement", path: "/InternationalSettlement" },
+    //     { name: "Reports", path: "/SettlementReports" },
+    //   ],
+    //   authPermission: modulePesmission[10] ? modulePesmission[10].status : 0,
+    // },
+
     {
       name: "Activity Logs",
       iconUrl:
@@ -216,39 +257,52 @@ export default function Sidebar({ modulePesmission }) {
       authPermission: modulePesmission[11] ? modulePesmission[11].status : 0,
     },
     {
-      name: "Contact Module",
-      iconUrl:
-        "https://www.bankconnect.online/assets/merchants/img/change-password.svg",
-      path: "/contact",
-      children: [{ name: "Contact", path: "/contact" }],
-      authPermission: modulePesmission[12] ? modulePesmission[12].status : 0,
-    },
-    {
-      name: "CMS Module",
-      iconUrl:
-        "https://www.bankconnect.online/assets/merchants/img/change-password.svg",
-      path: "/CMSModule",
-      children: [{ name: "CMS", path: "/MerchantsTransaction" }],
-      authPermission: modulePesmission[13] ? modulePesmission[13].status : 0,
-    },
-    {
-      name: "Meta Module",
-      iconUrl:
-        "https://www.bankconnect.online/assets/merchants/img/change-password.svg",
-      path: "/MetaModule",
-      children: [{ name: "Meta", path: "/MerchantsTransaction" }],
-      authPermission: modulePesmission[14] ? modulePesmission[14].status : 0,
-    },
+        name: "Website Email",
+        iconUrl:
+          "https://payoway.com/web/assets/admin/icons/websiteemail.svg",
+        path: "/abc",
+        children: [{ name: "Contact", path: "/contact" }],
+        authPermission: modulePesmission[12] ? modulePesmission[12].status : 0,
+      },
+
+    // {
+    //   name: "Contact Module",
+    //   iconUrl:
+    //     "https://www.bankconnect.online/assets/merchants/img/change-password.svg",
+    //   path: "/contact",
+    //   children: [{ name: "Contact", path: "/contact" }],
+    //   authPermission: modulePesmission[12] ? modulePesmission[12].status : 0,
+    // },
+    // {
+    //   name: "CMS Module",
+    //   iconUrl:
+    //     "https://www.bankconnect.online/assets/merchants/img/change-password.svg",
+    //   path: "/CMSModule",
+    //   children: [{ name: "CMS", path: "/MerchantsTransaction" }],
+    //   authPermission: modulePesmission[13] ? modulePesmission[13].status : 0,
+    // },
+    // {
+    //   name: "Meta Module",
+    //   iconUrl:
+    //     "https://www.bankconnect.online/assets/merchants/img/change-password.svg",
+    //   path: "/MetaModule",
+    //   children: [{ name: "Meta", path: "/MerchantsTransaction" }],
+    //   authPermission: modulePesmission[14] ? modulePesmission[14].status : 0,
+    // },
+
     {
       name: "Setting Module",
       iconUrl:
-        "https://www.bankconnect.online/assets/merchants/img/change-password.svg",
+        "https://payoway.com/web/assets/admin/icons/setting.svg",
       path: "/siteSetting",
       children: [
         { name: "Site Setup", path: "/siteSetting" },
         { name: "Currency Exchange", path: "/CurrencyRate" },
         { name: "Exchange", path: "/Exchange" },
-        { name: "All UPI", path: "/AllUpi" },
+        { name: "Block User", path: "/AllUpi" },
+        { name: "Banner Module ", path: "/MerchantsTransaction" },
+        { name: "CMS Module", path: "/MerchantsTransaction" },
+        { name: "Meta Module", path: "/MerchantsTransaction" }
       ],
       authPermission: modulePesmission[15] ? modulePesmission[15].status : 0,
     },
@@ -308,40 +362,6 @@ export default function Sidebar({ modulePesmission }) {
         <br />
 
         <List className="my-5">
-          <div className=" d-flex align-items-center">
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                isActive
-                  ? "iconcontainer iconActive mx-1"
-                  : "iconcontainer mx-1"
-              }
-            >
-              <img
-                src="https://www.bankconnect.online/assets/merchants/img/dashboard.svg"
-                alt="not found"
-                width="20px"
-                height="20px"
-                className="m-3"
-                onClick={() => {
-                  setActive(-1);
-                  setToggel(!toggel);
-                }}
-              />
-            </NavLink>
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                isActive ? "linkNAme activeClass mx-2" : "linkNAme mx-2"
-              }
-              onClick={() => {
-                setActive(-1);
-                setToggel(!toggel);
-              }}
-            >
-              Dashboard
-            </NavLink>
-          </div>
           {sideBarPermissionLink.map((item, index) => {
             return (
               <div key={index}>
@@ -350,15 +370,15 @@ export default function Sidebar({ modulePesmission }) {
                     to={item.path}
                     className={({ isActive }) =>
                       isActive || (toggel && active === index)
-                        ? "iconcontainer iconActive mx-1"
-                        : "iconcontainer mx-1"
+                        ? "iconcontainer iconActive mx-1 my-1"
+                        : "iconcontainer mx-1 my-1"
                     }
                   >
                     <img
                       src={item.iconUrl}
                       alt="not found"
-                      width="20px"
-                      height="20px"
+                      width="23px"
+                      height="23px"
                       className="m-3"
                       onClick={() => {
                         setActive(index);
@@ -378,41 +398,49 @@ export default function Sidebar({ modulePesmission }) {
                   >
                     {item.name}
                   </NavLink>
-                  {toggel && active === index ? (
-                    <UnfoldLessIcon
-                      onClick={() => {
-                        setActive(index);
-                        setToggel(!toggel);
-                      }}
-                      style={{ cursor: "pointer" }}
-                    />
-                  ) : (
-                    <AddIcon
-                      onClick={() => {
-                        setActive(index);
-                        setToggel(!toggel);
-                      }}
-                      color="primary"
-                      style={{ cursor: "pointer" }}
-                    />
-                  )}
+                  {item.children.length > 1 ? (
+                    <div>
+                      {toggel && active === index ? (
+                        <UnfoldLessIcon
+                          onClick={() => {
+                            setActive(index);
+                            setToggel(!toggel);
+                          }}
+                          style={{ cursor: "pointer" }}
+                        />
+                      ) : (
+                        <AddIcon
+                          onClick={() => {
+                            setActive(index);
+                            setToggel(!toggel);
+                          }}
+                          color="primary"
+                          style={{ cursor: "pointer" }}
+                        />
+                      )}
+                    </div>
+                  ) : null}
                 </div>
                 {toggel && active === index ? (
                   <>
-                    {item.children.map((child, index) => (
-                      <div className="d-flex flex-column container" key={index}>
-                        <NavLink
-                          to={child.path}
-                          className={({ isActive }) =>
-                            isActive
-                              ? "linkNAme activeClass ms-5 container"
-                              : "ms-5 linkNAme container"
-                          }
+                    {item?.children.length > 1 &&
+                      item.children.map((child, index) => (
+                        <div
+                          className="d-flex flex-column container"
+                          key={index}
                         >
-                          {child.name}
-                        </NavLink>
-                      </div>
-                    ))}
+                          <NavLink
+                            to={child.path}
+                            className={({ isActive }) =>
+                              isActive
+                                ? "linkNAme activeClass ms-5 container"
+                                : "ms-5 linkNAme container"
+                            }
+                          >
+                            {child.name}
+                          </NavLink>
+                        </div>
+                      ))}
                   </>
                 ) : null}
               </div>
