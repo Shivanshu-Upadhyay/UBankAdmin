@@ -35,6 +35,7 @@ var storage = multer.diskStorage({
 });
 const uploads = multer({ storage: storage });
 const helper = require("../helper/jwt");
+const activityLogs = require("../Controller/activityLogs");
 // Login Controller
 route.post("/login", uploads.none(),loginController.login);
 route.post("/modulePesmission", uploads.none(),loginController.modulePesmission);
@@ -98,6 +99,10 @@ route.post("/createAllUpi", uploads.none(), helper.verify, allUpiController.crea
 //❌❌❌❌❌❌❌🔚🔚🔚🔚🔚🔚🔚🔚👋👋👋👋👋👋👋👋🔚🔚🔚🔚🔚🔚❌❌❌❌❌❌❌
 // Change Password Controller
 route.post("/changePassword", uploads.none(), helper.verify, changePasswordController.changePassword);
+//❌❌❌❌❌❌❌🔚🔚🔚🔚🔚🔚🔚🔚👋👋👋👋👋👋👋👋🔚🔚🔚🔚🔚🔚❌❌❌❌❌❌❌
+// ACTIVITY LOGS
+route.post("/AdminLogs", uploads.none(), helper.verify, activityLogs.adminLogs);
+route.post("/merchantLogs", uploads.none(), helper.verify, activityLogs.merchantLogs);
 //❌❌❌❌❌❌❌🔚🔚🔚🔚🔚🔚🔚🔚👋👋👋👋👋👋👋👋🔚🔚🔚🔚🔚🔚❌❌❌❌❌❌❌
 
 
@@ -165,7 +170,7 @@ route.post('/updateSettlement',uploads.none(),settlementController.updateSettlem
 route.post('/getById',uploads.none(),settlementController.getById);
 
 //🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚
-// 😎😎😎😎😎😎😎😎😎😎😎😎SATBIR API END😎😎😎😎😎😎😎😎😎😎😎😎😎
+
 
 module.exports = route;
 

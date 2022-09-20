@@ -2,13 +2,14 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import baseUrl from "../../components/config/baseUrl";
 
-function FilterMerchant({setMerchantSelect}) {
+function FilterMerchant({setMerchantSelect,adminfilter}) {
   const auth = localStorage.getItem("admin");
   const [merchant, setMerchant] = useState([]);
   useEffect(() => {
     let fetchData = async () => {
       try {
         let formData = new FormData();
+       adminfilter && formData.append("adminfilter",adminfilter)
         const config = {
           headers: {
             "content-type": "multipart/form-data",
@@ -34,7 +35,7 @@ function FilterMerchant({setMerchantSelect}) {
   return (
     <>
       <select className="form-select" onChange={(e)=>setMerchantSelect(e.target.value)}>
-        <option selected>Select By Merchant</option>
+        <option> Select by {adminfilter?"Admin":"Merchant"}</option>
         {merchant.map((item, index) => (
           <option value={item.id}>{item.name}</option>
         ))}

@@ -225,7 +225,7 @@ module.exports.toggleStatusPM = async function (req, res) {
   try {
     let { status, id } = req.body;
     // status = Number(status);
-    
+    console.log(status);
 
     if (status !== "PENDING" && status !== "SUCCESS" && status !== "FAILURE") {
       return res.json(201, {
@@ -270,7 +270,7 @@ module.exports.createPM = async function (req, res) {
     let { id, currency_id, trx_type, transaction_id, payee_name, amount } =
       req.body;
 
-      
+      console.log(currency_id);
     
     let sqlF = "SELECT * FROM tbl_merchant_charges WHERE currency_id = ?";
     let resultF = await mysqlcon(sqlF, [currency_id]);
@@ -312,6 +312,7 @@ module.exports.createPM = async function (req, res) {
     };
     
 
+    console.log(details)
 
 
     let sql = "INSERT INTO tbl_icici_payout_transaction_response_details SET ?";

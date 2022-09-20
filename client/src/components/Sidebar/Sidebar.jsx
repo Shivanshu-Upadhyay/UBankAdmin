@@ -248,10 +248,10 @@ export default function Sidebar({ modulePesmission }) {
       name: "Activity Logs",
       iconUrl:
         "https://www.bankconnect.online/assets/merchants/img/developerImg.png",
-      path: "/Integrations",
+      path: "/AdminLogs",
       children: [
-        { name: "Admin logs", path: "/MerchantsTransaction" },
-        { name: "Merchants Logs ", path: "/MerchantsTransaction" },
+        { name: "Admin logs", path: "/AdminLogs" },
+        { name: "Merchants Logs ", path: "/MerchantLogs" },
         { name: "Wallet Logs ", path: "/MerchantsTransaction" },
       ],
       authPermission: modulePesmission[11] ? modulePesmission[11].status : 0,
@@ -260,7 +260,7 @@ export default function Sidebar({ modulePesmission }) {
         name: "Website Email",
         iconUrl:
           "https://payoway.com/web/assets/admin/icons/websiteemail.svg",
-        path: "/abc",
+        path: "/contact",
         children: [{ name: "Contact", path: "/contact" }],
         authPermission: modulePesmission[12] ? modulePesmission[12].status : 0,
       },

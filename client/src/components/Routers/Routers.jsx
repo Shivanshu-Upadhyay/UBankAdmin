@@ -65,6 +65,8 @@ import CreatePayout from "../TransactionMod/MerchantPayout/CreatePayout";
 // Settlemt Module
 import Settlement from "../Settlement/Settlement";
 import Common from "../Settlement/Common";
+import AdminLogs from "../ActivityLogs/AdminLogs";
+import MerchantLogs from "../ActivityLogs/MerchantLogs";
 
 function Routers() {
   const [auth, setAuth] = useState(localStorage.getItem("admin"));
@@ -391,7 +393,11 @@ function Routers() {
                         </>
                       ) : item.module === "Activity Logs" &&
                         item.status === 1 ? (
-                        <></>
+                        <>
+                        <Route path="/AdminLogs" element={<AdminLogs />} />
+                        <Route path="/MerchantLogs" element={<MerchantLogs />} />
+                       
+                        </>
                       ) : item.module === "Contact Module" &&
                         item.status === 1 ? (
                         <>

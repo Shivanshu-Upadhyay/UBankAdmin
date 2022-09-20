@@ -9,7 +9,11 @@ import axios from "axios";
 import { Box } from "@mui/system";
 import { toast } from "react-toastify";
 import PaginationComp from "../../../commonComp/Pagination/PaginationComp";
-import Form from "react-bootstrap/Form";
+
+import FilterDate from "../../../commonComp/filterDate/FilterDate";
+import Export from "../../../commonComp/Export/Export";
+import FilterMerchant from "../../../commonComp/FilterMerchant/FilterMerchant";
+import FilterStatus from "../../../commonComp/FilterStatus/FilterStatus";
 
 import { Link } from "react-router-dom";
 
@@ -48,6 +52,11 @@ function PayoutMerchants({ authCreate, authRead, authUpdate, authDelete }) {
   const [searchVal, setSearchval] = useState("");
   const [limitVal, setLimitVal] = useState(10);
   const [message, setMessage] = useState("");
+
+  const [to, setTo] = useState("");
+  const [from, setFrom] = useState("");
+  const [merchantSelect, setMerchantSelect] = useState("");
+
   const auth = localStorage.getItem("admin");
 
   const ReadData = async () => {
@@ -56,6 +65,9 @@ function PayoutMerchants({ authCreate, authRead, authUpdate, authDelete }) {
       formData.append("page", page);
       formData.append("searchText", searchVal);
       formData.append("limit", limitVal);
+      formData.append("to", to);
+      formData.append("from", from);
+      formData.append("merchantName", merchantSelect);
 
       const config = {
         headers: {
@@ -75,7 +87,7 @@ function PayoutMerchants({ authCreate, authRead, authUpdate, authDelete }) {
   };
   useEffect(() => {
     ReadData();
-  }, [page, searchVal, limitVal]);
+  }, [page, searchVal, limitVal, to,from,merchantSelect]);
 
   const toggleStatus = async (id, status) => {
     try {
@@ -140,21 +152,21 @@ function PayoutMerchants({ authCreate, authRead, authUpdate, authDelete }) {
                   <TableCell align="center">
                     <div className="d-flex  align-items-center justify-content-around">
                       <button
-                        className="btn btn-success"
+                        className="enableStatus btn btn-secondary"
                         style={{ boxShadow: "none" }}
                         onClick={() => toggleStatus(item.id, "SUCCESS")}
                       >
                         S
                       </button>
                       <button
-                        className="btn btn-danger mx-2"
+                        className="disableStatus mx-2 btn btn-danger"
                         style={{ boxShadow: "none" }}
                         onClick={() => toggleStatus(item.id, "FAILURE")}
                       >
                         F
                       </button>
                       <button
-                        className="btn btn-warning"
+                        className="pendingB btn btn-warning"
                         style={{ boxShadow: "none" }}
                         onClick={() => toggleStatus(item.id, "PENDING")}
                       >
@@ -202,39 +214,17 @@ function PayoutMerchants({ authCreate, authRead, authUpdate, authDelete }) {
           <div className="col-3 mb-3 text-end">
             {authCreate ? (
               <Link to="/CreatePayout">
-                <button className="btn btn-success">Add Payout</button>
+                <button className="addNew">Add Payout</button>
               </Link>
             ) : null}
           </div>
         </div>
-
-        <div className="row align-items-center text-end">
-          <div className="col-3 mb-3">
-            <button className="btn btn-success">Export</button>
-          </div>
-          <div className="col-3 mb-3"></div>
-          <div className="col-3 mb-3">
-            <Form.Select
-              aria-label="Default select example"
-              style={{ marginTop: "10px", boxShadow: "none" }}
-              value={user_id}
-              onChange={(e) => setUser_id(e.target.value)}
-            >
-              <option value="-1">Filter By Merchant</option>
-              {tableData.map((item, index) => {
-                return (
-                  <option key={index} value={item.id}>
-                    {item.name}
-                  </option>
-                );
-              })}
-            </Form.Select>
-          </div>
-          <div className="col-3 mb-3"></div>
+        <div className="row align-items-center">
+          <FilterField  setTo={setTo}  setFrom={setFrom} setMerchantSelect={setMerchantSelect} xlData={tableData}/>
         </div>
 
         <div className="row align-items-center">
-          <div className="col-6 mb-3">
+          <div className="col-9 mb-3">
             <Search searchVal={searchVal} setSearchval={setSearchval} />
           </div>
           <div className="col-3 mb-3">
@@ -262,5 +252,31 @@ function PayoutMerchants({ authCreate, authRead, authUpdate, authDelete }) {
     </>
   );
 }
+
+const FilterField = ({ setFrom, setTo,setMerchantSelect,xlData }) => {
+  return (
+    <>
+      <div className="row">
+        <div className="col-12">
+          <div className="row justify-content-between align-items-center mb-3">
+            <div className="col-3">
+              <Export xlData={xlData} />
+            </div>
+            <div className="col-3">
+             
+              <FilterDate setTo={setTo} setFrom={setFrom} />
+            </div>
+            <div className="col-3">
+              <FilterMerchant setMerchantSelect={setMerchantSelect} />
+            </div>
+            <div className="col-3">
+              <FilterStatus />
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
 
 export default PayoutMerchants;

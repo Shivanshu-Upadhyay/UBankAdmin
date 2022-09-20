@@ -466,8 +466,12 @@ module.exports.getCurrencyMT = async function (req, res) {
 
 module.exports.allMerchant = async function (req, res) {
   try{
+    const {adminfilter} = req.body
+    
     let sqlM ="SELECT id,name from tbl_user WHERE status = 1 AND complete_profile = 1";
-  let resultM = await mysqlcon(sqlM);
+    let sqlAdmin = "select user_id as id , CONCAT(firstname, lastname) as name from tbl_login"
+  let resultM = await mysqlcon(adminfilter?sqlAdmin:sqlM);
+  
   res.status(200).json({
     Data:resultM
   })
@@ -475,7 +479,8 @@ module.exports.allMerchant = async function (req, res) {
   }
   catch(err){
     res.status(500).json({
-      message:"Server Error"
+      message:"Server Error",
+      err,
     })
   }
   
