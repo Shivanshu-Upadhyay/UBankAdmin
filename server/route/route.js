@@ -103,6 +103,7 @@ route.post("/changePassword", uploads.none(), helper.verify, changePasswordContr
 // ACTIVITY LOGS
 route.post("/AdminLogs", uploads.none(), helper.verify, activityLogs.adminLogs);
 route.post("/merchantLogs", uploads.none(), helper.verify, activityLogs.merchantLogs);
+route.post("/walletLogs", uploads.none(), helper.verify, activityLogs.walletLogs);
 //❌❌❌❌❌❌❌🔚🔚🔚🔚🔚🔚🔚🔚👋👋👋👋👋👋👋👋🔚🔚🔚🔚🔚🔚❌❌❌❌❌❌❌
 
 

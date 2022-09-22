@@ -252,7 +252,7 @@ export default function Sidebar({ modulePesmission }) {
       children: [
         { name: "Admin logs", path: "/AdminLogs" },
         { name: "Merchants Logs ", path: "/MerchantLogs" },
-        { name: "Wallet Logs ", path: "/MerchantsTransaction" },
+        { name: "Wallet Logs ", path: "/WalletLogs" },
       ],
       authPermission: modulePesmission[11] ? modulePesmission[11].status : 0,
     },

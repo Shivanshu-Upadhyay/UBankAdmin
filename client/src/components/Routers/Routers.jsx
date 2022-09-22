@@ -67,6 +67,7 @@ import Settlement from "../Settlement/Settlement";
 import Common from "../Settlement/Common";
 import AdminLogs from "../ActivityLogs/AdminLogs";
 import MerchantLogs from "../ActivityLogs/MerchantLogs";
+import WalletLogs from "../ActivityLogs/WalletLogs";
 
 function Routers() {
   const [auth, setAuth] = useState(localStorage.getItem("admin"));
@@ -396,6 +397,7 @@ function Routers() {
                         <>
                         <Route path="/AdminLogs" element={<AdminLogs />} />
                         <Route path="/MerchantLogs" element={<MerchantLogs />} />
+                        <Route path="/WalletLogs" element={<WalletLogs />} />
                        
                         </>
                       ) : item.module === "Contact Module" &&
