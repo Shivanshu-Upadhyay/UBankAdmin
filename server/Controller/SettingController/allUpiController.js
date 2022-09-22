@@ -37,8 +37,10 @@ module.exports.defaultAllUpi = async (req, res) => {
       "%' or  settled_currency  LIKE '%" +
       searchItem +
       "%' LIMIT ?,?";
+      let sql3 ="INSERT INTO tbl_upi_block SET ?"
 
     let result1 = await mysqlcon(searchItem ? sql2 : sql1, [start, limit]);
+    
 
     if (result1.length === 0) {
       return res.json(201, {

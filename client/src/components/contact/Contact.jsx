@@ -11,6 +11,7 @@ import baseUrl from "../config/baseUrl";
 import axios from "axios";
 import { toast } from "react-toastify";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import Loader from "../Loader/Loader";
 function Contact({ authCreate, authRead, authUpdate, authDelete }) {
   const tableHeading = ["Name", "Email", "Mobile", "Message", "Date", "Action"];
   const [page, setPage] = useState(1);
@@ -19,6 +20,7 @@ function Contact({ authCreate, authRead, authUpdate, authDelete }) {
   const [searchVal, setSearchval] = useState("");
   const [limitVal, setLimitVal] = useState(10);
   const [message, setMessage] = useState("");
+  const [loading,setLoading] =useState(true)
   const auth = localStorage.getItem("admin");
 
   const ReadData = async () => {
@@ -40,6 +42,7 @@ function Contact({ authCreate, authRead, authUpdate, authDelete }) {
       setMessage(result.data.message);
       setTableData(result.data.data);
       setTotalPage(Number(result.data.totalPages));
+      setLoading(false)
     } catch (error) {
       console.log(error);
     }
@@ -83,7 +86,9 @@ function Contact({ authCreate, authRead, authUpdate, authDelete }) {
       console.log(error);
     }
   };
-
+if(loading){
+  return <Loader />
+}
   const TableBodyCom = () => {
     return (
       <>

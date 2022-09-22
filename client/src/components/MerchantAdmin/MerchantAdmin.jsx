@@ -12,6 +12,7 @@ import axios from "axios";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import CachedIcon from "@mui/icons-material/Cached";
 import { toast } from "react-toastify";
+import Loader from "../Loader/Loader";
 
 
 function MerchantAdmin({ authCreate, authRead, authUpdate, authDelete }) {
@@ -51,6 +52,7 @@ function MerchantAdmin({ authCreate, authRead, authUpdate, authDelete }) {
   const [searchVal, setSearchval] = useState("");
   const [limitVal, setLimitVal] = useState(10);
   const [message, setMessage] = useState("");
+  const [loading,setLoading]=useState(true)
   const auth = localStorage.getItem("admin");
 
   const ReadData = async () => {
@@ -80,6 +82,7 @@ function MerchantAdmin({ authCreate, authRead, authUpdate, authDelete }) {
 
       setTableData(result.data.data);
       setTotalPage(Number(result.data.totalPages));
+      setLoading(false)
     } catch (error) {
       console.log(error);
     }
@@ -149,6 +152,10 @@ function MerchantAdmin({ authCreate, authRead, authUpdate, authDelete }) {
       console.log(error);
     }
   };
+
+  if(loading){
+    return <Loader />
+  }
 
   const TableBodyCom = () => {
     return (

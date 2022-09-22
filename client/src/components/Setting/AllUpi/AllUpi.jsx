@@ -19,6 +19,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import Form from "react-bootstrap/Form";
+import FilterMerchant from "../../../commonComp/FilterMerchant/FilterMerchant";
 function AllUpi(authCreate, authRead, authUpdate, authDelete) {
   const tableHeading = [
     "Merchant Id",
@@ -184,15 +185,7 @@ const ModelBox = () => {
           <DialogContent>
             <DialogContentText>
               <Form.Group style={{ marginTop: "10px" }}>
-                <Form.Label style={{color:"black"}}>
-                Merchant Id
-                </Form.Label>
-                <Form.Select aria-label="Default select example">
-                  <option>Please Select </option>
-                  <option value="1">One !</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                </Form.Select>
+              <FilterMerchant />
               </Form.Group>
               <Form.Group style={{ marginTop: "10px" }}>
                 <Form.Label style={{color:"black"}}>

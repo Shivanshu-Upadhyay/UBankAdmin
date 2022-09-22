@@ -9,6 +9,7 @@ import axios from "axios";
 import { Box } from "@mui/system";
 import { toast } from "react-toastify";
 import PaginationComp from "../../../commonComp/Pagination/PaginationComp";
+import Loader from "../../Loader/Loader";
 
 function MerchantRefunds({ authCreate, authRead, authUpdate, authDelete }) {
   const tableHeading = [
@@ -28,6 +29,7 @@ function MerchantRefunds({ authCreate, authRead, authUpdate, authDelete }) {
   const [searchVal, setSearchval] = useState("");
   const [limitVal, setLimitVal] = useState(10);
   const [message, setMessage] = useState("");
+  const [loading,setLoading]=useState(true)
   const auth = localStorage.getItem("admin");
 
   const ReadData = async () => {
@@ -48,6 +50,7 @@ function MerchantRefunds({ authCreate, authRead, authUpdate, authDelete }) {
       setMessage(result.data.message);
       setTableData(result.data.data);
       setTotalPage(Number(result.data.totalPages));
+      setLoading(false)
     } catch (error) {
       console.log(error);
     }
@@ -95,6 +98,9 @@ function MerchantRefunds({ authCreate, authRead, authUpdate, authDelete }) {
       console.log(error);
     }
   };
+  if(loading){
+    return <Loader />
+  }
 
   const TableBodyCom = () => {
     return (

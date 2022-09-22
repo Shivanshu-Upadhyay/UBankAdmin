@@ -11,6 +11,7 @@ import baseUrl from "../config/baseUrl";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Loader from "../Loader/Loader";
 
 function PGMod({ authCreate, authRead, authUpdate, authDelete }) {
   const tableHeading = [
@@ -28,6 +29,7 @@ function PGMod({ authCreate, authRead, authUpdate, authDelete }) {
   const [tableData, setTableData] = useState([]);
   const [totalPage, setTotalPage] = useState(1);
   const [searchVal, setSearchval] = useState("");
+  const [loading,setLoading]=useState(true)
   const [limitVal, setLimitVal] = useState(10);
   const [message, setMessage] = useState("");
   const auth = localStorage.getItem("admin");
@@ -54,6 +56,10 @@ function PGMod({ authCreate, authRead, authUpdate, authDelete }) {
       setMessage(result.data.message);
       setTableData(result.data.data);
       setTotalPage(Number(result.data.totalPages));
+      
+        setLoading(false)
+      
+      
     } catch (error) {
       console.log(error);
     }
@@ -133,6 +139,10 @@ function PGMod({ authCreate, authRead, authUpdate, authDelete }) {
       console.log(error);
     }
   };
+
+  if(loading){
+    return <Loader />
+  }
 
   const TableBodyCom = () => {
     return (

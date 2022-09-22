@@ -2,9 +2,9 @@ import React from 'react'
 import './dashboard.css'
 function Dashboard() {
   return (
-    <div className='bg'>
+    <div className='centerLoder'>
        
-       <span className="loader1"></span>  <span className="loader0">Loading</span> <span className="loader"></span>
+      <h4>Dashboard</h4>
     </div>
   )
 }

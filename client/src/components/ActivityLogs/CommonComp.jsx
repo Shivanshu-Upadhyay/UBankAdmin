@@ -11,6 +11,7 @@ import axios from "axios";
 import FilterMerchant from "../../commonComp/FilterMerchant/FilterMerchant";
 import Export from "../../commonComp/Export/Export";
 import FilterDate from "../../commonComp/filterDate/FilterDate";
+import Loader from "../Loader/Loader";
 function CommonComp({ tableHeading, apiEndPoint, name }) {
   const [page, setPage] = useState(1);
   const [tableData, setTableData] = useState([]);
@@ -21,6 +22,7 @@ function CommonComp({ tableHeading, apiEndPoint, name }) {
   const [merchantSelect, setMerchantSelect] = useState();
   const [to, setTo] = useState("");
   const [from, setFrom] = useState("");
+  const [loading, setLoading] = useState(true)
   const auth = localStorage.getItem("admin");
 console.log(to,from);
   const ReadData = async () => {
@@ -54,6 +56,7 @@ console.log(to,from);
       setMessage(result.data.message);
       setTableData(result.data.data);
       setTotalPage(Number(result.data.totalPages));
+      setLoading(false)
     } catch (error) {
       console.log(error);
     }
@@ -61,6 +64,9 @@ console.log(to,from);
   useEffect(() => {
     ReadData();
   }, [page, searchVal, limitVal, merchantSelect,to,from]);
+  if(loading){
+    return <Loader />
+  }
 
   const TableBodyCom = () => {
     return (

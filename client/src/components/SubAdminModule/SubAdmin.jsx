@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 import { useStateContext } from "../../context/ContextProvider";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import PreviewIcon from "@mui/icons-material/Preview";
+import Loader from "../Loader/Loader";
 function SubAdmin({ authCreate, authRead, authUpdate, authDelete }) {
   const tableHeading = [
     "Sub Admin",
@@ -23,6 +24,7 @@ function SubAdmin({ authCreate, authRead, authUpdate, authDelete }) {
     "Action",
   ];
   const [page, setPage] = useState(1);
+  const [loading,setLoading]=useState(true)
   const [tableData, setTableData] = useState([]);
   const [totalPage, setTotalPage] = useState(1);
   const [searchVal, setSearchval] = useState("");
@@ -50,6 +52,7 @@ function SubAdmin({ authCreate, authRead, authUpdate, authDelete }) {
       setMessage(result.data.message);
       setTableData(result.data.data);
       setTotalPage(Number(result.data.totalPages));
+      setLoading(false)
     } catch (error) {
       console.log(error);
     }
@@ -134,6 +137,10 @@ function SubAdmin({ authCreate, authRead, authUpdate, authDelete }) {
     }
   };
 
+  if(loading){
+    return <Loader/>
+  }
+ 
   const TableBodyCom = () => {
     return (
       <>

@@ -10,6 +10,7 @@ import { Box } from "@mui/system";
 import baseUrl from "../config/baseUrl";
 import axios from "axios";
 import { toast } from "react-toastify";
+import Loader from "../Loader/Loader";
 
 
 function Mid({ authCreate, authRead, authUpdate, authDelete }) {
@@ -29,6 +30,7 @@ function Mid({ authCreate, authRead, authUpdate, authDelete }) {
   const [searchVal, setSearchval] = useState("");
   const [limitVal, setLimitVal] = useState(10);
   const [message, setMessage] = useState("");
+  const [loading,setLoading]= useState(true)
   const auth = localStorage.getItem("admin");
 
   const ReadData = async () => {
@@ -49,6 +51,7 @@ function Mid({ authCreate, authRead, authUpdate, authDelete }) {
       setMessage(result.data.message);
       setTableData(result.data.data);
       setTotalPage(Number(result.data.totalPages));
+      setLoading(false)
     } catch (error) {
       console.log(error);
     }
@@ -88,6 +91,10 @@ function Mid({ authCreate, authRead, authUpdate, authDelete }) {
       console.log(error);
     }
   };
+
+  if(loading){
+    return <Loader />
+  }
 
   const TableBodyCom = () => {
     return (

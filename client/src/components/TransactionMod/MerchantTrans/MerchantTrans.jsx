@@ -15,6 +15,7 @@ import FilterDate from "../../../commonComp/filterDate/FilterDate";
 import Export from "../../../commonComp/Export/Export";
 import FilterMerchant from "../../../commonComp/FilterMerchant/FilterMerchant";
 import FilterStatus from "../../../commonComp/FilterStatus/FilterStatus";
+import Loader from "../../Loader/Loader";
 function MerchantTrans({ authCreate, authRead, authUpdate, authDelete }) {
   const tableHeading = [
     "Merchant Name",
@@ -50,6 +51,7 @@ function MerchantTrans({ authCreate, authRead, authUpdate, authDelete }) {
   const [searchVal, setSearchval] = useState("");
   const [limitVal, setLimitVal] = useState(10);
   const [message, setMessage] = useState("");
+  const [loading,setLoading] =useState(true)
   const auth = localStorage.getItem("admin");
    
 
@@ -75,6 +77,7 @@ function MerchantTrans({ authCreate, authRead, authUpdate, authDelete }) {
       setMessage(result.data.message);
       setTableData(result.data.data);
       setTotalPage(Number(result.data.totalPages));
+      setLoading(false)
     } catch (error) {
       console.log(error);
     }
@@ -142,6 +145,10 @@ function MerchantTrans({ authCreate, authRead, authUpdate, authDelete }) {
       console.log(err);
     }
   };
+
+if(loading){
+  return <Loader />
+}
 
   const TableBodyCom = () => {
     return (
