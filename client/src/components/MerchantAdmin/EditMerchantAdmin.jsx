@@ -4,7 +4,6 @@ import Header from "../../commonComp/Header/Header";
 import baseUrl from "../config/baseUrl";
 import Select from "react-select";
 import { Button } from "@mui/material";
-
 import axios from "axios";
 function EditMerchantAdmin() {
   const { id } = useParams();
