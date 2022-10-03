@@ -4,6 +4,7 @@ import { useStateContext } from "../../context/ContextProvider";
 import Login from "../Login/Login";
 import Sidebar from "../Sidebar/Sidebar";
 import Dashboard from "../Dashboard/Dashboard";
+import Error from '../PAGE404/Error'
 //Api Helper
 import baseUrl from "../config/baseUrl";
 import axios from "axios";
@@ -70,13 +71,17 @@ import MerchantLogs from "../ActivityLogs/MerchantLogs";
 import WalletLogs from "../ActivityLogs/WalletLogs";
 
 function Routers() {
-  const [auth, setAuth] = useState(localStorage.getItem("admin"));
+  const [auth,setAuth] = useState('')
   const [modulePesmission, setModulePesmission] = useState([]);
   const { isLoginUser } = useStateContext();
   console.log(isLoginUser, auth);
 
   useEffect(() => {
-    setAuth(localStorage.getItem("admin"));
+    if(!isLoginUser){
+      setAuth(localStorage.getItem('admin'))
+    }else{
+      setAuth(isLoginUser)
+    }
     const fetchData = async () => {
       try {
         let formData = new FormData();
@@ -519,14 +524,16 @@ function Routers() {
                   );
                 })
               : null}
+              <Route path="*" element={<Error />} />
           </Route>
         ) : (
+          <>
+          <Route path="*" element={<Error />} />
           <Route path="/login-admin" element={<Login />} />
+          </>
+        
         )}
-        <Route
-          path="*"
-          element={auth ? <Navigate to="/" /> : <Navigate to="/login-admin" />}
-        />
+       
       </Routes>
     </>
   );

@@ -35,7 +35,7 @@ function Login() {
         }, 1000 * 60 * 60);
         setToggel(true);
         setActive(-1);
-        setIsLoginUser(!isLoginUser);
+        setIsLoginUser(result.data.token);
         localStorage.setItem("admin", result.data.token);
         navigate("/");
       } else {
