@@ -70,10 +70,9 @@ module.exports.readBankCode = async (req, res) => {
 };
 
 // 👇 type 1 Api 👇
-
 module.exports.readType1BankCode = async function (req, res) {
   try {
-    let sql = "SELECT * FROM payment_gateway ";
+    let sql = "SELECT id ,gateway_name FROM payment_gateway ";
     let result = await mysqlcon(sql);
     return res.json(200, {
       message: "Data Fetched Successfully✅",
@@ -89,7 +88,7 @@ module.exports.readType1BankCode = async function (req, res) {
 // 👇 type 2 Api 👇
 module.exports.readType2BankCode = async function (req, res) {
   try {
-    let sql = "SELECT * FROM tbl_akonto_banks_code ";
+    let sql = "SELECT code,title FROM tbl_akonto_banks_code ";
     let result = await mysqlcon(sql);
     return res.json(200, {
       message: "Data Fetched Successfully✅",
