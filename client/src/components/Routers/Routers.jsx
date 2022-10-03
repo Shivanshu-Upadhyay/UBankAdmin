@@ -524,16 +524,14 @@ function Routers() {
                   );
                 })
               : null}
-              <Route path="*" element={<Error />} />
+              
           </Route>
         ) : (
           <>
-          <Route path="*" element={<Error />} />
           <Route path="/login-admin" element={<Login />} />
           </>
-        
         )}
-       
+        <Route path="*" element={<Error />} />
       </Routes>
     </>
   );
