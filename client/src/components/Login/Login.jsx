@@ -5,13 +5,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useStateContext } from "../../context/ContextProvider";
 function Login() {
-  const {
-    setIsLoginUser,
-    isLoginUser,
-    setActive,
-
-    setToggel,
-  } = useStateContext();
+  const {setIsLoginUser,setActive,setToggel, setRole } = useStateContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -29,14 +23,14 @@ function Login() {
       };
 
       let result = await axios.post(`${baseUrl}/login`, formData, config);
+      console.log(result.data);
       if (result.data.token) {
-        setTimeout(() => {
-          localStorage.clear("admin");
-        }, 1000 * 60 * 60);
         setToggel(true);
         setActive(-1);
         setIsLoginUser(result.data.token);
+        setRole(result.data.role)
         localStorage.setItem("admin", result.data.token);
+        localStorage.setItem("role", result.data.role);
         navigate("/");
       } else {
         toast.error(result.data.message, {

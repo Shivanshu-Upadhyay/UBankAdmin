@@ -4,6 +4,7 @@ function ContextProvider({ children }) {
   const [isLoginUser, setIsLoginUser] = useState(false);
   const [active, setActive] = React.useState(0);
   const [toggel, setToggel] = useState(false);
+  const [role, setRole] = useState('')
   return (
     <StateContext.Provider
       value={{
@@ -12,7 +13,7 @@ function ContextProvider({ children }) {
         active,
         setActive,
         toggel,
-        setToggel,
+        setToggel,role, setRole
         
       }}
     >

@@ -13,7 +13,7 @@ module.exports.login = async (req, res) => {
         let result = await mysqlcon(sql, [email, md5(password)]);
         if (Object.keys(result).length > 0) {
           let token = await jwt.sign(
-            { id: result[0].user_id },
+            { id: result[0].user_id,role:result[0].role },
             config.JWT_SECRET,
             {
               expiresIn: config.JWT_EXPIRY,
@@ -22,6 +22,7 @@ module.exports.login = async (req, res) => {
           return res.status(200).json({
             message: "Login Successful✅",
             token: token,
+            role:result[0].role
           });
         } else {
           return res.status(201).json({

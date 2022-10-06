@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { useStateContext } from "../../context/ContextProvider";
 import Login from "../Login/Login";
 import Sidebar from "../Sidebar/Sidebar";
@@ -71,47 +71,41 @@ import MerchantLogs from "../ActivityLogs/MerchantLogs";
 import WalletLogs from "../ActivityLogs/WalletLogs";
 
 function Routers() {
-  const [auth,setAuth] = useState('')
   const [modulePesmission, setModulePesmission] = useState([]);
-  const { isLoginUser } = useStateContext();
-  console.log(isLoginUser, auth);
-
+  const { isLoginUser,setIsLoginUser,role, setRole } = useStateContext();
   useEffect(() => {
-    if(!isLoginUser){
-      setAuth(localStorage.getItem('admin'))
-    }else{
-      setAuth(isLoginUser)
-    }
-    const fetchData = async () => {
-      try {
-        let formData = new FormData();
-        formData.append("token", auth);
-        const config = {
-          headers: {
-            "content-type": "multipart/form-data",
-            Authorization: `Bearer ${auth}`,
-          },
-        };
-        let result = await axios.post(
-          `${baseUrl}/modulePesmission`,
-          formData,
-          config
-        );
-        if (result.status === 200) {
-          setModulePesmission(result.data.permission);
-          
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
+    setIsLoginUser(localStorage.getItem('admin'))
+    setRole(localStorage.getItem('role')) 
     fetchData();
-  }, [isLoginUser, auth]);
-
+  }, [isLoginUser,role]);
+  const fetchData = async () => {
+    try {
+      let formData = new FormData();
+      formData.append("token", isLoginUser);
+      const config = {
+        headers: {
+          "content-type": "multipart/form-data",
+          Authorization: `Bearer ${isLoginUser}`,
+        },
+      };
+      let result = await axios.post(
+        `${baseUrl}/modulePesmission`,
+        formData,
+        config
+      );
+      if (result.status === 200) {
+        setModulePesmission(result.data.permission);
+        
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
   return (
     <>
       <Routes>
-        {auth ? (
+        {isLoginUser && role==='1' ? (
           <Route
             path="/"
             element={<Sidebar modulePesmission={modulePesmission} />}
