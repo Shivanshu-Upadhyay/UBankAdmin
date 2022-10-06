@@ -70,6 +70,14 @@ import AdminLogs from "../ActivityLogs/AdminLogs";
 import MerchantLogs from "../ActivityLogs/MerchantLogs";
 import WalletLogs from "../ActivityLogs/WalletLogs";
 
+
+//  <><><><><><><><><><><><><><><>🤓 Settlement Dashboard 🤓<><><><><><><><><><><><><><><> 
+
+import SettlementSidebar from '../SettlementComp/SIDEBAR/Sidebar'
+import SettlementDashboard from '../SettlementComp/Dashboard/Dashboard'
+
+
+
 function Routers() {
   const [modulePesmission, setModulePesmission] = useState([]);
   const { isLoginUser,setIsLoginUser,role, setRole } = useStateContext();
@@ -519,7 +527,13 @@ function Routers() {
                 })
               : null}
           </Route>
-        ) : (
+        ) : isLoginUser && role ==="2"? (<Route path="/" element={<SettlementSidebar />}>
+          <Route path="/" element={<SettlementDashboard/>} />
+          <Route path="/Settlement" element={"Settlement"} />
+          <Route path="/AddFunds" element={"AddFunds"} />
+          <Route path="/CrossBorder" element={"CrossBorder"} />
+          <Route path="/Reports" element={"Reports"} />
+        </Route>) : (
           <>
           <Route path="/login-admin" element={<Login />} />
           </>

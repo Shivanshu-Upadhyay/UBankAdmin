@@ -94,8 +94,9 @@ export default function Sidebar({ modulePesmission }) {
   userTokenExp();
 
   const logout = () => {
-    setIsLoginUser(undefined);
     localStorage.clear("admin");
+    localStorage.clear("role");
+    setIsLoginUser(undefined);
     navigate("/login-admin");
   };
 
