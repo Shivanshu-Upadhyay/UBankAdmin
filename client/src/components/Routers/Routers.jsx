@@ -530,7 +530,7 @@ function Routers() {
           <Route path="/login-admin" element={<Login />} />
           </>
         )}
-        {/* <Route path="*" element={<Error />} /> */}
+        <Route path="*" element={<Error />} />
       </Routes>
     </>
   );
