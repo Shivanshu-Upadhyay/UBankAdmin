@@ -12,7 +12,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import "./sidebar.css";
 import { useStateContext } from "../../../context/ContextProvider";
 
-const drawerWidth = 240;
+const drawerWidth = 250;
 const openedMixin = (theme) => ({
   width: drawerWidth,
   transition: theme.transitions.create("width", {
@@ -96,27 +96,68 @@ export default function SettlementSidebar() {
       path: "/",
     },
     {
-      name: "Settlement",
+      name: "Bank Deposit Received",
       iconUrl:
         "https://www.bankconnect.online/assets/merchants/img/sattlement.svg",
-      path: "/Settlement",
+      path: "/BankDepositReceived",
     },
     {
-      name: "Add Funds",
+      name: "Local Payouts",
       iconUrl: "https://www.bankconnect.online/assets/merchants/img/payout.svg",
       path: "/AddFunds",
     },
     {
-      name: "Cross Border",
+      name: "Add Funds",
       iconUrl:
         "https://www.bankconnect.online/assets/merchants/img/employes.svg",
       path: "/CrossBorder",
     },
     {
+      name: "Local Settlement",
+      iconUrl:
+        "https://www.payoway.com/web/assets/admin/icons/internationalsettlement.svg",
+      path: "/LocalSettlementTransactions",
+    },
+    {
+      name: "International Settlement ",
+      iconUrl:"https://www.payoway.com/web/assets/admin/icons/world.png",
+      path: "/InternationalSettlementTransactions",
+    },
+    {
+      name: "Disputes/Chargeback",
+      iconUrl:
+        "https://www.payoway.com/web/assets/admin/icons/disputes.svg",
+      path: "/DisputesChargeback",
+    },
+    {
+      name: "Refunds",
+      iconUrl:
+        "https://www.payoway.com/web/assets/admin/icons/refund.svg",
+      path: "/Refunds",
+    },
+    {
+      name: "Commissions",
+      iconUrl:
+        "	https://www.payoway.com/web/assets/admin/icons/commission.png",
+      path: "/Commissions",
+    },
+    {
       name: "Reports",
       iconUrl:
-        "https://www.bankconnect.online/assets/merchants/img/reports.svg",
+        "https://www.payoway.com/web/assets/admin/icons/reports.svg",
       path: "/Reports",
+    },
+    {
+      name: "Settings",
+      iconUrl:
+        "https://www.payoway.com/web/assets/admin/icons/setting.svg",
+      path: "/Settings",
+    },
+    {
+      name: "Change Password",
+      iconUrl:
+        "https://www.payoway.com/web/assets/admin/icons/password.svg",
+      path: "/ChangePassword",
     },
 
     {
@@ -184,8 +225,8 @@ export default function SettlementSidebar() {
                   to={item.path}
                   className={({ isActive }) =>
                     isActive
-                      ? " settlementiconcontainer mx-3 settlementiconActive"
-                      : " settlementiconcontainer mx-3"
+                      ? " settlementiconcontainer mx-2 settlementiconActive"
+                      : " settlementiconcontainer mx-2"
                   }
                 >
                   <img src={item.iconUrl} alt="" className="settlementiconstyle" />

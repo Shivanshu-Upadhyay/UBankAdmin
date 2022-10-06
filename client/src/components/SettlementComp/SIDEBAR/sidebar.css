@@ -72,22 +72,19 @@
 }
 
 .openClose {
-  
   position: absolute;
-  top: 20rem;
+  top: 21rem;
   z-index: 9999;
-  left: 215px;
-  
-  
+  left: 228px;
+  transition: all 0.2s ease; 
 }
 .openClose2 {
-  
   position: absolute;
-  top: 20rem;
+  top: 24rem;
   z-index: 9999;
-  left: 45px;
-  
-  
+  left: 85px;
+  transform: rotate(180deg);
+  transition: all 0.2s ease; 
 }
 
 .parentAll{
@@ -102,11 +99,11 @@
 
 
 /* width */
-.css-1hsz34s-MuiDrawer-docked .MuiDrawer-paper::-webkit-scrollbar {
+ .MuiDrawer-paper::-webkit-scrollbar {
   width: 0px !important;
 }
 /* width */
-.css-2dum1v-MuiDrawer-docked .MuiDrawer-paper::-webkit-scrollbar {
+.MuiDrawer-paper::-webkit-scrollbar {
   width: 0px !important;
 }
 

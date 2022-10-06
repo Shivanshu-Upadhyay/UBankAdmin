@@ -12,7 +12,7 @@ import AddIcon from "@mui/icons-material/Add";
 import UnfoldLessIcon from "@mui/icons-material/UnfoldLess";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useStateContext } from "../../context/ContextProvider";
-const drawerWidth = 240;
+const drawerWidth = 250;
 const openedMixin = (theme) => ({
   width: drawerWidth,
   transition: theme.transitions.create("width", {

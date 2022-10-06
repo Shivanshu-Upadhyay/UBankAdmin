@@ -529,7 +529,7 @@ function Routers() {
           </Route>
         ) : isLoginUser && role ==="2"? (<Route path="/" element={<SettlementSidebar />}>
           <Route path="/" element={<SettlementDashboard/>} />
-          <Route path="/Settlement" element={"Settlement"} />
+          <Route path="/BankDepositReceived" element={"Bank Deposit Received"} />
           <Route path="/AddFunds" element={"AddFunds"} />
           <Route path="/CrossBorder" element={"CrossBorder"} />
           <Route path="/Reports" element={"Reports"} />
