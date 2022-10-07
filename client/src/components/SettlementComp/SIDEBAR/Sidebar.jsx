@@ -104,7 +104,7 @@ export default function SettlementSidebar() {
     {
       name: "Local Payouts",
       iconUrl: "https://www.bankconnect.online/assets/merchants/img/payout.svg",
-      path: "/AddFunds",
+      path: "/LocalPayouts",
     },
     {
       name: "Add Funds",

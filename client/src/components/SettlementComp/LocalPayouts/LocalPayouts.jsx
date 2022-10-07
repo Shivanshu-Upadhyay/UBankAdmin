@@ -6,7 +6,7 @@ import styles from './style.module.css'
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import SearchIcon from '@mui/icons-material/Search';
 import PaginationComp from '../../../commonComp/Pagination/PaginationComp'
-function BankDeposit() {
+function LocalPayouts() {
   const [xlData,setXlData]= useState([])
   const [page,setPage]=useState(1)
     const data =[
@@ -28,22 +28,20 @@ function BankDeposit() {
 
 
 
-const tableHeading = ['Merchant Id','Merchant Name','Transaction id','Received Date','Currency','Bank Name','Transaction Type','Deposits Received','Bank Charges','Tax','Total Charges','Net Deposits Received','Authorizer','Action']
+const tableHeading = ['AC.Type','Bank','Payout Id','Customer Payout Id','Merchant','Status','Message','UTR','Trx Type','Payee','Credit Acc','IFSC','Amount','Remark','Payout Charge','GST Charge','Bank Charge','Wallet Deduct','Currency','Create','Update']
 
   return (
     
     <section> 
-    <h4 style={{fontWeight:"bold",marginBottom:"20px"}}>Bank Deposit Received</h4>
-    
+    <h4 style={{fontWeight:"bold",marginBottom:"20px"}}>Local Payouts</h4>
     <Card carddata={data}/>
     <br /> <br />
     {/* FILTER SECTION */}
     <div className="row align-items-center justify-content-end">
-      <div className="col-9 row align-items-center justify-content-around">
-        <div className='col-4'> <div className={styles.bankSearch}><SearchIcon className='mx-2' /> <input type="search" className={styles.inputSearch}/></div> </div>
+      <div className="col-8 row align-items-center justify-content-around">
+        <div className='col-5'> <div className={styles.bankSearch}><SearchIcon className='mx-2' /> <input type="search" className={styles.inputSearch}/></div> </div>
         <div className="col-3 centerDiv"><FilterDateMax /></div>
-        <div className="col-3 centerDiv"> <button className={styles.addTransaction}>Add Transaction </button></div>
-        <div className="col-2 centerDiv"> <button className={styles.addTransaction}><ArrowDownwardIcon />Download</button></div>
+        <div className="col-3 centerDiv"> <button className={styles.addTransaction}><ArrowDownwardIcon />Download</button></div>
       </div>
     </div>
      {/* FILTER SECTION END*/}
@@ -61,4 +59,4 @@ const tableHeading = ['Merchant Id','Merchant Name','Transaction id','Received D
   )
 }
 
-export default BankDeposit
+export default LocalPayouts

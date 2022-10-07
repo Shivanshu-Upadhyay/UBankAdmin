@@ -7,16 +7,15 @@ const PaginationComp = ({ setPage, page, totalPage,message }) => {
   };
   return (
     <>
-      <div className="row my-5">
-        <div className="col-8">
+      <div className="row my-5 align-items-center justify-content-between">
+        <div className="col-6">
           <div className="showingdata">{message}</div>
         </div>
-        <div className="col-4">
+        <div className="col-6 d-flex justify-content-end">
           <Pagination
             count={totalPage}
             page={page}
-            defaultPage={5}
-            siblingCount={0}
+            defaultPage={1}
             size="large"
             color="primary"
             onChange={pageNumber}
