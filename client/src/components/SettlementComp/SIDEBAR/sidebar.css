@@ -74,14 +74,14 @@
 .openClose {
   position: absolute;
   top: 21rem;
-  z-index: 9999;
+  z-index: 999999;
   left: 228px;
   transition: all 0.2s ease; 
 }
 .openClose2 {
   position: absolute;
   top: 24rem;
-  z-index: 9999;
+  z-index: 99999;
   left: 85px;
   transform: rotate(180deg);
   transition: all 0.2s ease; 

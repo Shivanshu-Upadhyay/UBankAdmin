@@ -75,6 +75,7 @@ import WalletLogs from "../ActivityLogs/WalletLogs";
 
 import SettlementSidebar from '../SettlementComp/SIDEBAR/Sidebar'
 import SettlementDashboard from '../SettlementComp/Dashboard/Dashboard'
+import BankDeposit from "../SettlementComp/BankDeposit/BankDeposit";
 
 
 
@@ -529,7 +530,7 @@ function Routers() {
           </Route>
         ) : isLoginUser && role ==="2"? (<Route path="/" element={<SettlementSidebar />}>
           <Route path="/" element={<SettlementDashboard/>} />
-          <Route path="/BankDepositReceived" element={"Bank Deposit Received"} />
+          <Route path="/BankDepositReceived" element={<BankDeposit/>} />
           <Route path="/AddFunds" element={"AddFunds"} />
           <Route path="/CrossBorder" element={"CrossBorder"} />
           <Route path="/Reports" element={"Reports"} />
@@ -538,7 +539,7 @@ function Routers() {
           <Route path="/login-admin" element={<Login />} />
           </>
         )}
-        <Route path="*" element={<Error />} />
+        <Route path="*" element={isLoginUser?<Error />:<Login/>} />
       </Routes>
     </>
   );

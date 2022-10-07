@@ -6,19 +6,19 @@ const Card = ({carddata}) => {
   
   
   return (
-    <>
+    
       <div className="row justify-content-between">
         {carddata?.map((item, index) => {
           return (
             <div
               className={
                 index === 0
-                  ? "cardbox Dcardbg1 col-lg-3 col-md-6 col-sm-12 "
+                  ? "cardbox Dcardbg1 col-3"
                   : index === 1
-                  ? " cardbox Dcardbg2 col-lg-3 col-md-6  col-sm-12"
+                  ? " cardbox Dcardbg2 col-3"
                   : index === 2
-                  ? "cardbox Dcardbg3 col-lg-3 col-md-6  col-sm-12"
-                  : " cardbox Dcardbg4 col-lg-3 col-md-6  col-sm-12"
+                  ? "cardbox Dcardbg3 col-3"
+                  : " cardbox Dcardbg4 col-3"
               }
               key={index}
             >
@@ -66,7 +66,7 @@ const Card = ({carddata}) => {
           );
         })}
       </div>
-    </>
+    
   );
 };
 
