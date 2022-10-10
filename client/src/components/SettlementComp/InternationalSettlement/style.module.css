@@ -1,0 +1,58 @@
+.bankSearch{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #dfd9d9;
+    padding: 10px 5px;
+    border-radius: 30px;
+}
+
+.inputSearch{
+    border: none;
+    outline: none;
+    background: #dfd9d9;
+    width: 100%;
+    margin-right:5px;
+}
+.addTransaction{
+    display: flex;
+     padding: 10px 20px;
+     background: #1eaae7;
+     color: #fff;
+     font-weight: 600;
+     border-radius: 30px;
+     
+ }
+
+ .penddingBtn{
+    width: 100px;
+    padding: 8px 20px;
+    border-radius: 30px;
+    background: #ffa500;
+    color: #fff;
+    font-weight: 500;
+ }
+ .approvedBtn{
+    width: 100px;
+    padding: 8px 20px;
+    border-radius: 30px;
+    background:#4e802f;
+    color: #fff;
+    font-weight: 500;
+ }
+ .approvedBtn2{
+    width: 100px;
+    padding: 8px 20px;
+    border-radius: 30px;
+    background:#005d7a;
+    color: #fff;
+    font-weight: 500;
+ }
+ .faileddBtn{
+    width: 100px;
+    padding: 8px 20px;
+    border-radius: 30px;
+    background:#a91818;
+    color: #fff;
+    font-weight: 500;
+ }

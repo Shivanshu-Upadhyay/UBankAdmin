@@ -110,18 +110,18 @@ export default function SettlementSidebar() {
       name: "Add Funds",
       iconUrl:
         "https://www.bankconnect.online/assets/merchants/img/employes.svg",
-      path: "/CrossBorder",
+      path: "/AddFunds",
     },
     {
       name: "Local Settlement",
       iconUrl:
         "https://www.payoway.com/web/assets/admin/icons/internationalsettlement.svg",
-      path: "/LocalSettlementTransactions",
+      path: "/LocalSettlement",
     },
     {
       name: "International Settlement ",
       iconUrl:"https://www.payoway.com/web/assets/admin/icons/world.png",
-      path: "/InternationalSettlementTransactions",
+      path: "/InternationalSettlement",
     },
     {
       name: "Disputes/Chargeback",

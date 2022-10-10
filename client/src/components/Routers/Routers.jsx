@@ -71,14 +71,17 @@ import MerchantLogs from "../ActivityLogs/MerchantLogs";
 import WalletLogs from "../ActivityLogs/WalletLogs";
 
 
-//  <><><><><><><><><><><><><><><>🤓 Settlement Dashboard 🤓<><><><><><><><><><><><><><><> 
+//<><><><><><><><><><><><><><><>🤓Settlement Dashboard🤓<><><><><><><><><><><><><><> 
 
 import SettlementSidebar from '../SettlementComp/SIDEBAR/Sidebar'
 import SettlementDashboard from '../SettlementComp/Dashboard/Dashboard'
 import BankDeposit from "../SettlementComp/BankDeposit/BankDeposit";
 import LocalPayouts from "../SettlementComp/LocalPayouts/LocalPayouts";
+import AddFunds from "../SettlementComp/AddFunds/AddFunds";
+import LocalSettlement from "../SettlementComp/LocalSettlement/LocalSettlement";
+import InternationalSettlement from "../SettlementComp/InternationalSettlement/InternationalSettlement";
 
-
+//<><><><><><><><><><><><><><><>🤓Settlement Dashboard End🤓<><><><><><><><><><><><><>
 
 function Routers() {
   const [modulePesmission, setModulePesmission] = useState([]);
@@ -533,8 +536,11 @@ function Routers() {
           <Route path="/" element={<SettlementDashboard/>} />
           <Route path="/BankDepositReceived" element={<BankDeposit/>} />
           <Route path="/LocalPayouts" element={<LocalPayouts/>} />
-          <Route path="/CrossBorder" element={"CrossBorder"} />
+          <Route path="/AddFunds" element={<AddFunds/>} />
+          <Route path="/LocalSettlement" element={<LocalSettlement/>} />
+          <Route path="/InternationalSettlement" element={<InternationalSettlement/>} />
           <Route path="/Reports" element={"Reports"} />
+          <Route path="/ChangePassword" element={<ChangePassword/>} />
         </Route>) : (
           <>
           <Route path="/login-admin" element={<Login />} />
