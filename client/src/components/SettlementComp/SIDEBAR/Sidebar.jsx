@@ -127,7 +127,7 @@ export default function SettlementSidebar() {
       name: "Disputes/Chargeback",
       iconUrl:
         "https://www.payoway.com/web/assets/admin/icons/disputes.svg",
-      path: "/DisputesChargeback",
+      path: "/DisputesChargebacks",
     },
     {
       name: "Refunds",

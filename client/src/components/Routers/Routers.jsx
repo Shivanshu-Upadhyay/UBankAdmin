@@ -80,6 +80,10 @@ import LocalPayouts from "../SettlementComp/LocalPayouts/LocalPayouts";
 import AddFunds from "../SettlementComp/AddFunds/AddFunds";
 import LocalSettlement from "../SettlementComp/LocalSettlement/LocalSettlement";
 import InternationalSettlement from "../SettlementComp/InternationalSettlement/InternationalSettlement";
+import DisputesChargebacks from "../SettlementComp/DisputesChargebacks/DisputesChargebacks";
+import Refunds from "../SettlementComp/Refunds/Refunds";
+import Commissions from "../SettlementComp/Commissions/Commissions";
+import Reports from "../SettlementComp/Reports/Reports";
 
 //<><><><><><><><><><><><><><><>🤓Settlement Dashboard End🤓<><><><><><><><><><><><><>
 
@@ -539,7 +543,10 @@ function Routers() {
           <Route path="/AddFunds" element={<AddFunds/>} />
           <Route path="/LocalSettlement" element={<LocalSettlement/>} />
           <Route path="/InternationalSettlement" element={<InternationalSettlement/>} />
-          <Route path="/Reports" element={"Reports"} />
+          <Route path="/DisputesChargebacks" element={<DisputesChargebacks/>} />
+          <Route path="/Refunds" element={<Refunds/>} />
+          <Route path="/Commissions" element={<Commissions/>} />
+          <Route path="/Reports" element={<Reports/>} />
           <Route path="/ChangePassword" element={<ChangePassword/>} />
         </Route>) : (
           <>

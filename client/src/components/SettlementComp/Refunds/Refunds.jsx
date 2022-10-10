@@ -6,14 +6,14 @@ import styles from './style.module.css'
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import SearchIcon from '@mui/icons-material/Search';
 import PaginationComp from '../../../commonComp/Pagination/PaginationComp'
-function InternationalSettlement() {
+function Refunds() {
   const [xlData,setXlData]= useState([])
   const [page,setPage]=useState(1)
     const data =[
         {name: 'Declined', percentage: 2, amount: 400002},
         {name: 'Success', percentage: 24, amount: 222700040},
-        {name: 'Refund', percentage: 10, amount: null},
-        {name: 'Chargeback', percentage: 50, amount: 1}]
+        {name: 'Refund', percentage: 0, amount: null},
+        {name: 'Chargeback', percentage: 0, amount: 1}]
  const tableBodyData = [
    
    {
@@ -28,13 +28,12 @@ function InternationalSettlement() {
 
 
 
-const tableHeading = ['Final Authorization','Admin Status','Settlement Date','Merchant Id','Merchant Name','Source','Settlement Id','Settlement Type','Bank Name','From Currency','	Exchange Rate','Amount','Settlement Fee','Net Amount For Settlement','Settlement Amount','Action']
+const tableHeading = ['Merchant Id','Merchant Name','Transaction Id','Transaction Date','Currency','Amount','Refund Charges','Net Amount','In USD','Mode','Bank Name','Action']
 
   return (
     
     <section> 
-    <h4 style={{fontWeight:"bold",marginBottom:"20px"}}>International Settlement Transactions</h4>
-    
+    <h4 style={{fontWeight:"bold",marginBottom:"20px"}}>Refunds</h4>
     <Card carddata={data}/>
     <br /> <br />
     {/* FILTER SECTION */}
@@ -42,7 +41,7 @@ const tableHeading = ['Final Authorization','Admin Status','Settlement Date','Me
       <div className="col-9 row align-items-center justify-content-around">
         <div className='col-4'> <div className={styles.bankSearch}><SearchIcon className='mx-2' /> <input type="search" className={styles.inputSearch}/></div> </div>
         <div className="col-3 centerDiv"><FilterDateMax /></div>
-        <div className="col-3 centerDiv"> <button className={styles.addTransaction}>Add Settlement </button></div>
+        <div className="col-3 centerDiv"> <button className={styles.addTransaction}>Enter Transation</button></div>
         <div className="col-2 centerDiv"> <button className={styles.addTransaction}><ArrowDownwardIcon />Download</button></div>
       </div>
     </div>
@@ -62,4 +61,4 @@ const tableHeading = ['Final Authorization','Admin Status','Settlement Date','Me
 }
 
 
-export default InternationalSettlement
+export default Refunds
