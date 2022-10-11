@@ -12,6 +12,10 @@ import DialogTitle from "@mui/material/DialogTitle";
 
 export default function TableComp({ tableBodyData, setXlData,tableHeading }) {
   const [users, setUsers] = useState(tableBodyData);
+ useEffect(()=>{
+  setUsers(tableBodyData)
+ },[tableBodyData])
+  
   const handleChange = (e) => {
     const { name, checked } = e.target;
     if (name === "allSelect") {
@@ -21,7 +25,7 @@ export default function TableComp({ tableBodyData, setXlData,tableHeading }) {
       setUsers(tempUser);
       setXlData(tempUser);
     } else {
-      let tempUser = users.map((user) =>  user.name === name ? { ...user, isChecked: checked } : user);
+      let tempUser = users.map((user) =>  user.created_on === name ? { ...user, isChecked: checked } : user);
       setUsers(tempUser);
       setXlData(tempUser.filter((item) => item.isChecked));
     } 
@@ -58,24 +62,24 @@ export default function TableComp({ tableBodyData, setXlData,tableHeading }) {
                     <input
                       className="form-check-input"
                       type="checkbox"
-                      name={item.name}
+                      name={item.created_on}
                       checked={item?.isChecked || false}
                       onChange={handleChange}
                     />
                   </TableCell>
                   <TableCell>{item.id}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
+                  <TableCell>{item.mer_name}</TableCell>
+                  <TableCell>{item.trx_id}</TableCell>
+                  <TableCell>{item.created_on}</TableCell>
+                  <TableCell>{item.currency}</TableCell>
+                  <TableCell>{item.title}</TableCell>
+                  <TableCell>{item.trx_type}</TableCell>
+                  <TableCell>{item.deposit_recieved}</TableCell>
+                  <TableCell>{item.bank_charge}</TableCell>
+                  <TableCell>{item.tax}</TableCell>
+                  <TableCell>{item.total_charges}</TableCell>
+                  <TableCell>{item.deposit_recieved}</TableCell>
+                  <TableCell>{item.auth}</TableCell>
                   <TableCell align="center">
                     <PopUp formData={item} />
                   </TableCell>

@@ -5,8 +5,11 @@ const config = require('./config/config.js');
 const cors = require("cors");
 const settelmentRoute = require('./route/settelmentRoute')
 // Cors error
- 
-app.use(cors());
+const corsOption = {
+    credentials:true,
+    origin: ["http://localhost:3001"],
+  };
+app.use(cors(corsOption));
 app.use(express.urlencoded())
 app.use(express.json())
 

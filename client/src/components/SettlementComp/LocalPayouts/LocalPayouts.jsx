@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Card from '../../../commonComp/Card/Card'
 import FilterDateMax from '../../../commonComp/filterDateMax/FilterDateMax'
 import TableComp from './TableComp'
@@ -6,26 +6,33 @@ import styles from './style.module.css'
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import SearchIcon from '@mui/icons-material/Search';
 import PaginationComp from '../../../commonComp/Pagination/PaginationComp'
+import {localPayouts} from '../../../Api/http'
 function LocalPayouts() {
   const [xlData,setXlData]= useState([])
   const [page,setPage]=useState(1)
+  const [totalPage,setTotalPage]=useState(1)
+  const [tableBodyData,setTableBodyData] = useState([])
     const data =[
-        {name: 'Declined', percentage: 2, amount: 400002},
-        {name: 'Success', percentage: 24, amount: 222700040},
-        {name: 'Refund', percentage: 0, amount: null},
-        {name: 'Chargeback', percentage: 0, amount: 1}]
- const tableBodyData = [
-   
-   {
-       id:1,
-       name:"ram"
-     },
-   {
-       id:2,
-       name:"mohan"
-     },
-    ]
-
+        {name: 'Declined', percentage: 72, amount: 4002},
+        {name: 'Success', percentage: 24, amount: 222040},
+        {name: 'Refund', percentage: 30, amount: 890},
+        {name: 'Chargeback', percentage: 60, amount: 8091}]
+ 
+    const fetchData = async()=>{
+      try {
+        const values = {pageNumber:page}
+      const {data} = await  localPayouts(values)
+      console.log(data);
+      setTableBodyData(data.result)
+      setTotalPage(data.numOfPages)
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    
+    useEffect(()=>{
+      fetchData()
+    },[page])
 
 
 const tableHeading = ['AC.Type','Bank','Payout Id','Customer Payout Id','Merchant','Status','Message','UTR','Trx Type','Payee','Credit Acc','IFSC','Amount','Remark','Payout Charge','GST Charge','Bank Charge','Wallet Deduct','Currency','Create','Update']
@@ -50,8 +57,8 @@ const tableHeading = ['AC.Type','Bank','Payout Id','Customer Payout Id','Merchan
     <PaginationComp
           setPage={setPage}
           page={page}
-          totalPage={10}
-          message={"Showing 10 from data 44311"}
+          totalPage={totalPage}
+          message={`Showing 10 from data ${totalPage}`}
         />
     </section>
     

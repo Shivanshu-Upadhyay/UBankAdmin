@@ -11,7 +11,6 @@ module.exports.login = async (req, res) => {
       if (email && password) {
         let sql = "select * from tbl_login where email = ? and password = ?";
         let result = await mysqlcon(sql, [email, md5(password)]);
-        console.log(result[0]?.role!==1 && 2);
         if(result[0]?.role<=0){
           return res.status(202).json({
             message:"Role not Assign"

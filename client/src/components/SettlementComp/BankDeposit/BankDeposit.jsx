@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Card from '../../../commonComp/Card/Card'
 import FilterDateMax from '../../../commonComp/filterDateMax/FilterDateMax'
 import TableComp from './TableComp'
@@ -6,27 +6,33 @@ import styles from './style.module.css'
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import SearchIcon from '@mui/icons-material/Search';
 import PaginationComp from '../../../commonComp/Pagination/PaginationComp'
+import {bankDeposit} from '../../../Api/http.js'
 function BankDeposit() {
   const [xlData,setXlData]= useState([])
+  const [totalPage,setTotalPage]=useState(1)
   const [page,setPage]=useState(1)
+  const [tableBodyData,setTableBodyData] = useState([])
     const data =[
         {name: 'Declined', percentage: 2, amount: 400002},
         {name: 'Success', percentage: 24, amount: 222700040},
         {name: 'Refund', percentage: 0, amount: null},
         {name: 'Chargeback', percentage: 0, amount: 1}]
- const tableBodyData = [
-   
-   {
-       id:1,
-       name:"ram"
-     },
-   {
-       id:2,
-       name:"mohan"
-     },
-    ]
+ 
 
+const fetchData = async()=>{
+  try {
+  const {data} = await  bankDeposit()
+  console.log(data);
+  setTableBodyData(data.result)
+  setTotalPage(data.numOfPages)
+  } catch (error) {
+    console.log(error);
+  }
+}
 
+useEffect(()=>{
+  fetchData()
+},[])
 
 const tableHeading = ['Merchant Id','Merchant Name','Transaction id','Received Date','Currency','Bank Name','Transaction Type','Deposits Received','Bank Charges','Tax','Total Charges','Net Deposits Received','Authorizer','Action']
 
@@ -52,8 +58,8 @@ const tableHeading = ['Merchant Id','Merchant Name','Transaction id','Received D
     <PaginationComp
           setPage={setPage}
           page={page}
-          totalPage={10}
-          message={"Showing 10 from data 44311"}
+          totalPage={totalPage}
+          message={`Showing 10 from data ${totalPage}`}
         />
     </section>
     
