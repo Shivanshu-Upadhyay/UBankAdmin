@@ -24,7 +24,7 @@ function Login() {
 
       let result = await axios.post(`${baseUrl}/login`, formData, config);
       console.log(result.data);
-      if (result.data.token) {
+      if (result.data.token && (result.data.role===1||result.data.role===2)) {
         setToggel(true);
         setActive(-1);
         setIsLoginUser(result.data.token);
@@ -44,7 +44,7 @@ function Login() {
         });
       }
     } catch (error) {
-      toast.error("Connect your Database", {
+      toast.error("Somthing went wrong", {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: false,

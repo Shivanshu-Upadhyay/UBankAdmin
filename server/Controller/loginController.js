@@ -11,7 +11,13 @@ module.exports.login = async (req, res) => {
       if (email && password) {
         let sql = "select * from tbl_login where email = ? and password = ?";
         let result = await mysqlcon(sql, [email, md5(password)]);
-        if (Object.keys(result).length > 0) {
+        console.log(result[0]?.role!==1 && 2);
+        if(result[0]?.role<=0){
+          return res.status(202).json({
+            message:"Role not Assign"
+          })
+        }
+        else if (Object.keys(result).length > 0) {
           let token = await jwt.sign(
             { id: result[0].user_id,role:result[0].role },
             config.JWT_SECRET,
