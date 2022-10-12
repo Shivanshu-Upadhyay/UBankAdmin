@@ -17,7 +17,6 @@ function FilterDateMax({ setDate, setTo, setFrom }) {
   const handleYesterday = () => {
     let today = new Date();
     today.setDate(today.getDate())
-   
     let year =
       today.getFullYear() +
       "-" +

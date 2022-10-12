@@ -12,6 +12,9 @@ function LocalPayouts() {
   const [page,setPage]=useState(1)
   const [totalPage,setTotalPage]=useState(1)
   const [tableBodyData,setTableBodyData] = useState([])
+  const [date,setDate] = useState('')
+  const [to,setTo] = useState('')
+  const [from,setFrom] = useState('')
     const data =[
         {name: 'Declined', percentage: 72, amount: 4002},
         {name: 'Success', percentage: 24, amount: 222040},
@@ -20,7 +23,7 @@ function LocalPayouts() {
  
     const fetchData = async()=>{
       try {
-        const values = {pageNumber:page}
+      const values = {pageNumber:page,date,to,from}
       const {data} = await  localPayouts(values)
       console.log(data);
       setTableBodyData(data.result)
@@ -32,7 +35,7 @@ function LocalPayouts() {
     
     useEffect(()=>{
       fetchData()
-    },[page])
+    },[page,date,to,from])
 
 
 const tableHeading = ['AC.Type','Bank','Payout Id','Customer Payout Id','Merchant','Status','Message','UTR','Trx Type','Payee','Credit Acc','IFSC','Amount','Remark','Payout Charge','GST Charge','Bank Charge','Wallet Deduct','Currency','Create','Update']
@@ -47,7 +50,7 @@ const tableHeading = ['AC.Type','Bank','Payout Id','Customer Payout Id','Merchan
     <div className="row align-items-center justify-content-end">
       <div className="col-8 row align-items-center justify-content-around">
         <div className='col-5'> <div className={styles.bankSearch}><SearchIcon className='mx-2' /> <input type="search" className={styles.inputSearch}/></div> </div>
-        <div className="col-3 centerDiv"><FilterDateMax /></div>
+        <div className="col-3 centerDiv"><FilterDateMax setDate={setDate} setTo={setTo} setFrom={setFrom}/></div>
         <div className="col-3 centerDiv"> <button className={styles.addTransaction}><ArrowDownwardIcon />Download</button></div>
       </div>
     </div>
