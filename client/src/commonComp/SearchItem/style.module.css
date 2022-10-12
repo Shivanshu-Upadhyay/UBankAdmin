@@ -1,0 +1,16 @@
+.bankSearch{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #dfd9d9;
+    padding: 10px 5px;
+    border-radius: 30px;
+}
+
+.inputSearch{
+    border: none;
+    outline: none;
+    background: #dfd9d9;
+    width: 100%;
+    margin-right:5px;
+}

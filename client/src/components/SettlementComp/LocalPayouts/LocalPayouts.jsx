@@ -4,9 +4,9 @@ import FilterDateMax from '../../../commonComp/filterDateMax/FilterDateMax'
 import TableComp from './TableComp'
 import styles from './style.module.css'
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import SearchIcon from '@mui/icons-material/Search';
 import PaginationComp from '../../../commonComp/Pagination/PaginationComp'
 import {localPayouts} from '../../../Api/http'
+import SearchItem from '../../../commonComp/SearchItem/SearchItem'
 function LocalPayouts() {
   const [xlData,setXlData]= useState([])
   const [page,setPage]=useState(1)
@@ -15,6 +15,7 @@ function LocalPayouts() {
   const [date,setDate] = useState('')
   const [to,setTo] = useState('')
   const [from,setFrom] = useState('')
+  const [searchItem,setSearchItem] = useState('')
     const data =[
         {name: 'Declined', percentage: 72, amount: 4002},
         {name: 'Success', percentage: 24, amount: 222040},
@@ -23,7 +24,7 @@ function LocalPayouts() {
  
     const fetchData = async()=>{
       try {
-      const values = {pageNumber:page,date,to,from}
+      const values = {pageNumber:page,date,to,from,searchItem}
       const {data} = await  localPayouts(values)
       console.log(data);
       setTableBodyData(data.result)
@@ -35,7 +36,7 @@ function LocalPayouts() {
     
     useEffect(()=>{
       fetchData()
-    },[page,date,to,from])
+    },[page,date,to,from,searchItem])
 
 
 const tableHeading = ['AC.Type','Bank','Payout Id','Customer Payout Id','Merchant','Status','Message','UTR','Trx Type','Payee','Credit Acc','IFSC','Amount','Remark','Payout Charge','GST Charge','Bank Charge','Wallet Deduct','Currency','Create','Update']
@@ -49,7 +50,7 @@ const tableHeading = ['AC.Type','Bank','Payout Id','Customer Payout Id','Merchan
     {/* FILTER SECTION */}
     <div className="row align-items-center justify-content-end">
       <div className="col-8 row align-items-center justify-content-around">
-        <div className='col-5'> <div className={styles.bankSearch}><SearchIcon className='mx-2' /> <input type="search" className={styles.inputSearch}/></div> </div>
+        <div className='col-5'> <SearchItem searchItem={searchItem} setSearchItem={setSearchItem}  /> </div>
         <div className="col-3 centerDiv"><FilterDateMax setDate={setDate} setTo={setTo} setFrom={setFrom}/></div>
         <div className="col-3 centerDiv"> <button className={styles.addTransaction}><ArrowDownwardIcon />Download</button></div>
       </div>
