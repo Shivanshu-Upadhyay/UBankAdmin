@@ -51,6 +51,8 @@ function LocalPayouts() {
 
      const tableHeading = ['AC.Type','Bank','Payout Id','Customer Payout Id','Merchant','Status','Message','UTR','Trx Type','Payee','Credit Acc','IFSC','Amount','Remark','Payout Charge','GST Charge','Bank Charge','Wallet Deduct','Currency','Create','Update']
 
+
+
   return (
     <section> 
     <h4 style={{fontWeight:"bold",marginBottom:"20px"}}>Local Payouts</h4>
@@ -75,7 +77,9 @@ function LocalPayouts() {
         />
     </section>
     
-  
+   
+
+     
   )
 }
 
