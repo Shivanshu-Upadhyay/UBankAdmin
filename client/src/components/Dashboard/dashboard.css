@@ -5,3 +5,161 @@
   width: 100%;
   height: 80vh;
 }
+
+
+.graphBox{
+  background: #ffd1b3;
+  box-shadow: rgb(0 0 0 / 12%) 0px 1px 4px 1px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  /* padding: 5px; */
+}
+
+.apexcharts-toolbar{
+  display: none !important;
+}
+
+.apexcharts-gridlines-horizontal{
+  display: none !important;
+}
+
+.apexcharts-xcrosshairs{
+  display: none !important;
+}
+
+foreignObject {
+  cursor: auto !important;
+}
+
+.apexcharts-svg.apexcharts-zoomable.hovering-zoom{
+  cursor: auto !important;
+}
+
+.scroll{
+  overflow: auto;
+  height: calc(202px - 57px);
+  padding: 0px 10px;
+}
+
+.newscroll{
+  overflow: auto;
+  height: calc(256px - 57px);
+  padding: 0px 10px;
+}
+
+.nav-tabs .nav-link.active {
+  color: #000;
+  background-color: #ffd1b3;
+  border: none;
+  height: 100%;
+}
+
+.nav-link {
+  color: #000;
+}
+
+.nav-link:focus, .nav-link:hover {
+  color: #000;
+}
+
+span.apexcharts-legend-text {
+  color: #818181 !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+}
+
+.apexcharts-title-text {
+  margin-top: 10px !important;
+}
+
+.rowHeading {
+  padding: 5px;
+  /* border-bottom: 1px solid #ced4da; */
+  background: #ff944d;
+}
+
+.rowHeading h2 {
+  margin: 0 !important;
+  vertical-align: middle;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+}
+
+.rowHeading h2 img {
+  min-width: 40px;
+  max-height: 40px;
+  width: initial;
+  margin-right: 8px;
+}
+
+.tabIcons{
+  min-width: 20px;
+  max-height: 20px;
+  width: initial;
+  margin-right: 8px;
+}
+
+.tabHeading{
+  display: flex;
+  vertical-align: middle;
+  align-items: center;
+  margin: 0;
+  font-size: 12px;
+}
+
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+  border-color: transparent;
+}
+
+.nav-tabs {
+  border-bottom: transparent !important;
+}
+
+.text{
+  position: absolute;
+  top: 17px;
+  z-index: 9999;
+  right: 10px;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.apexcharts-tooltip.apexcharts-theme-light{
+  top: 10px !important;
+}
+
+ul.mb-3.nav.nav-tabs.nav-justified{
+  background: #ffa366;
+}
+
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:focus-visible {
+  outline: none;
+}
+
+li button{
+  outline: none !important;
+  border: none !important;
+}
+
+li{
+  outline: none !important;
+  border: none !important;
+}
+
+foreignObject {
+  width: 517.5px;
+}
+
+svg {
+  width: 517.5px;
+}
