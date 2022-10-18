@@ -8,6 +8,7 @@ import PaginationComp from '../../../commonComp/Pagination/PaginationComp'
 import {bankDeposit} from '../../../Api/http.js'
 import * as XLSX from "xlsx";
 import SearchItem from '../../../commonComp/SearchItem/SearchItem'
+import AddTransaction from './AddTransaction'
 function BankDeposit() {
   const [page,setPage]=useState(1)
   const [totalPage,setTotalPage]=useState(1)
@@ -60,7 +61,7 @@ const tableHeading = ['Merchant Id','Merchant Name','Transaction id','Received D
       <div className="col-9 row align-items-center justify-content-around">
         <div className='col-4'> <SearchItem searchItem={searchItem} setSearchItem={setSearchItem}  /> </div>
         <div className="col-3 centerDiv"><FilterDateMax setDate={setDate} setTo={setTo} setFrom={setFrom}/></div>
-        <div className="col-3 centerDiv"> <button className={styles.addTransaction}>Add Transaction </button></div>
+        <div className="col-3 centerDiv"> <AddTransaction /></div>
         <div className="col-2 centerDiv"> <button className={styles.addTransaction} onClick={downloadExl}><ArrowDownwardIcon  />Download</button></div>
       </div>
     </div>

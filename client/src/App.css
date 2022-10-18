@@ -533,3 +533,43 @@ font-family: 'Mulish';
 
 
 /* <>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>scrollbar css <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
+
+.addTransaction{
+  display: flex;
+   padding: 10px 20px;
+   background: #1eaae7;
+   color: #fff;
+   font-weight: 600;
+   border-radius: 30px;
+   
+}
+.input1 {
+  border: none;
+  outline: none;
+  text-align: center;
+  color: #000000 ;
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.forminputDeposite{
+  font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+    color: rgba(0, 0, 0, 0.6);
+    padding-bottom: 4px;
+    margin-bottom: 0;
+}
+
+
+select.form-select.form-select-sm.mb-3.boldOption {
+  border: none;
+  box-shadow: none;
+}
+
+.boldOption{
+  width: 70% !important;
+}
