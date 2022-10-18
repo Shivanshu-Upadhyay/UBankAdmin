@@ -11,7 +11,7 @@ const api = axios.create({
   },
 });
 
-// List of all the endpoints😎
-export const bankDeposit = () => api.post("/settelment/bankDeposit");
-export const localPayouts = (data) => api.post("/settelment/localPayouts",data);
+// List of all the endpoints Settelment😎
+export const bankDeposit = (data) => api.post("api/settelment/bankDeposit",data);
+export const localPayouts = (data) => api.post("api/settelment/localPayouts",data);
 

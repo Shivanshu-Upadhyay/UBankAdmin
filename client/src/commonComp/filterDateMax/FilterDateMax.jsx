@@ -19,8 +19,8 @@ function FilterDateMax({ setDate, setTo, setFrom }) {
     today.setDate(today.getDate())
     let year =
       today.getFullYear() +
-      "-" +
-      0 +
+      "-" +  
+      
       (today.getMonth() + 1) +
       "-" +
       (today.getDate() - 1);
@@ -34,7 +34,7 @@ function FilterDateMax({ setDate, setTo, setFrom }) {
     let year =
       today.getFullYear() +
       "-" +
-      0 +
+     
       (today.getMonth() + 1) +
       "-" +
       today.getDate();

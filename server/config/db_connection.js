@@ -8,6 +8,7 @@ var connection = mysql.createConnection({
   user: config.DB_USERNAME,
   password: config.DB_PASSWORD,
   database: config.DB_NAME,
+  connectionLimit:10
 });
 connection.connect(function (err) {
   if (err) {
@@ -19,4 +20,7 @@ connection.connect(function (err) {
 
 const query = util.promisify(connection.query).bind(connection);
 
+
+
 module.exports = query;
+

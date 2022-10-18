@@ -15,9 +15,11 @@ const jwt = {
                     }
                     else{
                         req.user = results[0];
+                       
                         next(); 
                     }
                 }); 
+                
             })
         }
         else{
