@@ -92,7 +92,7 @@ function Routers() {
   const { isLoginUser,setIsLoginUser,role, setRole } = useStateContext();
   useEffect(() => {
     setIsLoginUser(localStorage.getItem('admin'))
-    setRole(localStorage.getItem('role')) 
+    setRole(localStorage.getItem('role'))
     fetchData();
   }, [isLoginUser,role]);
   const fetchData = async () => {
