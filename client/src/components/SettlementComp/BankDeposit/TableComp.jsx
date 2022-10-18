@@ -43,11 +43,11 @@ export default function TableComp({ tableBodyData, setXlData,tableHeading }) {
                   className="form-check-input"
                   type="checkbox"
                   name="allSelect"
-                  checked={!users.some((user) => user?.isChecked !== true)}
+                  checked={!users?.some((user) => user?.isChecked !== true)}
                   onChange={handleChange}
                 />
               </TableCell>
-            {tableHeading.map((item,i)=><TableCell key={i} style={{fontWeight:"600"}}>{item}</TableCell>)}
+            {tableHeading?.map((item,i)=><TableCell key={i} style={{fontWeight:"600"}}>{item}</TableCell>)}
             </TableRow>
           </TableHead>
           
