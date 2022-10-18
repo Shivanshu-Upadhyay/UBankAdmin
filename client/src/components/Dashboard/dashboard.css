@@ -156,10 +156,14 @@ li{
   border: none !important;
 }
 
-foreignObject {
-  width: 517.5px;
+.apexcharts-canvas{
+  width: 100% !important;
 }
 
-svg {
-  width: 517.5px;
+.apexcharts-canvas svg{
+  width: 100% !important;
+}
+
+.apexcharts-canvas svg foreignObject{
+  width: 100% !important;
 }

@@ -5,9 +5,16 @@ const config = require('./config/config.js');
 const cors = require("cors");
 const settelmentRoute = require('./route/settelmentRoute')
 // Cors error
+const whitelist = ['http://localhost:3000', 'http://localhost:3001']
 const corsOption = {
     credentials:true,
-    origin: ["http://localhost:3001"],
+    origin: function (origin, callback) {
+      if (whitelist.indexOf(origin) !== -1) {
+        callback(null, true)
+      } else {
+        callback(new Error('Not allowed by CORS'))
+      }
+    }
   };
 app.use(cors(corsOption));
 app.use(express.urlencoded())

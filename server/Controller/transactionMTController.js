@@ -254,15 +254,30 @@ module.exports.defaultMT = async function (req, res) {
 module.exports.getIdMT = async function (req, res) {
   try {
     let { id } = req.body;
+    console.log(id)
 
     let sql = "SELECT * FROM tbl_merchant_transaction WHERE invoice_id = ?";
 
     let result = await mysqlcon(sql, [id]);
+    let od_id = result[0].new_trx === 1 ? result[0].txn_id : result[0].order_no;
+
+
+    let sql1 = "SELECT * FROM tbl_payin_request WHERE order_id = ?";
+    let sql2 = "SELECT * FROM tbl_payment_gate_response_tale WHERE order_id = ?";
+    let sql3 = `SELECT * FROM tbl_cron_log WHERE data LIKE '{"order_id":"${od_id}%'`;
+
+
+    let request_data = await mysqlcon(sql1, [result[0].order_no]);
+    let bank_data = await mysqlcon(sql2, [result[0].order_no]);
+    let cron_data = await mysqlcon(sql3);
 
     if (result.length !== 0) {
       return res.json(200, {
         message: `Records for id =  ${id}`,
-        data: result[0],
+        data: result,
+        request_data: request_data,
+        bank_data: bank_data,
+        cron_data: cron_data
       });
     } else {
       return res.json(201, {
@@ -271,6 +286,7 @@ module.exports.getIdMT = async function (req, res) {
       });
     }
   } catch (error) {
+    console.log(error)
     return res.json(500, {
       message: "error occurered",
       error: error,
