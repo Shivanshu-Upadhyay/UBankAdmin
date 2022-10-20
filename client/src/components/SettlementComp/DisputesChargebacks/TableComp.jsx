@@ -30,21 +30,21 @@ export default function TableComp({ tableBodyData,tableHeading }) {
                   key={index}
                 >
                   <TableCell>{item.id}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
+                  <TableCell>{item.mer_name}</TableCell>
+                  <TableCell>{item.recieved_date}</TableCell>
+                  <TableCell>{item.currency}</TableCell>
+                  <TableCell>{item.amount}</TableCell>
+                  <TableCell>{item.charges}</TableCell>
+                  <TableCell>{item.net_amount}</TableCell>
+                  <TableCell>{item.amount}</TableCell>
+                  <TableCell>{item.bankName}</TableCell>
+                  <TableCell>{item.customer_name}</TableCell>
+                  <TableCell>{item.reason}</TableCell>
+                  <TableCell>{item.mode}</TableCell>
+                  <TableCell>{item.auth}</TableCell>
+                  <TableCell>{item.net_amount}</TableCell>
+                  <TableCell>{item.created_on}</TableCell>
+                  <TableCell>{item.updated_on}</TableCell>
                   <TableCell align="center">
                     <PopUp formData={item} />
                   </TableCell>

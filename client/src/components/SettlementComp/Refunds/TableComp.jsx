@@ -29,17 +29,17 @@ export default function TableComp({ tableBodyData,tableHeading }) {
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   key={index}
                 >
-                  <TableCell>{item.id}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
+                  <TableCell>{item.user_id}</TableCell>
+                  <TableCell>{item.mer_name}</TableCell>
+                  <TableCell>{item.trx_id}</TableCell>
+                  <TableCell>{item.recieved_date}</TableCell>
+                  <TableCell>{item.currency}</TableCell>
+                  <TableCell>{item.amount}</TableCell>
+                  <TableCell>{item.charges}</TableCell>
+                  <TableCell>{item.net_amount}</TableCell>
+                  <TableCell>{item.net_amount}</TableCell>
+                  <TableCell>{item.trx_type}</TableCell>
+                  <TableCell>{item.bankName}</TableCell>
                   <TableCell align="center">
                     <PopUp formData={item} />
                   </TableCell>
