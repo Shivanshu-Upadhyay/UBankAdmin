@@ -5,7 +5,8 @@ import TableComp from './TableComp'
 import styles from './style.module.css'
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import PaginationComp from '../../../commonComp/Pagination/PaginationComp'
-import {localPayouts} from '../../../Api/http'
+import axios from 'axios'
+import baseUrl from '../../config/baseUrl'
 import SearchItem from '../../../commonComp/SearchItem/SearchItem'
 import * as XLSX from "xlsx";
 function LocalPayouts() {
@@ -16,16 +17,24 @@ function LocalPayouts() {
   const [to,setTo] = useState('')
   const [from,setFrom] = useState('')
   const [searchItem,setSearchItem] = useState('')
+  const auth = localStorage.getItem("admin");
     const data =[
         {name: 'Declined', percentage: 72, amount: 4002},
         {name: 'Success', percentage: 24, amount: 222040},
         {name: 'Refund', percentage: 30, amount: 890},
         {name: 'Chargeback', percentage: 60, amount: 8091}]
- 
+
     const fetchData = async()=>{
       try {
       const values = {pageNumber:page,date,to,from,searchItem}
-      const {data} = await  localPayouts(values)
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${auth}`,
+        },
+      };
+      const {data} = await axios.post(`${baseUrl}/api/settelment/localPayouts`, values, config)
       console.log(data);
       setTableBodyData(data.result)
       setTotalPage(data.numOfPages)

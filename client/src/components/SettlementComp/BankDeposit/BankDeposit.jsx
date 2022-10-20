@@ -5,10 +5,11 @@ import TableComp from './TableComp'
 import styles from './style.module.css'
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import PaginationComp from '../../../commonComp/Pagination/PaginationComp'
-import {bankDeposit} from '../../../Api/http.js'
 import * as XLSX from "xlsx";
 import SearchItem from '../../../commonComp/SearchItem/SearchItem'
 import AddTransaction from './AddTransaction'
+import axios from 'axios'
+import baseUrl from '../../config/baseUrl'
 function BankDeposit() {
   const [page,setPage]=useState(1)
   const [totalPage,setTotalPage]=useState(1)
@@ -18,6 +19,7 @@ function BankDeposit() {
   const [from,setFrom] = useState('')
   const [searchItem,setSearchItem] = useState('')
   const [xlsxData,setXlData] = useState([])
+  const auth = localStorage.getItem("admin");
   const data =[
     {name: 'Declined', percentage: 2, amount: 400002},
     {name: 'Success', percentage: 24, amount: 222700040},
@@ -26,7 +28,14 @@ function BankDeposit() {
     const fetchData = async()=>{
       try {
       const values = {pageNumber:page,date,to,from,searchItem}
-      const {data} = await  bankDeposit(values)
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${auth}`,
+        },
+      };
+      const {data} = await axios.post(`${baseUrl}/api/settelment/bankDeposit`, values, config)
       console.log(data);
       setTableBodyData(data.result)
       setTotalPage(data.numOfPages)

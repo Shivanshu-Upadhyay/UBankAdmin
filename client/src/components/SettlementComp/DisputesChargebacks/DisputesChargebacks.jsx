@@ -15,7 +15,6 @@ function DisputesChargebacks() {
         {name: 'Refund', percentage: 0, amount: null},
         {name: 'Chargeback', percentage: 0, amount: 1}]
  const tableBodyData = [
-   
    {
        id:1,
        name:"ram"

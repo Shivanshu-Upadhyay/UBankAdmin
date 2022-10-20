@@ -1,33 +1,51 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Card from '../../../commonComp/Card/Card'
 import FilterDateMax from '../../../commonComp/filterDateMax/FilterDateMax'
 import TableComp from './TableComp'
 import styles from './style.module.css'
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import SearchIcon from '@mui/icons-material/Search';
 import PaginationComp from '../../../commonComp/Pagination/PaginationComp'
+import axios from 'axios'
+import baseUrl from '../../config/baseUrl'
+import SearchItem from '../../../commonComp/SearchItem/SearchItem'
 function AddFunds() {
-  const [xlData,setXlData]= useState([])
   const [page,setPage]=useState(1)
+  const [totalPage,setTotalPage]=useState(1)
+  const [tableBodyData,setTableBodyData] = useState([])
+  const [date,setDate] = useState('')
+  const [to,setTo] = useState('')
+  const [from,setFrom] = useState('')
+  const [searchItem,setSearchItem] = useState('')
+  const auth = localStorage.getItem("admin");
     const data =[
         {name: 'Declined', percentage: 2, amount: 400002},
         {name: 'Success', percentage: 24, amount: 222700040},
         {name: 'Refund', percentage: 0, amount: null},
         {name: 'Chargeback', percentage: 0, amount: 1}]
- const tableBodyData = [
-   
-   {
-       id:1,
-       name:"ram"
-     },
-   {
-       id:2,
-       name:"mohan"
-     },
-    ]
 
 
-
+    const fetchData = async()=>{
+      try {
+      const values = {pageNumber:page,date,to,from,searchItem}
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${auth}`,
+        },
+      };
+      const {data} = await axios.post(`${baseUrl}/api/settelment/addFundRead`, values, config)
+      console.log(data);
+      setTableBodyData(data.result)
+      setTotalPage(data.numOfPages)
+      } catch (error) {
+        console.log(error);
+      }
+    }
+ 
+    useEffect(()=>{
+      fetchData()
+    },[page,date,to,from,searchItem])
+      
 const tableHeading = ['Merchant Id','Merchant','Currency','Previous Balance','Amount Added','Current Balance','Funds added by',' Time & Date','Action']
 
   return (
@@ -40,19 +58,19 @@ const tableHeading = ['Merchant Id','Merchant','Currency','Previous Balance','Am
     {/* FILTER SECTION */}
     <div className="row align-items-center justify-content-end">
       <div className="col-9 row align-items-center justify-content-around">
-        <div className='col-5'> <div className={styles.bankSearch}><SearchIcon className='mx-2' /> <input type="search" className={styles.inputSearch}/></div> </div>
-        <div className="col-3 centerDiv"><FilterDateMax /></div>
-        <div className="col-3 centerDiv"> <button className={styles.addTransaction}><ArrowDownwardIcon />Download</button></div>
+        <div className='col-5'> <SearchItem searchItem={searchItem} setSearchItem={setSearchItem}  /> </div>
+        <div className="col-3 centerDiv"><FilterDateMax setDate={setDate} setTo={setTo} setFrom={setFrom}/></div>
+        <div className="col-3 centerDiv"> <button className={styles.addTransaction} >Add Funds</button></div>
       </div>
     </div>
      {/* FILTER SECTION END*/}
     <br /><br />
-    <TableComp setXlData={setXlData} tableHeading={tableHeading} tableBodyData={tableBodyData}/>
+    <TableComp  tableHeading={tableHeading} tableBodyData={tableBodyData}/>
     <PaginationComp
           setPage={setPage}
           page={page}
-          totalPage={10}
-          message={"Showing 10 from data 44311"}
+          totalPage={totalPage}
+          message={`Showing 10 from data ${totalPage}`}
         />
     </section>
     

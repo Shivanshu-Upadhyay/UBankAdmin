@@ -573,3 +573,41 @@ select.form-select.form-select-sm.mb-3.boldOption {
 .boldOption{
   width: 70% !important;
 }
+
+.penddingBtn{
+  width: 100px;
+  padding: 8px 20px;
+  border-radius: 30px;
+  background-image: linear-gradient(135deg, #1eef2c 40%, #ffa500);
+  color: #fff;
+  font-weight: 500;
+}
+.successBtn{
+  width: 100px;
+  padding: 8px 20px;
+  border-radius: 30px;
+  background: green;
+  color: #fff;
+  font-weight: 500;
+}
+.failedBtn{
+  width: 100px;
+  padding: 8px 20px;
+  border-radius: 30px;
+  background: red;
+  background-image: linear-gradient(135deg, rgb(221, 59, 59) 40%, red);
+  color: #fff;
+  font-weight: 500;
+}
+.approveBtn{
+  width: 100px;
+  padding: 8px 20px;
+  border-radius: 30px;
+  background-image: linear-gradient(135deg, #f34079 40%, #15e37c);
+  color: #fff;
+  font-weight: 500;
+}
+
+
+
+

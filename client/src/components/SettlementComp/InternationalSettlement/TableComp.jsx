@@ -9,9 +9,12 @@ import Popover from "@mui/material/Popover";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import styles from "./style.module.css";
-export default function TableComp({ tableBodyData, setXlData, tableHeading }) {
+
+export default function TableComp({ tableBodyData, setXlData,tableHeading }) {
   const [users, setUsers] = useState(tableBodyData);
+  useEffect(()=>{
+    setUsers(tableBodyData)
+  },[tableBodyData])
   const handleChange = (e) => {
     const { name, checked } = e.target;
     if (name === "allSelect") {
@@ -21,13 +24,13 @@ export default function TableComp({ tableBodyData, setXlData, tableHeading }) {
       setUsers(tempUser);
       setXlData(tempUser);
     } else {
-      let tempUser = users.map((user) =>
-        user.name === name ? { ...user, isChecked: checked } : user
-      );
+      let tempUser = users.map((user) =>  user.created_on === name ? { ...user, isChecked: checked } : user);
       setUsers(tempUser);
       setXlData(tempUser.filter((item) => item.isChecked));
-    }
+    } 
   };
+ 
+  console.log(users);
 
   return (
     <>
@@ -35,7 +38,7 @@ export default function TableComp({ tableBodyData, setXlData, tableHeading }) {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>
+            <TableCell>
                 <input
                   className="form-check-input"
                   type="checkbox"
@@ -44,14 +47,10 @@ export default function TableComp({ tableBodyData, setXlData, tableHeading }) {
                   onChange={handleChange}
                 />
               </TableCell>
-              {tableHeading.map((item, i) => (
-                <TableCell key={i} style={{ fontWeight: "600" }}>
-                  {item}
-                </TableCell>
-              ))}
+            {tableHeading.map((item,i)=><TableCell key={i} style={{fontWeight:"600"}}>{item}</TableCell>)}
             </TableRow>
           </TableHead>
-
+          
           <TableBody>
             {users?.map((item, index) => {
               return (
@@ -59,53 +58,30 @@ export default function TableComp({ tableBodyData, setXlData, tableHeading }) {
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   key={index}
                 >
-                  <TableCell>
+                   <TableCell>
                     <input
                       className="form-check-input"
                       type="checkbox"
-                      name={item.name}
+                      name={item.created_on}
                       checked={item?.isChecked || false}
                       onChange={handleChange}
                     />
                   </TableCell>
-                  <TableCell>
-                    {item.id === 1 ? (
-                      <button className={styles.penddingBtn}>Pendiing</button>
-                    ) : (
-                      <button className={styles.approvedBtn}>Approved</button>
-                    )}
-                  </TableCell>
-                  <TableCell>
-                    {item.id === 1 ? (
-                      <div>
-                        <button className={`${styles.approvedBtn2} mb-2`}>
-                          Approved
-                        </button>
-                        <button className={styles.faileddBtn}>Faild</button>
-                      </div>
-                    ) : (
-                      <div>
-                        <button className={`${styles.approvedBtn2} mb-2`} disabled>
-                          Approved
-                        </button>
-                        <button className={styles.faileddBtn} disabled>Faild</button>
-                      </div>
-                    )}
-                  </TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-
+                  <TableCell>{item.authorizer==='1'?<button className="successBtn">Success</button>:<button className="penddingBtn">Pending</button>}</TableCell>
+                  <TableCell> <button className="approveBtn my-3">Approve</button> <button className="failedBtn">Failed</button></TableCell>
+                  <TableCell>{item.created_on}</TableCell>
+                  <TableCell>{item.user_id}</TableCell>
+                  <TableCell>{item.merchant_name}</TableCell>
+                  <TableCell>{item.source}</TableCell>
+                  <TableCell>{item.settlementId}</TableCell>
+                  <TableCell>{item.settlementType}</TableCell>
+                  <TableCell>{item.bankName}</TableCell>
+                  <TableCell>{item.fromCurrency}</TableCell>
+                  <TableCell>{item.exchangeRate}</TableCell>
+                  <TableCell>{item.requestedAmount}</TableCell>
+                  <TableCell>{item.charges}</TableCell>
+                  <TableCell>{item.net_amount_for_settlement}</TableCell>
+                  <TableCell>{item.settlementAmount}</TableCell>
                   <TableCell align="center">
                     <PopUp formData={item} />
                   </TableCell>

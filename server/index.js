@@ -25,7 +25,6 @@ const corsOption = {
 app.use(cors(corsOption));
 app.use(express.urlencoded())
 app.use(express.json())
-
 // routing
 app.use(require('./route/route'));
 app.use(settelmentRoute)

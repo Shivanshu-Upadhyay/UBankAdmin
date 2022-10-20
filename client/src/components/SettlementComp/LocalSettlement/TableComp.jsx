@@ -12,6 +12,9 @@ import DialogTitle from "@mui/material/DialogTitle";
 
 export default function TableComp({ tableBodyData, setXlData,tableHeading }) {
   const [users, setUsers] = useState(tableBodyData);
+  useEffect(()=>{
+    setUsers(tableBodyData)
+  },[tableBodyData])
   const handleChange = (e) => {
     const { name, checked } = e.target;
     if (name === "allSelect") {
@@ -21,12 +24,13 @@ export default function TableComp({ tableBodyData, setXlData,tableHeading }) {
       setUsers(tempUser);
       setXlData(tempUser);
     } else {
-      let tempUser = users.map((user) =>  user.name === name ? { ...user, isChecked: checked } : user);
+      let tempUser = users.map((user) =>  user.created_on === name ? { ...user, isChecked: checked } : user);
       setUsers(tempUser);
       setXlData(tempUser.filter((item) => item.isChecked));
     } 
   };
  
+  console.log(users);
 
   return (
     <>
@@ -58,26 +62,26 @@ export default function TableComp({ tableBodyData, setXlData,tableHeading }) {
                     <input
                       className="form-check-input"
                       type="checkbox"
-                      name={item.name}
+                      name={item.created_on}
                       checked={item?.isChecked || false}
                       onChange={handleChange}
                     />
                   </TableCell>
-                  <TableCell>{item.id}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
+                  <TableCell>{item.authorizer==='1'?<button className="successBtn">Success</button>:<button className="penddingBtn">Pending</button>}</TableCell>
+                  <TableCell> <button className="approveBtn my-3">Approve</button> <button className="failedBtn">Failed</button></TableCell>
+                  <TableCell>{item.created_on}</TableCell>
+                  <TableCell>{item.user_id}</TableCell>
+                  <TableCell>{item.merchant_name}</TableCell>
+                  <TableCell>{item.source}</TableCell>
+                  <TableCell>{item.settlementId}</TableCell>
+                  <TableCell>{item.settlementType}</TableCell>
+                  <TableCell>{item.bankName}</TableCell>
+                  <TableCell>{item.fromCurrency}</TableCell>
+                  <TableCell>{item.exchangeRate}</TableCell>
+                  <TableCell>{item.requestedAmount}</TableCell>
+                  <TableCell>{item.charges}</TableCell>
+                  <TableCell>{item.net_amount_for_settlement}</TableCell>
+                  <TableCell>{item.settlementAmount}</TableCell>
                   <TableCell align="center">
                     <PopUp formData={item} />
                   </TableCell>

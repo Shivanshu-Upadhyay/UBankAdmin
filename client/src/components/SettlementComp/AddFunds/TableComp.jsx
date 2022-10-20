@@ -11,9 +11,6 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 
 export default function TableComp({ tableBodyData, setXlData,tableHeading }) {
-  
- 
-
   return (
     <>
       <TableContainer className="tablecontainer2 ">
@@ -33,14 +30,14 @@ export default function TableComp({ tableBodyData, setXlData,tableHeading }) {
                   key={index}
                 >
                    
-                  <TableCell>{item.id}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
+                  <TableCell>{item.merchant_id}</TableCell>
+                  <TableCell>{item.merchant_name}</TableCell>
+                  <TableCell>{item.currency}</TableCell>
+                  <TableCell>{item.available_balance}</TableCell>
+                  <TableCell>{item.add_amount}</TableCell>
+                  <TableCell>{item.current_amount}</TableCell>
+                  <TableCell>{item.funds_added_by}</TableCell>
+                  <TableCell>{item.created_on}</TableCell>
                   <TableCell align="center">
                     <PopUp formData={item} />
                   </TableCell>
