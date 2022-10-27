@@ -526,7 +526,7 @@ font-family: 'Mulish';
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background:#69a47b ;
+  background:#fff ;
   border-radius: 10px;
 }
 

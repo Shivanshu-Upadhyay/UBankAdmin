@@ -29,19 +29,19 @@ export default function TableComp({ tableBodyData,tableHeading }) {
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   key={index}
                 >
-                  <TableCell>{item.id}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.name}</TableCell>
+                  <TableCell>{item.created_on}</TableCell>
+                  <TableCell>{item.user_id}</TableCell>
+                  <TableCell>{item.merchant_name}</TableCell>
+                  <TableCell>{item.dep_commissions }</TableCell>
+                  <TableCell>{item.pay_commissions }</TableCell>
+                  <TableCell>{item.settle_commissions }</TableCell>
+                  <TableCell>{item.currency}</TableCell>
+                  <TableCell>{item.cb_commissions }</TableCell>
+                  <TableCell>{item.ref_commissions }</TableCell>
+                  <TableCell>{item.total_commissions }</TableCell>
+                  <TableCell>{item.other_commissions }</TableCell>
+                  <TableCell>{item.net_commissions }</TableCell>
+                  <TableCell>{item.authorizer}</TableCell>
                   <TableCell align="center">
                     <PopUp formData={item} />
                   </TableCell>

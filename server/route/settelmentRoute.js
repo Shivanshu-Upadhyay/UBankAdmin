@@ -9,6 +9,7 @@ const LocalSettlement = require("../Controller/SettlementController/localSettlem
 const InternationalSettlement = require("../Controller/SettlementController/internationalSettlement");
 const disputesChargeback = require("../Controller/SettlementController/disputesChargeback");
 const Refunds = require("../Controller/SettlementController/refunds");
+const Commissions = require("../Controller/SettlementController/commissions");
 // CREATING ROUTERS 🤓
 settelmentRoute.post('/api/settelment/bankDeposit', helper.verify, BankDeposit.default)
 settelmentRoute.post('/api/settelment/localPayouts', helper.verify, LocalPayouts.default)
@@ -17,5 +18,6 @@ settelmentRoute.post('/api/settelment/localSettlement',helper.verify,LocalSettle
 settelmentRoute.post('/api/settelment/internationalSettlement',helper.verify,InternationalSettlement.default)
 settelmentRoute.post('/api/settelment/disputesChargeback',helper.verify,disputesChargeback.default)
 settelmentRoute.post('/api/settelment/refunds',helper.verify,Refunds.default)
+settelmentRoute.post('/api/settelment/commissions',helper.verify,Commissions.default)
 
 module.exports = settelmentRoute
