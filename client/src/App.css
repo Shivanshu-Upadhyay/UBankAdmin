@@ -498,7 +498,6 @@ border: 1px solid #F9501A;
   padding: 10px 20px;
 }
 
-
 .forminputDeposite{
 font-family: 'Mulish';
   font-style: normal;
@@ -526,7 +525,7 @@ font-family: 'Mulish';
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background:#fff ;
+  background:#99b5a2 ;
   border-radius: 10px;
 }
 
