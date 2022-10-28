@@ -357,7 +357,7 @@ function SettlementDashboard() {
                       return (
                         <tr>
                           <td>
-                            <img
+                          <img
                               src={
                                 item.currency === "INR"
                                   ? "./imges/rupee.svg"
@@ -376,21 +376,21 @@ function SettlementDashboard() {
                                   : item.currency === "MYR"
                                   ? "./imges/rm.svg"
                                   : item.currency === "CLP"
-                                  ? "./imges/rm.svg"
+                                  ? "./imges/clp.svg"
                                   : item.currency === "MXN"
-                                  ? "./imges/rm.svg"
+                                  ? "./imges/mxn.svg"
                                   : item.currency === "PEN"
-                                  ? "./imges/rm.svg"
+                                  ? "./imges/pen.svg"
                                   : item.currency === "GTQ"
-                                  ? "./imges/rm.svg"
+                                  ? "./imges/gtq.svg"
                                   : item.currency === "CRC"
-                                  ? "./imges/rm.svg"
+                                  ? "./imges/crc.svg"
                                   : item.currency === "BRL"
-                                  ? "./imges/rm.svg"
+                                  ? "./imges/brl.svg"
                                   : item.currency === "PKR"
-                                  ? "./imges/rm.svg"
+                                  ? "./imges/pkr.svg"
                                   : item.currency === "KRW"
-                                  ? "./imges/rm.svg"
+                                  ? "./imges/krw.svg"
                                   : ""
                               }
                               alt=""
