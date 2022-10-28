@@ -6,9 +6,7 @@ import baseUrl from "../../../config/baseUrl";
 export default class LocalYesterday extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {
-        
           series: [{
             name: 'Total Amount',
               data: [31, 40, 28, 51, 42, 109],
@@ -49,6 +47,16 @@ export default class LocalYesterday extends React.Component {
                 show: false,
               }
             },
+            title: {
+              text: '',
+              align: 'right',
+              offsetX: 0,
+              color: '#fff',
+              style: {
+                fontSize: '18px',
+                fontFamily:  'Mulish',
+              }
+            },
             tooltip: {
               x: {
                 format: 'dd/MM/yy HH:mm'
@@ -56,6 +64,28 @@ export default class LocalYesterday extends React.Component {
             },
           },
         };
+      }
+
+      componentDidMount() {
+        const localYesterday = async() => {
+          try {
+            const auth = localStorage.getItem("admin");
+            let formData = new FormData();
+            const config = {
+              headers: {
+                "content-type": "multipart/form-data",
+                Authorization: `Bearer ${auth}`,
+              },
+            };
+            let {data} = await axios.post(`${baseUrl}/yesterdaySettlement`, formData, config);
+  
+
+            this.setState({series:[{data:data.data.yesterdaySettlement}],options:{title:{text:data.data.total}}})
+          } catch (error) {
+            console.log(error);
+          }
+        }
+        localYesterday()
       }
       render() {
         return (

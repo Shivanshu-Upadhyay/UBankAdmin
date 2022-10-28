@@ -36,6 +36,16 @@ export default class YearlySettlementAmount extends React.Component {
             yaxis : {
                 show: false,
             },
+            title: {
+              text: '',
+              align: 'right',
+              offsetX: 0,
+              color: '#fff',
+              style: {
+                fontSize: '18px',
+                fontFamily:  'Mulish',
+              }
+            },
             xaxis: {
               type: 'weekly',
               categories: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
@@ -56,6 +66,30 @@ export default class YearlySettlementAmount extends React.Component {
             },
           },
         };
+      }
+
+      componentDidMount() {
+        const yearly = async() => {
+          try {
+            const auth = localStorage.getItem("admin");
+            let formData = new FormData();
+            const config = {
+              headers: {
+                "content-type": "multipart/form-data",
+                Authorization: `Bearer ${auth}`,
+              },
+            };
+            let {data} = await axios.post(`${baseUrl}/yearly`, formData, config);
+
+            this.setState({series:[{data:Object.values(data.data.yearly)}],options:{xaxis:{categories:Object.keys(data.data.yearly)},title:{text:data.data.total}}})
+
+            // this.setState({series:[{data:[data.data.yearly[0].output,data.data.yearly[1].output,data.data.yearly[2].output,data.data.yearly[3].output,data.data.yearly[4].output,data.data.yearly[5].output,data.data.yearly[6].output,data.data.yearly[7].output,data.data.yearly[8].output,data.data.yearly[9].output,data.data.yearly[10].output,data.data.yearly[11].output]}],options:{xaxis:{categories:[data.data.yearly[0].name,data.data.yearly[1].name,data.data.yearly[2].name,data.data.yearly[3].name,data.data.yearly[4].name,data.data.yearly[5].name,data.data.yearly[6].name,data.data.yearly[7].name,data.data.yearly[8].name,data.data.yearly[9].name,data.data.yearly[10].name,data.data.yearly[11].name]},title:{text:data.data.total}}})
+            
+          } catch (error) {
+            console.log(error);
+          }
+        }
+        yearly()
       }
       render() {
         return (

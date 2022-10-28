@@ -6,12 +6,10 @@ import baseUrl from "../../../config/baseUrl";
 export default class WeeklySettlementAmount extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-        
+        this.state = {        
           series: [{
             name: 'Total Amount',
-              data: [31, 40, 28, 51, 42, 109, 100],
+              data: [],
               color: '#006600'
             }],
           options: {
@@ -36,9 +34,19 @@ export default class WeeklySettlementAmount extends React.Component {
             yaxis : {
                 show: false,
             },
+            title: {
+              text: '',
+              align: 'right',
+              offsetX: 0,
+              color: '#fff',
+              style: {
+                fontSize: '18px',
+                fontFamily:  'Mulish',
+              }
+            },
             xaxis: {
               type: 'weekly',
-              categories: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
+              categories: [],
               axisBorder: {
                 show: false,
               },
@@ -57,6 +65,29 @@ export default class WeeklySettlementAmount extends React.Component {
           },
         };
       }
+
+      componentDidMount() {
+        const weekly = async() => {
+          try {
+            const auth = localStorage.getItem("admin");
+            let formData = new FormData();
+            const config = {
+              headers: {
+                "content-type": "multipart/form-data",
+                Authorization: `Bearer ${auth}`,
+              },
+            };
+            let {data} = await axios.post(`${baseUrl}/weekly`, formData, config);
+
+            this.setState({series:[{data:Object.values(data.data.weekly)}],options:{xaxis:{categories:Object.keys(data.data.weekly)},title:{text:data.data.total}}})
+            
+          } catch (error) {
+            console.log(error);
+          }
+        }
+        weekly()
+      }
+
       render() {
         return (
           <div id="chart">

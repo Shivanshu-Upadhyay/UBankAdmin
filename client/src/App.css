@@ -259,7 +259,7 @@
 }
 
 .iconActive {
-  background: #1eaae7;
+  background: #ff6600;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -564,6 +564,8 @@ font-family: 'Mulish';
 }
 
 
+
+
 select.form-select.form-select-sm.mb-3.boldOption {
   border: none;
   box-shadow: none;
@@ -608,5 +610,9 @@ select.form-select.form-select-sm.mb-3.boldOption {
 }
 
 
-
+.golakrnewalaprofile{
+  border-radius: 50%;
+  border: 1px solid blueviolet;
+  overflow: hidden;
+}
 

@@ -49,6 +49,16 @@ export default class InternationalYearly extends React.Component {
                 show: false,
               }
             },
+            title: {
+              text: '',
+              align: 'right',
+              offsetX: 0,
+              color: '#fff',
+              style: {
+                fontSize: '18px',
+                fontFamily:  'Mulish',
+              }
+            },
             tooltip: {
               x: {
                 format: 'dd/MM/yy HH:mm'
@@ -57,6 +67,28 @@ export default class InternationalYearly extends React.Component {
           },
         };
       }
+
+      componentDidMount() {
+        const yearlyCommissions = async() => {
+          try {
+            const auth = localStorage.getItem("admin");
+            let formData = new FormData();
+            const config = {
+              headers: {
+                "content-type": "multipart/form-data",
+                Authorization: `Bearer ${auth}`,
+              },
+            };
+            let {data} = await axios.post(`${baseUrl}/yearlyCommissions`, formData, config);
+  
+            this.setState({series:[{data:Object.values(data.data.yearly)}],options:{xaxis:{categories:Object.keys(data.data.yearly)},title:{text:data.data.total}}})
+          } catch (error) {
+            console.log(error);
+          }
+        }
+        yearlyCommissions()
+      }
+
       render() {
         return (
           <div id="chart">

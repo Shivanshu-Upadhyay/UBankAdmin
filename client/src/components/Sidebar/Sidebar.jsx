@@ -10,7 +10,7 @@ import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import AddIcon from "@mui/icons-material/Add";
 import UnfoldLessIcon from "@mui/icons-material/UnfoldLess";
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useStateContext } from "../../context/ContextProvider";
 const drawerWidth = 250;
 const openedMixin = (theme) => ({
@@ -266,14 +266,7 @@ export default function Sidebar({ modulePesmission }) {
         authPermission: modulePesmission[12] ? modulePesmission[12].status : 0,
       },
 
-    // {
-    //   name: "Contact Module",
-    //   iconUrl:
-    //     "https://www.bankconnect.online/assets/merchants/img/change-password.svg",
-    //   path: "/contact",
-    //   children: [{ name: "Contact", path: "/contact" }],
-    //   authPermission: modulePesmission[12] ? modulePesmission[12].status : 0,
-    // },
+   
     // {
     //   name: "CMS Module",
     //   iconUrl:
@@ -340,16 +333,25 @@ export default function Sidebar({ modulePesmission }) {
           <Typography variant="h6" noWrap component="div">
             {open ? (
               <img
-                src="https://www.bankconnect.online/assets/merchants/img/logo.png"
+                src="./imges/adminlogo.svg"
                 alt=""
-                width="40px"
+                width="200px"
               />
             ) : (
-              <img src="./imges/fav-icon.png" alt="" width="36px" />
+              <img src="./imges/adminlogo.svg" alt="" width="200px" />
             )}
           </Typography>
           <div className="navLeft">
-            <div>
+            <Link to="ChangePassword" className="me-2 ">
+              <img
+                src="https://www.payoway.com/web/assets/ubankconnect/profile-image/6df347edc19697d5cb93e80b2d3c0d4c.png"
+                alt=""
+                width="42px"
+                height="42px"
+                className="golakrnewalaprofile"
+              />
+            </Link>
+            <div >
               <img
                 src="https://www.bankconnect.online/assets/merchants/img/setting.svg"
                 alt=""

@@ -61,7 +61,7 @@ const downloadExl = () => {
   return (
     
     <section> 
-    <h4 style={{fontWeight:"bold",marginBottom:"20px"}}>Local Settlement Transactions</h4>
+    <h4 style={{fontWeight:"bold",marginBottom:"20px"}}>International Settlement Transactions</h4>
     
     <Card carddata={data}/>
     <br /> <br />

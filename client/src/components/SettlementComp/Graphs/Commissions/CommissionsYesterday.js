@@ -36,6 +36,16 @@ export default class CommissionsYesterday extends React.Component {
             yaxis : {
               show: false,
             },
+            title: {
+              text: '',
+              align: 'right',
+              offsetX: 0,
+              color: '#fff',
+              style: {
+                fontSize: '18px',
+                fontFamily:  'Mulish',
+              }
+            },
             xaxis: {
               type: 'hours',
               categories: ['0-4','4-8','8-12','12-16','16-20','20-24'],
@@ -57,6 +67,29 @@ export default class CommissionsYesterday extends React.Component {
           },
         };
       }
+
+      componentDidMount() {
+        const yesterdayCommissions = async() => {
+          try {
+            const auth = localStorage.getItem("admin");
+            let formData = new FormData();
+            const config = {
+              headers: {
+                "content-type": "multipart/form-data",
+                Authorization: `Bearer ${auth}`,
+              },
+            };
+            let {data} = await axios.post(`${baseUrl}/yesterdayCommissions`, formData, config);
+            
+            this.setState({series:[{data:data.data.yesterday}],options:{title:{text:data.data.total}}})
+            
+          } catch (error) {
+            console.log(error);
+          }
+        }
+        yesterdayCommissions()
+      }
+
       render() {
         return (
           <div id="chart">

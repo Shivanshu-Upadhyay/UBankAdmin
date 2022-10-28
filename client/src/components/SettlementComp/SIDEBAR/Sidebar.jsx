@@ -187,12 +187,12 @@ export default function SettlementSidebar() {
           <Typography variant="h6" noWrap component="div">
             {open ? (
               <img
-                src="./imgs/logo.svg"
+                src="./imges/newlogo.svg"
                 alt="not found"
                 width="200px"
               />
             ) : (
-              <img src="./imgs/logo.svg" alt="" width="200px" />
+              <img src="./imges/newlogo.svg" alt="" width="200px" />
             )}
           </Typography>
           <div className="settlementnavLeft">

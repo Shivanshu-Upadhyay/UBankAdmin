@@ -23,16 +23,11 @@ class AddFund{
             res.status(200).json({
             result:data,
             numOfPages
-            })
-          
+            }) 
         } catch (error) {
             res.status(500).json({message:"Something went wrong",
         error})
         }
-      
     }
 }
-
-
-
 module.exports = new AddFund

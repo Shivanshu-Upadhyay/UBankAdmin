@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./style.css";
+import axios from "axios";
+import baseUrl from "../../config/baseUrl";
 
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
@@ -33,6 +35,38 @@ import CommissionsYearly from '../Graphs/Commissions/CommissionsYearly';
 //----Commissions---//
 
 function SettlementDashboard() {
+  const [topLocal, setTopLocal] = useState('');
+  const [topInternational, setTopInternational]= useState('')
+  const[topCurrency, setTopCurrency] = useState([]);
+  const auth = localStorage.getItem("admin");
+  const ReadData = async () => {
+    try {
+      let formData = new FormData();
+      const config = {
+        headers: {
+          "content-type": "multipart/form-data",
+          Authorization: `Bearer ${auth}`,
+        },
+      };
+
+      let result = await axios.post(
+        `${baseUrl}/dashboardTable`,
+        formData,
+        config
+      );
+
+      setTopLocal(result.data.data.topLocal)
+      setTopInternational(result.data.data.topInternational)
+      setTopCurrency(result.data.data.topCurrency)
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    ReadData();
+  }, []);
+
   return (
     <>
       <div className="row mb-5">
@@ -56,7 +90,6 @@ function SettlementDashboard() {
                   <img src="./imges/settledaily.svg" className="tabIcons" alt="" />
                   Yesterday
                 </h6>}>
-                <h6 className="text">$100</h6>
                 <YesterdaySettlementAmount />
               </Tab>
               <Tab eventKey="weekly" 
@@ -65,7 +98,6 @@ function SettlementDashboard() {
                   <img src="./imges/settleweekly.svg" className="tabIcons" alt="" />
                   Weekly
                 </h6>}>
-                <h6 className="text">$1000</h6>
                 <WeeklySettlementAmount />
               </Tab>
               <Tab eventKey="monthly" 
@@ -74,7 +106,6 @@ function SettlementDashboard() {
                   <img src="./imges/settlemonthly.svg" className="tabIcons" alt="" />
                   Monthly
                 </h6>}>
-                <h6 className="text">$100000</h6>
                 <MonthlySettlementAmount />
               </Tab>
               <Tab eventKey="yearly" 
@@ -83,7 +114,6 @@ function SettlementDashboard() {
                   <img src="./imges/settleyearly.svg" className="tabIcons" alt="" />
                   Yearly
                 </h6>}>
-                <h6 className="text">$1000000</h6>
                 <YearlySettlementAmount />
               </Tab>
             </Tabs>
@@ -108,7 +138,6 @@ function SettlementDashboard() {
                   <img src="./imges/settledaily.svg" className="tabIcons" alt="" />
                   Yesterday
                 </h6>}>
-                <h6 className="text">$100</h6>
                 <LocalYesterday />
               </Tab>
               <Tab eventKey="weekly" title={
@@ -116,7 +145,6 @@ function SettlementDashboard() {
                   <img src="./imges/settleweekly.svg" className="tabIcons" alt="" />
                   Weekly
                 </h6>}>
-                <h6 className="text">$500</h6>
                 <LocalWeekly />
               </Tab>
               <Tab eventKey="monthly" title={
@@ -124,7 +152,6 @@ function SettlementDashboard() {
                   <img src="./imges/settlemonthly.svg" className="tabIcons" alt="" />
                   Monthly
                 </h6>}>
-                <h6 className="text">$1000</h6>
                 <LocalMonthly />
               </Tab>
               <Tab eventKey="yearly" title={
@@ -132,7 +159,6 @@ function SettlementDashboard() {
                   <img src="./imges/settleyearly.svg" className="tabIcons" alt="" />
                   Yearly
                 </h6>}>
-                <h6 className="text">$10000</h6>
                 <LocalYearly />
               </Tab>
             </Tabs>
@@ -160,7 +186,7 @@ function SettlementDashboard() {
                   <img src="./imges/settledaily.svg" className="tabIcons" alt="" />
                   Yesterday
                 </h6>}>
-                <h6 className="text">$10</h6>
+                {/* <h6 className="text">$10</h6> */}
                 <InternationalYesterday />
               </Tab>
               <Tab eventKey="weekly" title={
@@ -168,7 +194,7 @@ function SettlementDashboard() {
                   <img src="./imges/settleweekly.svg" className="tabIcons" alt="" />
                   Weekly
                 </h6>}>
-                <h6 className="text">$100</h6>
+                {/* <h6 className="text">$100</h6> */}
                 <InternationalWeekly />
               </Tab>
               <Tab eventKey="monthly" title={
@@ -176,7 +202,7 @@ function SettlementDashboard() {
                   <img src="./imges/settlemonthly.svg" className="tabIcons" alt="" />
                   Monthly
                 </h6>}>
-                <h6 className="text">500</h6>
+                {/* <h6 className="text">500</h6> */}
                 <InternationalMonthly />
               </Tab>
               <Tab eventKey="yearly" title={
@@ -184,7 +210,7 @@ function SettlementDashboard() {
                   <img src="./imges/settleyearly.svg" className="tabIcons" alt="" />
                   Yearly
                 </h6>}>
-                <h6 className="text">2000</h6>
+                {/* <h6 className="text">2000</h6> */}
                 <InternationalYearly />
               </Tab>
             </Tabs>
@@ -209,7 +235,7 @@ function SettlementDashboard() {
                   <img src="./imges/settledaily.svg" className="tabIcons" alt="" />
                   Yesterday
                 </h6>}>
-                <h6 className="text">$100</h6>
+                {/* <h6 className="text">$100</h6> */}
                 <CommissionsYesterday />
               </Tab>
               <Tab eventKey="weekly" title={
@@ -217,7 +243,7 @@ function SettlementDashboard() {
                   <img src="./imges/settleweekly.svg" className="tabIcons" alt="" />
                   Weekly
                 </h6>}>
-                <h6 className="text">$500</h6>
+                {/* <h6 className="text">$500</h6> */}
                 <CommissionsWeekly />
               </Tab>
               <Tab eventKey="monthly" title={
@@ -225,7 +251,7 @@ function SettlementDashboard() {
                   <img src="./imges/settlemonthly.svg" className="tabIcons" alt="" />
                   Monthly
                 </h6>}>
-                <h6 className="text">$1000</h6>
+                {/* <h6 className="text">$1000</h6> */}
                 <CommissionsMonthly />
               </Tab>
               <Tab eventKey="yearly" title={
@@ -233,7 +259,7 @@ function SettlementDashboard() {
                   <img src="./imges/settleyearly.svg" className="tabIcons" alt="" />
                   Yearly
                 </h6>}>
-                <h6 className="text">$10000</h6>
+                {/* <h6 className="text">$10000</h6> */}
                 <CommissionsYearly />
               </Tab>
             </Tabs>
@@ -257,34 +283,20 @@ function SettlementDashboard() {
                   <th>Amount</th>
                 </thead>
                 <tbody>
-                  <tr>
-                      <td>SBI</td>
-                      <td>10000</td>
-                  </tr>
-                  <tr>
-                      <td>BOB</td>
-                      <td>100000</td>
-                  </tr>
-                  <tr>
-                      <td>BOI</td>
-                      <td>10000</td>
-                  </tr>
-                  <tr>
-                      <td>CANARA BANK</td>
-                      <td>100000</td>
-                  </tr>
-                  <tr>
-                      <td>PUNJAB NATIONAL BANK</td>
-                      <td>10000</td>
-                  </tr>
-                  <tr>
-                      <td>INDIAN BANK</td>
-                      <td>10000</td>
-                  </tr>
-                  <tr>
-                      <td>ICICI BANK</td>
-                      <td>10000</td>
-                  </tr>
+                  {Object.keys(topLocal).length > 0 ? (
+                    topLocal.map((item, index) => {
+                      return (
+                        <tr>
+                          <td>{item.name}</td>
+                          <td>{item.amount}</td>
+                        </tr>
+                        );
+                    })
+                  ) : (
+                      <tr>
+                        <h6 style={{textAlign: "center"}}>No Transaction Found</h6>
+                      </tr>
+                  )}
                 </tbody>
               </table>
             </div>
@@ -305,34 +317,20 @@ function SettlementDashboard() {
                   <th>Amount</th>
                 </thead>
                 <tbody>
-                  <tr>
-                      <td>SBI</td>
-                      <td>10000</td>
-                  </tr>
-                  <tr>
-                      <td>BOB</td>
-                      <td>100000</td>
-                  </tr>
-                  <tr>
-                      <td>BOI</td>
-                      <td>10000</td>
-                  </tr>
-                  <tr>
-                      <td>CANARA BANK</td>
-                      <td>100000</td>
-                  </tr>
-                  <tr>
-                      <td>PUNJAB NATIONAL BANK</td>
-                      <td>10000</td>
-                  </tr>
-                  <tr>
-                      <td>INDIAN BANK</td>
-                      <td>10000</td>
-                  </tr>
-                  <tr>
-                      <td>ICICI BANK</td>
-                      <td>10000</td>
-                  </tr>
+                  {Object.keys(topInternational).length > 0 ? (
+                    topInternational.map((item, index) => {
+                      return (
+                        <tr>
+                          <td>{item.name}</td>
+                          <td>{item.amount}</td>
+                        </tr>
+                        );
+                    })
+                  ) : (
+                      <tr>
+                        <h6 style={{textAlign: "center"}}>No Transaction Found</h6>
+                      </tr>
+                  )}
                 </tbody>
               </table>
             </div>
@@ -354,46 +352,57 @@ function SettlementDashboard() {
                   <th>Amount</th>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td><img src="./imges/rupee.svg" alt="" /></td>
-                    <td>INR</td>
-                    <td>10000</td>
-                  </tr>
-                  <tr>
-                    <td><img src="./imges/usdollar.svg" alt="" /></td>
-                    <td>DOLLAR</td>
-                    <td>100000</td>
-                  </tr>
-                  <tr>
-                    <td><img src="./imges/yuan.svg" alt="" /></td>
-                    <td>CNY</td>
-                    <td>10000</td>
-                  </tr>
-                  <tr>
-                    <td><img src="./imges/bhat.svg" alt="" /></td>
-                    <td>THB</td>
-                    <td>100000</td>
-                  </tr>
-                  <tr>
-                    <td><img src="./imges/dong.svg" alt="" /></td>
-                    <td>VND</td>
-                    <td>10000</td>
-                  </tr>
-                  <tr>
-                    <td><img src="./imges/peso.svg" alt="" /></td>
-                    <td>PHP</td>
-                    <td>10000</td>
-                  </tr>
-                  <tr>
-                    <td><img src="./imges/rp.svg" alt="" /></td>
-                    <td>IDR</td>
-                    <td>10000</td>
-                  </tr>
-                  <tr>
-                    <td><img src="./imges/rm.svg" alt="" /></td>
-                    <td>MYR</td>
-                    <td>10000</td>
-                  </tr>
+                  {
+                    topCurrency?.map((item, index) => {
+                      return (
+                        <tr>
+                          <td>
+                            <img
+                              src={
+                                item.currency === "INR"
+                                  ? "./imges/rupee.svg"
+                                  : item.currency === "CNY"
+                                  ? "./imges/yuan.svg"
+                                  : item.currency === "IDR"
+                                  ? "./imges/rp.svg"
+                                  : item.currency === "THB"
+                                  ? "./imges/bhat.svg"
+                                  : item.currency === "VND"
+                                  ? "./imges/dong.svg"
+                                  : item.currency === "USD"
+                                  ? "./imges/usdollar.svg"
+                                  : item.currency === "PHP"
+                                  ? "./imges/peso.svg"
+                                  : item.currency === "MYR"
+                                  ? "./imges/rm.svg"
+                                  : item.currency === "CLP"
+                                  ? "./imges/rm.svg"
+                                  : item.currency === "MXN"
+                                  ? "./imges/rm.svg"
+                                  : item.currency === "PEN"
+                                  ? "./imges/rm.svg"
+                                  : item.currency === "GTQ"
+                                  ? "./imges/rm.svg"
+                                  : item.currency === "CRC"
+                                  ? "./imges/rm.svg"
+                                  : item.currency === "BRL"
+                                  ? "./imges/rm.svg"
+                                  : item.currency === "PKR"
+                                  ? "./imges/rm.svg"
+                                  : item.currency === "KRW"
+                                  ? "./imges/rm.svg"
+                                  : ""
+                              }
+                              alt=""
+                              width="60px"
+                            />
+                          </td>
+                          <td>{item.name}</td>
+                          <td>{item.amount}</td>
+                        </tr>
+                        );
+                    })
+                  }
                 </tbody>
               </table>
             </div>

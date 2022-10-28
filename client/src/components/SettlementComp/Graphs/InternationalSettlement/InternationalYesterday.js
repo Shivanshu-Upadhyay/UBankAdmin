@@ -6,9 +6,7 @@ import baseUrl from "../../../config/baseUrl";
 export default class InternationalYesterday extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {
-        
           series: [{
             name: 'FIAT',
               data: [31, 40, 28, 51, 42, 109],
@@ -16,7 +14,7 @@ export default class InternationalYesterday extends React.Component {
             }, {
               name: 'CRYPTO',
               data: [11, 32, 45, 32, 34, 52],
-              color: '#1a8d1a'
+              color: '#b3d9b3'
             }],
           options: {
             chart: {
@@ -53,6 +51,16 @@ export default class InternationalYesterday extends React.Component {
                 show: false,
               }
             },
+            title: {
+              text: '',
+              align: 'right',
+              offsetX: 0,
+              color: '#fff',
+              style: {
+                fontSize: '18px',
+                fontFamily:  'Mulish',
+              }
+            },
             tooltip: {
               x: {
                 format: 'dd/MM/yy HH:mm'
@@ -61,6 +69,28 @@ export default class InternationalYesterday extends React.Component {
           },
         };
       }
+
+      componentDidMount() {
+        const yesterdayInternatioanl = async() => {
+          try {
+            const auth = localStorage.getItem("admin");
+            let formData = new FormData();
+            const config = {
+              headers: {
+                "content-type": "multipart/form-data",
+                Authorization: `Bearer ${auth}`,
+              },
+            };
+            let {data} = await axios.post(`${baseUrl}/yesterdayInternational`, formData, config);
+  
+            this.setState({series:[{data:data.data.fiat},{data:data.data.crypto}],options:{title:{text:data.data.total}}})
+          } catch (error) {
+            console.log(error);
+          }
+        }
+        yesterdayInternatioanl()
+      }
+
       render() {
         return (
           <div id="chart">

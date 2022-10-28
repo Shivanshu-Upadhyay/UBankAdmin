@@ -3,6 +3,7 @@ import ReactApexChart from 'react-apexcharts';
 import axios from "axios";
 import baseUrl from "../../../config/baseUrl";
 
+
 export default class YesterdaySettlementAmount extends React.Component {
     constructor(props) {
         super(props);
@@ -11,7 +12,7 @@ export default class YesterdaySettlementAmount extends React.Component {
         
           series: [{
             name: 'Total Amount',
-              data: [31, 40, 28, 51, 42, 109],
+              data: [ ],
               color: '#006600'
             }],
           options: {
@@ -36,6 +37,16 @@ export default class YesterdaySettlementAmount extends React.Component {
             yaxis : {
               show: false,
             },
+            title: {
+              text: '',
+              align: 'right',
+              offsetX: 0,
+              color: '#fff',
+              style: {
+                fontSize: '18px',
+                fontFamily:  'Mulish',
+              }
+            },
             xaxis: {
               type: 'hours',
               categories: ['0-4','4-8','8-12','12-16','16-20','20-24'],
@@ -57,6 +68,27 @@ export default class YesterdaySettlementAmount extends React.Component {
           },
         };
       }
+
+    componentDidMount() {
+      const yesterday = async() => {
+        try {
+          const auth = localStorage.getItem("admin");
+          let formData = new FormData();
+          const config = {
+            headers: {
+              "content-type": "multipart/form-data",
+              Authorization: `Bearer ${auth}`,
+            },
+          };
+          let {data} = await axios.post(`${baseUrl}/yesterday`, formData, config);
+
+          this.setState({series:[{data:data.data.yesterdayAmount}],options:{title:{text:data.data.total}}})
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      yesterday()
+    }
       render() {
         return (
           <div id="chart">

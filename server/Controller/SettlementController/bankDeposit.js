@@ -20,7 +20,6 @@ class BankDeposit{
           let sqlSearch = `select tbl_bank_deposites_receive.*, tbl_akonto_banks_code.title from tbl_bank_deposites_receive JOIN tbl_akonto_banks_code ON tbl_bank_deposites_receive.bank_name = tbl_akonto_banks_code.id where trx_id LIKE '%${searchItem}%' ORDER BY tbl_bank_deposites_receive.created_on DESC limit ?,?`
 
           const data = await mysqlcon(date?sqlDate:(to&&from)?sqlToFrom:searchItem?sqlSearch:sql,date?[date,start,limit]:(to&&from)?[from,to,start,limit]:[start,limit]);
-          
           res.status(200).json({
           result:data,
           numOfPages

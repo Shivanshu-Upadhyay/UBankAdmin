@@ -16,7 +16,7 @@ export default class InternationalYearly extends React.Component {
             }, {
               name: 'CRYPTO',
               data: [11, 32, 45, 32, 34, 52, 41, 11, 32, 45, 32, 34],
-              color: '#1a8d1a'
+              color: '#b3d9b3'
             }],
           options: {
             chart: {
@@ -53,6 +53,16 @@ export default class InternationalYearly extends React.Component {
                 show: false,
               }
             },
+            title: {
+              text: '',
+              align: 'right',
+              offsetX: 0,
+              color: '#fff',
+              style: {
+                fontSize: '18px',
+                fontFamily:  'Mulish',
+              }
+            },
             tooltip: {
               x: {
                 format: 'dd/MM/yy HH:mm'
@@ -60,6 +70,29 @@ export default class InternationalYearly extends React.Component {
             },
           },
         };
+      }
+
+      componentDidMount() {
+        const yearlyInternational = async() => {
+          try {
+            const auth = localStorage.getItem("admin");
+            let formData = new FormData();
+            const config = {
+              headers: {
+                "content-type": "multipart/form-data",
+                Authorization: `Bearer ${auth}`,
+              },
+            };
+            let {data} = await axios.post(`${baseUrl}/yearlyInternational`, formData, config);
+            // console.log(data.data)
+
+            this.setState({series:[{data:[data.data.yearly[0].fiat,data.data.yearly[1].fiat,data.data.yearly[2].fiat,data.data.yearly[3].fiat,data.data.yearly[4].fiat,data.data.yearly[5].fiat,data.data.yearly[6].fiat,data.data.yearly[7].fiat,data.data.yearly[8].fiat,data.data.yearly[9].fiat,data.data.yearly[10].fiat,data.data.yearly[11].fiat]},{data:[data.data.yearly[0].crypto,data.data.yearly[1].crypto,data.data.yearly[2].crypto,data.data.yearly[3].crypto,data.data.yearly[4].crypto,data.data.yearly[5].crypto,data.data.yearly[6].crypto,data.data.yearly[7].crypto,data.data.yearly[8].crypto,data.data.yearly[9].crypto,data.data.yearly[10].crypto,data.data.yearly[11].crypto]}],options:{xaxis:{categories:[data.data.yearly[0].day,data.data.yearly[1].day,data.data.yearly[2].day,data.data.yearly[3].day,data.data.yearly[4].day,data.data.yearly[5].day,data.data.yearly[6].day,data.data.yearly[7].day,data.data.yearly[8].day,data.data.yearly[9].day,data.data.yearly[10].day,data.data.yearly[11].day]},title:{text:data.data.total}}})
+
+          } catch (error) {
+            console.log(error);
+          }
+        }
+        yearlyInternational()
       }
       render() {
         return (
