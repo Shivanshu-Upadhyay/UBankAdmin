@@ -20,7 +20,7 @@ const settelmentRoute = require('./route/settelmentRoute')
 
 const corsOption = {
     credentials:true,
-    origin: ["http://localhost:3000"],
+    origin: ["http://localhost:3000"]
   };
 app.use(cors(corsOption));
 app.use(express.urlencoded())

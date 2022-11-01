@@ -3,22 +3,32 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import AddIcon from "@mui/icons-material/Add";
+import axios from 'axios'
+import baseUrl from "../../config/baseUrl";
 const AddTransaction = ({ReadOnlyVal,formData}) => {
   const [open, setOpen] = React.useState(false);
+  const [merchantIdList,setMerchantIdList] =useState([])
+  const [bankList,setBankList] =useState([])
+  const auth = localStorage.getItem("admin");
+  let today = new Date(); 
+  let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+let dateTime = date+' '+time; 
+
   const [formDataAll,setFormDataAll] = useState({
-    FirstName:'',
-    LastName:'',
-    Email:'',
-    MobileNo:'',
-    SettleCurrency:"",
-    BusinessName:'',
-    BusinessLocation:"",
-    JobTitle:'',
-    Website:'',
-    AnnualProcessingVolume:'',
-    AverageTransactionAmount:"",
-    chargebackpercentage:"",
-    CurrenciesRequire:'',
+    merchantId:'',
+    merchantName:'',
+    receivedDate:dateTime,
+    Currency:'',
+    bankName:'',
+    TransactionType:'',
+    transactionid:Date.now(),
+    depositsReceived:'',
+    BankCharges:'',
+    Tax:'',
+    TotalCharges:"",
+    authorizer:'',
+    NetDepositsReceived:12
   })
   const handleChange = (e)=>{
     setFormDataAll({...formDataAll,[e.target.name]:e.target.value})
@@ -28,13 +38,27 @@ const AddTransaction = ({ReadOnlyVal,formData}) => {
     console.log(formDataAll);
     handleClose()
   }
-  const handleClickOpen = () => {
-    setOpen(true);
+  const handleClickOpen = async() => {
+      const config = {
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${auth}`,
+        },
+      }
+      let {data} = await axios.post(`${baseUrl}/api/settelment/bankDeposit/createAndUpdate`,{}, config);
+      console.log(data);
+      setFormDataAll({...formDataAll,"authorizer":data.authorizer})
+      setMerchantIdList(data.merchant)
+      setBankList(data.bankName)
+      setOpen(true); 
   };
   const handleClose = () => {
     setOpen(false);
   };
-console.log(formData);
+const setMerchantNameFun = (e)=>{
+  setFormDataAll({...formDataAll,"merchantName": merchantIdList?.filter((item)=>item.id+''===e.target.value)[0].name,[e.target.name]:e.target.value})
+  
+}
   return (
     <>
       <div>
@@ -69,30 +93,16 @@ console.log(formData);
                     </label>
                     <div className="d-flex justify-content-center align-items-center">
                     <select
-                      className="form-select form-select-sm mb-3 boldOption"
-                      name="SettleCurrency"
-                      defaultValue={"default"}
+                      className="form-select form-select-sm mb-3 boldOption text-center"
+                      name="merchantId"
                       style={{width:"100px"}}
-                      onChange={handleChange}
-                      value={formData?.settle_currency}
+                      onChange={(e)=>{setMerchantNameFun(e)}}
+                      value={formDataAll.merchantId}
                     >
-                      <option value={"default"} disabled>
+                      <option value="default">
                         Please Select
                       </option>
-                      <option value="INR">INR</option>
-                      <option value="CNY">CNY</option>
-                      <option value="USD">USD</option>
-                      <option value="EUR">EUR</option>
-                      <option value="GBP">GBP</option>
-                      <option value="USDT">USDT</option>
-                      <option value="BTC">BTC</option>
-                      <option value="ETH">ETH</option>
-                      <option value="THB">THB</option>
-                      <option value="VND">VND</option>
-                      <option value="PHP">PHP</option>
-                      <option value="MYR">MYR</option>
-                      <option value="IDR">IDR</option>
-                      <option value="KRW">KRW</option>
+                      {merchantIdList?.map(item=> <option value={item.id} key={item.id}>{item.id}</option>)}
                     </select>
                     </div>
                   </div>
@@ -103,7 +113,7 @@ console.log(formData);
                     >
                       Merchant Name
                     </label>
-                    <input type="text" className="input1" name="LastName"onChange={handleChange} value={formData?.lname}/>
+                    <input type="text" className="input1" name="merchantName" value={formDataAll.merchantName} readOnly/>
                   </div>
 
                   <div className="col-md-3 d-flex flex-column text-center">
@@ -113,7 +123,7 @@ console.log(formData);
                     >
                       Received Date
                     </label>
-                    <input type="email" className="input1" name="Email" onChange={handleChange} value={formData?.email}/>
+                    <input type="email" className="input1" name="receivedDate" readOnly value={formDataAll?.receivedDate}/>
                   </div>
                   <div className="col-md-3 d-flex flex-column text-center">
                     <label
@@ -124,14 +134,14 @@ console.log(formData);
                     </label>
                     <div className="d-flex justify-content-center align-items-center">
                     <select
-                      className="form-select form-select-sm mb-3 boldOption"
-                      name="SettleCurrency"
+                      className="form-select form-select-sm mb-3 boldOption text-center"
+                      name="Currency"
                       defaultValue={"default"}
                       style={{width:"100px"}}
                       onChange={handleChange}
-                      value={formData?.settle_currency}
+                      value={formDataAll?.Currency}
                     >
-                      <option value={"default"} disabled>
+                      <option value="default" >
                         Please Select
                       </option>
                       <option value="INR">INR</option>
@@ -161,30 +171,17 @@ console.log(formData);
                     </label>
                     <div className="d-flex justify-content-center align-items-center">
                     <select
-                      className="form-select form-select-sm mb-3 boldOption"
-                      name="SettleCurrency"
+                      className="form-select form-select-sm mb-3 boldOption text-center"
+                      name="bankName"
                       defaultValue={"default"}
                       style={{width:"100px"}}
                       onChange={handleChange}
-                      value={formData?.settle_currency}
+                      value={formDataAll?.bankName}
                     >
-                      <option value={"default"} disabled>
+                      <option value="default">
                       Please  Select
                       </option>
-                      <option value="INR">INR</option>
-                      <option value="CNY">CNY</option>
-                      <option value="USD">USD</option>
-                      <option value="EUR">EUR</option>
-                      <option value="GBP">GBP</option>
-                      <option value="USDT">USDT</option>
-                      <option value="BTC">BTC</option>
-                      <option value="ETH">ETH</option>
-                      <option value="THB">THB</option>
-                      <option value="VND">VND</option>
-                      <option value="PHP">PHP</option>
-                      <option value="MYR">MYR</option>
-                      <option value="IDR">IDR</option>
-                      <option value="KRW">KRW</option>
+                      {bankList?.map(item=> <option value={item.id} key={item.id}>{item.gateway_name}</option>)}
                     </select>
                     </div>
                     
@@ -198,30 +195,20 @@ console.log(formData);
                     </label>
                     <div className="d-flex justify-content-center align-items-center">
                     <select
-                      className="form-select form-select-sm mb-3 boldOption"
-                      name="SettleCurrency"
+                      className="form-select form-select-sm mb-3 boldOption text-center"
+                      name="TransactionType"
                       defaultValue={"default"}
                       style={{width:"100px"}}
                       onChange={handleChange}
-                      value={formData?.settle_currency}
+                      value={formDataAll?.TransactionType}
                     >
-                      <option value={"default"} disabled>
+                      <option value="default" >
                         Please Select
                       </option>
-                      <option value="INR">INR</option>
-                      <option value="CNY">CNY</option>
-                      <option value="USD">USD</option>
-                      <option value="EUR">EUR</option>
-                      <option value="GBP">GBP</option>
-                      <option value="USDT">USDT</option>
-                      <option value="BTC">BTC</option>
-                      <option value="ETH">ETH</option>
-                      <option value="THB">THB</option>
-                      <option value="VND">VND</option>
-                      <option value="PHP">PHP</option>
-                      <option value="MYR">MYR</option>
-                      <option value="IDR">IDR</option>
-                      <option value="KRW">KRW</option>
+                      <option value="Bank Transfer">Bank Transfer</option>
+                      <option value="CRYPTO">CRYPTO</option>
+                      
+                      
                     </select>
                     </div>
                   </div>
@@ -233,7 +220,7 @@ console.log(formData);
                     >
                     Transaction id
                     </label>
-                    <input type="email" className="input1" name="BusinessLocation" onChange={handleChange} value={formData?.blocation} />
+                    <input type="email" className="input1" name="transactionid" readOnly value={formDataAll?.transactionid} />
                   </div>
                   <div className="col-md-3 d-flex flex-column text-center">
                     <label
@@ -242,7 +229,7 @@ console.log(formData);
                     >
                     Deposits Received
                     </label>
-                    <input type="text" className="input1" name="JobTitle" onChange={handleChange} value={formData?.job_title}/>
+                    <input type="text" className="input1" name="depositsReceived" onChange={handleChange} value={formDataAll.depositsReceived}/>
                   </div>
                   <hr style={{ width: "95%" }} />
                   <div className=" col-md-3 d-flex flex-column text-center">
@@ -252,7 +239,7 @@ console.log(formData);
                     >
                      Bank Charges
                     </label>
-                    <input type="text" className="input1" name="Website" onChange={handleChange} value={formData?.website}/>
+                    <input type="text" className="input1" name="BankCharges" onChange={handleChange} value={formDataAll?.BankCharges}/>
                   </div>
                   <div className="col-md-3 d-flex flex-column text-center">
                     <label
@@ -261,7 +248,7 @@ console.log(formData);
                     >
                      Tax
                     </label>
-                    <input type="text" className="input1" name="AnnualProcessingVolume" onChange={handleChange} value={formData?.apv}/>
+                    <input type="text" className="input1" name="Tax" onChange={handleChange} value={formDataAll?.Tax}/>
                   </div>
                   <div className="col-md-3 d-flex flex-column text-center">
                     <label
@@ -270,7 +257,7 @@ console.log(formData);
                     >
                       Total Charges
                     </label>
-                    <input type="email" className="input1" name="AverageTransactionAmount" onChange={handleChange} value={formData?.ata}/>
+                    <input type="email" className="input1" name="TotalCharges" onChange={handleChange} value={formDataAll?.TotalCharges}/>
                   </div>
                   
                   
@@ -281,16 +268,27 @@ console.log(formData);
                     >
                       Authorizer
                     </label>
-                    <input type="text" className="input1" name="chargebackpercentage?" onChange={handleChange} value={formData?.charge_back_per}/>
+                    <input type="text" className="input1" name="authorizer"  value={formDataAll?.authorizer} readOnly/>
                   </div>
                   
                   <hr style={{ width: "95%" }} />
-             <div className="d-flex justify-content-end">
-             {formData?<button className="addTransaction" onClick={handleClose} type='submit'>
+             <div className="d-flex justify-content-between align-items-center">
+
+              <div className="totalBankdeposite d-flex align-items-center"> 
+              <img src="https://www.payoway.com/web/assets/merchants/img/dollor.svg" alt="" width="50px" height="50px"/>
+              <div className="ms-2">
+                <h6>Net Deposits Received</h6>
+                <input type="text" style={{border:"none",outline:"none",backgroundColor:"#d2eefa",fontWeight:"bold",width:"90%" }} value={formDataAll?.NetDepositsReceived} readOnly />
+              </div>
+              </div>
+              <div>
+              {formData? <button className="addTransaction" onClick={handleClose} type='submit'>
                 Close
               </button>:<button className="addTransaction" onClick={(e)=>handleSubmit(e)} type='submit'>
                 Create 
               </button>}
+              </div>
+             
            
               
               </div>

@@ -616,3 +616,11 @@ select.form-select.form-select-sm.mb-3.boldOption {
   overflow: hidden;
 }
 
+
+
+.totalBankdeposite{
+  background-color: rgba(30, 170, 231, 0.2);
+  width: 35%;
+  padding: 20px 20px;
+  border-radius: 15px;
+}

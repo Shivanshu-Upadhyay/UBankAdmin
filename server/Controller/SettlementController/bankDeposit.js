@@ -30,6 +30,17 @@ class BankDeposit{
         error})
         }
     } 
+    async createAndUpdate(req,res){  
+       if(!req.body.length){
+        const {email} = req.user
+        let sqlForMerchant = "select id,name from tbl_user";
+        let sqlForBank = "SELECT id,gateway_name FROM payment_gateway where type = 0 And status=1"
+        let merchant= mysqlcon(sqlForMerchant)
+        let bankName= mysqlcon(sqlForBank)
+        const data = await Promise.all([merchant,bankName])
+        return res.status(200).json({merchant:data[0],bankName:data[1],authorizer:email})
+       } 
+    }
 }
 
 module.exports = new BankDeposit

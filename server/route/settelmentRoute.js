@@ -11,15 +11,17 @@ const disputesChargeback = require("../Controller/SettlementController/disputesC
 const Refunds = require("../Controller/SettlementController/refunds");
 const Commissions = require("../Controller/SettlementController/commissions");
 
-// MADHARCHOD ABHHINEET START
+// ABHHINEET START
 const amountreqController = require("../Controller/SettlementController/Dashboard/amountreqController");
 const localSettlementController = require("../Controller/SettlementController/Dashboard/localSettlementController");
 const InternationalSettlementController = require("../Controller/SettlementController/Dashboard/InternationalSettlementController");
 const commissionController = require("../Controller/SettlementController/Dashboard/commissionController");
 const dashboardTableController = require("../Controller/SettlementController/Dashboard/dahsboardTable");
-// MADHARCHOD ABHHINEET END
+// ABHHINEET END
 
 // CREATING ROUTERS 🤓
+
+//1-> READ API--->
 settelmentRoute.post('/api/settelment/bankDeposit', helper.verify, BankDeposit.default)
 settelmentRoute.post('/api/settelment/localPayouts', helper.verify, LocalPayouts.default)
 settelmentRoute.post('/api/settelment/addFundRead', helper.verify, AddFund.default)
@@ -29,8 +31,17 @@ settelmentRoute.post('/api/settelment/disputesChargeback',helper.verify,disputes
 settelmentRoute.post('/api/settelment/refunds',helper.verify,Refunds.default)
 settelmentRoute.post('/api/settelment/commissions',helper.verify,Commissions.default)
 
+// 2-> CREATE AND UPDATE API --->
 
-// MADHARCHOD ABHHINEET START
+settelmentRoute.post('/api/settelment/bankDeposit/createAndUpdate',helper.verify,BankDeposit.createAndUpdate)
+
+
+
+
+
+
+
+// ABHHINEET START
 settelmentRoute.post('/yesterday', helper.verify, amountreqController.yesterday);
 settelmentRoute.post('/weekly', helper.verify, amountreqController.weekly);
 settelmentRoute.post('/monthly', helper.verify, amountreqController.monthly);
@@ -52,6 +63,6 @@ settelmentRoute.post('/monthlyCommissions', helper.verify, commissionController.
 settelmentRoute.post('/yearlyCommissions', helper.verify, commissionController.yearlyCommissions);
 
 settelmentRoute.post('/dashboardTable', helper.verify, dashboardTableController.dashboardTable);
-// MADHARCHOD ABHHINEET END
+// ABHHINEET END
 
 module.exports = settelmentRoute
