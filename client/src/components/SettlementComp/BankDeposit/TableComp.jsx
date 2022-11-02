@@ -70,7 +70,7 @@ export default function TableComp({ tableBodyData, setXlData,tableHeading }) {
                   <TableCell>{item.id}</TableCell>
                   <TableCell>{item.mer_name}</TableCell>
                   <TableCell>{item.trx_id}</TableCell>
-                  <TableCell>{item.created_on}</TableCell>
+                  <TableCell>{item.recieved_date}</TableCell>
                   <TableCell>{item.currency}</TableCell>
                   <TableCell>{item.title}</TableCell>
                   <TableCell>{item.trx_type}</TableCell>

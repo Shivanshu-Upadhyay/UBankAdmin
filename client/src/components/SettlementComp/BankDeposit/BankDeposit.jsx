@@ -70,7 +70,7 @@ const tableHeading = ['Merchant Id','Merchant Name','Transaction id','Received D
       <div className="col-9 row align-items-center justify-content-around">
         <div className='col-4'> <SearchItem searchItem={searchItem} setSearchItem={setSearchItem}  /> </div>
         <div className="col-3 centerDiv"><FilterDateMax setDate={setDate} setTo={setTo} setFrom={setFrom}/></div>
-        <div className="col-3 centerDiv"> <AddTransaction /></div>
+        <div className="col-3 centerDiv"> <AddTransaction fetchData={fetchData} /></div>
         <div className="col-2 centerDiv"> <button className={styles.addTransaction} onClick={downloadExl}><ArrowDownwardIcon  />Download</button></div>
       </div>
     </div>

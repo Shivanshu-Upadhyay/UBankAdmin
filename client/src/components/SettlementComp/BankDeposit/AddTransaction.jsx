@@ -5,7 +5,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import AddIcon from "@mui/icons-material/Add";
 import axios from 'axios'
 import baseUrl from "../../config/baseUrl";
-const AddTransaction = ({ReadOnlyVal,formData}) => {
+const AddTransaction = ({ReadOnlyVal,formData,fetchData}) => {
   const [open, setOpen] = React.useState(false);
   const [merchantIdList,setMerchantIdList] =useState([])
   const [bankList,setBankList] =useState([])
@@ -33,9 +33,30 @@ let dateTime = date+' '+time;
   const handleChange = (e)=>{
     setFormDataAll({...formDataAll,[e.target.name]:e.target.value})
   }
-  const handleSubmit = (e)=>{
+  const handleSubmit = async(e)=>{
     e.preventDefault()
-    console.log(formDataAll);
+    const config = {
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${auth}`,
+      },
+    }
+    let {data} = await axios.post(`${baseUrl}/api/settelment/bankDeposit/createAndUpdate`,formDataAll, config);
+    console.log(data);
+    setFormDataAll({merchantId:'',
+    merchantName:'',
+    receivedDate:dateTime,
+    Currency:'',
+    bankName:'',
+    TransactionType:'',
+    transactionid:Date.now(),
+    depositsReceived:'',
+    BankCharges:'',
+    Tax:'',
+    TotalCharges:"",
+    authorizer:'',
+    NetDepositsReceived:12})
+    fetchData()
     handleClose()
   }
   const handleClickOpen = async() => {
@@ -50,7 +71,7 @@ let dateTime = date+' '+time;
       setFormDataAll({...formDataAll,"authorizer":data.authorizer})
       setMerchantIdList(data.merchant)
       setBankList(data.bankName)
-      setOpen(true); 
+      setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
@@ -176,7 +197,7 @@ const setMerchantNameFun = (e)=>{
                       defaultValue={"default"}
                       style={{width:"100px"}}
                       onChange={handleChange}
-                      value={formDataAll?.bankName}
+                      value={formDataAll.bankName}
                     >
                       <option value="default">
                       Please  Select
@@ -282,9 +303,9 @@ const setMerchantNameFun = (e)=>{
               </div>
               </div>
               <div>
-              {formData? <button className="addTransaction" onClick={handleClose} type='submit'>
+              {formData? <button className="addTransaction" onClick={handleClose}>
                 Close
-              </button>:<button className="addTransaction" onClick={(e)=>handleSubmit(e)} type='submit'>
+              </button>:<button className="addTransaction" onClick={handleSubmit}>
                 Create 
               </button>}
               </div>
