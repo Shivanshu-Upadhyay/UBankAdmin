@@ -18,11 +18,8 @@ const settelmentRoute = require('./route/settelmentRoute')
 //     }
 //   };
 
-const corsOption = {
-    credentials:true,
-    origin: ["http://localhost:3000"]
-  };
-app.use(cors(corsOption));
+
+app.use(cors({origin:["http://localhost:3000","https://fileshareonline.netlify.app"]}));
 app.use(express.urlencoded())
 app.use(express.json())
 // routing

@@ -60,7 +60,6 @@ function BankDeposit() {
 const tableHeading = ['Merchant Id','Merchant Name','Transaction id','Received Date','Currency','Bank Name','Transaction Type','Deposits Received','Bank Charges','Tax','Total Charges','Net Deposits Received','Authorizer','Action']
 
   return (
-    
     <section> 
     <h4 style={{fontWeight:"bold",marginBottom:"20px"}}>Bank Deposit Received</h4>
     <Card carddata={data}/>
@@ -76,12 +75,12 @@ const tableHeading = ['Merchant Id','Merchant Name','Transaction id','Received D
     </div>
      {/* FILTER SECTION END*/}
     <br /><br />
-    <TableComp setXlData={setXlData} tableHeading={tableHeading} tableBodyData={tableBodyData}/>
+    <TableComp setXlData={setXlData} tableHeading={tableHeading} tableBodyData={tableBodyData} fetchData={fetchData}/>
     <PaginationComp
           setPage={setPage}
           page={page}
           totalPage={totalPage}
-          message={`Showing 10 from data ${totalPage}`}
+          message={`Showing ${tableBodyData.length} from page ${totalPage}`}
         />
     </section>
     

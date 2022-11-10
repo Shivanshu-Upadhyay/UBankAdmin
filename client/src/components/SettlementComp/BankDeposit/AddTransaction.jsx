@@ -5,7 +5,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import AddIcon from "@mui/icons-material/Add";
 import axios from 'axios'
 import baseUrl from "../../config/baseUrl";
-const AddTransaction = ({ReadOnlyVal,formData,fetchData}) => {
+const AddTransaction = ({edit,readData,fetchData}) => {
   const [open, setOpen] = React.useState(false);
   const [merchantIdList,setMerchantIdList] =useState([])
   const [bankList,setBankList] =useState([])
@@ -16,25 +16,27 @@ let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds(
 let dateTime = date+' '+time; 
 
   const [formDataAll,setFormDataAll] = useState({
-    merchantId:'',
-    merchantName:'',
-    receivedDate:dateTime,
-    Currency:'',
-    bankName:'',
-    TransactionType:'',
-    transactionid:Date.now(),
-    depositsReceived:'',
-    BankCharges:'',
-    Tax:'',
-    TotalCharges:"",
-    authorizer:'',
-    NetDepositsReceived:12
+    id:readData?.id,
+    merchantId:readData?.user_id,
+    merchantName:readData?.mer_name,
+    receivedDate:readData?.recieved_date?readData?.recieved_date:dateTime,
+    Currency:readData?.currency,
+    bankName:readData?.bank_name,
+    TransactionType:readData?.trx_type,
+    transactionid:readData?.trx_id?readData?.trx_id:Date.now(),
+    depositsReceived:readData?.deposit_recieved,
+    BankCharges:readData?.bank_charge,
+    Tax:readData?.tax,
+    TotalCharges:readData?.total_charges,
+    authorizer:readData?.auth,
+    NetDepositsReceived:readData?.amount
   })
   const handleChange = (e)=>{
     setFormDataAll({...formDataAll,[e.target.name]:e.target.value})
   }
   const handleSubmit = async(e)=>{
     e.preventDefault()
+    console.log(formDataAll);
     const config = {
       headers: {
         "content-type": "application/json",
@@ -56,7 +58,7 @@ let dateTime = date+' '+time;
     TotalCharges:"",
     authorizer:'',
     NetDepositsReceived:12})
-    fetchData()
+   fetchData()
     handleClose()
   }
   const handleClickOpen = async() => {
@@ -67,7 +69,6 @@ let dateTime = date+' '+time;
         },
       }
       let {data} = await axios.post(`${baseUrl}/api/settelment/bankDeposit/createAndUpdate`,{}, config);
-      console.log(data);
       setFormDataAll({...formDataAll,"authorizer":data.authorizer})
       setMerchantIdList(data.merchant)
       setBankList(data.bankName)
@@ -83,7 +84,7 @@ const setMerchantNameFun = (e)=>{
   return (
     <>
       <div>
-      {ReadOnlyVal? <div onClick={handleClickOpen} style={{ cursor:"pointer",padding:"10px 20px",fontWeight:"700"}} >View</div> :<button className="addTransaction" onClick={handleClickOpen}>
+      {edit? <div onClick={handleClickOpen} style={{ cursor:"pointer",fontWeight:"700"}} >Edit</div> :<button className="addTransaction" onClick={handleClickOpen}>
           <AddIcon />
           Add Transaction 
         </button>}
@@ -104,7 +105,7 @@ const setMerchantNameFun = (e)=>{
           <DialogContent>
             <div className="row">
               <div className="col-12 dialogBlock1">
-                <form action="" className="row justify-content-around">
+                <form action="" className="row justify-content-around" onSubmit={handleSubmit}>
                   <div className=" col-md-3 d-flex flex-column text-center">
                     <label
                       className="forminputDeposite"
@@ -119,6 +120,7 @@ const setMerchantNameFun = (e)=>{
                       style={{width:"100px"}}
                       onChange={(e)=>{setMerchantNameFun(e)}}
                       value={formDataAll.merchantId}
+                      required
                     >
                       <option value="default">
                         Please Select
@@ -134,7 +136,7 @@ const setMerchantNameFun = (e)=>{
                     >
                       Merchant Name
                     </label>
-                    <input type="text" className="input1" name="merchantName" value={formDataAll.merchantName} readOnly/>
+                    <input type="text" className="input1" name="merchantName" value={formDataAll.merchantName} readOnly required/>
                   </div>
 
                   <div className="col-md-3 d-flex flex-column text-center">
@@ -144,7 +146,7 @@ const setMerchantNameFun = (e)=>{
                     >
                       Received Date
                     </label>
-                    <input type="email" className="input1" name="receivedDate" readOnly value={formDataAll?.receivedDate}/>
+                    <input type="text" className="input1" name="receivedDate" readOnly={!readData?.recieved_date&&true}  onChange={handleChange} value={formDataAll?.receivedDate}required/>
                   </div>
                   <div className="col-md-3 d-flex flex-column text-center">
                     <label
@@ -161,6 +163,7 @@ const setMerchantNameFun = (e)=>{
                       style={{width:"100px"}}
                       onChange={handleChange}
                       value={formDataAll?.Currency}
+                      required
                     >
                       <option value="default" >
                         Please Select
@@ -198,6 +201,7 @@ const setMerchantNameFun = (e)=>{
                       style={{width:"100px"}}
                       onChange={handleChange}
                       value={formDataAll.bankName}
+                      required
                     >
                       <option value="default">
                       Please  Select
@@ -221,6 +225,7 @@ const setMerchantNameFun = (e)=>{
                       defaultValue={"default"}
                       style={{width:"100px"}}
                       onChange={handleChange}
+                      required
                       value={formDataAll?.TransactionType}
                     >
                       <option value="default" >
@@ -241,7 +246,7 @@ const setMerchantNameFun = (e)=>{
                     >
                     Transaction id
                     </label>
-                    <input type="email" className="input1" name="transactionid" readOnly value={formDataAll?.transactionid} />
+                    <input type="email" className="input1" name="transactionid" readOnly value={formDataAll?.transactionid}required />
                   </div>
                   <div className="col-md-3 d-flex flex-column text-center">
                     <label
@@ -250,7 +255,7 @@ const setMerchantNameFun = (e)=>{
                     >
                     Deposits Received
                     </label>
-                    <input type="text" className="input1" name="depositsReceived" onChange={handleChange} value={formDataAll.depositsReceived}/>
+                    <input type="text" className="input1" name="depositsReceived" onChange={handleChange} value={formDataAll.depositsReceived} required/>
                   </div>
                   <hr style={{ width: "95%" }} />
                   <div className=" col-md-3 d-flex flex-column text-center">
@@ -278,7 +283,7 @@ const setMerchantNameFun = (e)=>{
                     >
                       Total Charges
                     </label>
-                    <input type="email" className="input1" name="TotalCharges" onChange={handleChange} value={formDataAll?.TotalCharges}/>
+                    <input type="text" className="input1" name="TotalCharges" onChange={handleChange} value={formDataAll?.TotalCharges}/>
                   </div>
                   
                   
@@ -299,18 +304,16 @@ const setMerchantNameFun = (e)=>{
               <img src="https://www.payoway.com/web/assets/merchants/img/dollor.svg" alt="" width="50px" height="50px"/>
               <div className="ms-2">
                 <h6>Net Deposits Received</h6>
-                <input type="text" style={{border:"none",outline:"none",backgroundColor:"#d2eefa",fontWeight:"bold",width:"90%" }} value={formDataAll?.NetDepositsReceived} readOnly />
+                <input type="text" style={{border:"none",outline:"none",backgroundColor:"#d2eefa",fontWeight:"bold",width:"90%" }} value={formDataAll?.NetDepositsReceived} onChange={handleChange} name="NetDepositsReceived" />
               </div>
               </div>
               <div>
-              {formData? <button className="addTransaction" onClick={handleClose}>
-                Close
-              </button>:<button className="addTransaction" onClick={handleSubmit}>
+              {readData? <button className="addTransaction" type="submit">
+                Update
+              </button>:<button className="addTransaction" type="submit">
                 Create 
               </button>}
               </div>
-             
-           
               
               </div>
                 </form>

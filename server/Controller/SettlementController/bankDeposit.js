@@ -53,9 +53,10 @@ class BankDeposit {
     } catch (error) {
       res.status(500).json({ message: "Something went wrong", error });
     }
-  }
+  } 
   async createAndUpdate(req, res) {
     try {
+      const {id} = req.body
       if (Object.keys(req.body).length <= 0) {
         const { email } = req.user;
         let sqlForMerchant = "select id,name from tbl_user";
@@ -66,7 +67,7 @@ class BankDeposit {
         return res
           .status(200)
           .json({ merchant: data[0], bankName: data[1], authorizer: email });
-      } else if(Object.keys(req.body).length >=4) {
+      } else if(Object.keys(req.body).length >=6 && id===undefined) {
         let formData = {
           user_id: req.body.merchantId,
           mer_name: req.body.merchantName,
@@ -86,6 +87,29 @@ class BankDeposit {
           let result = await mysqlcon(sql, [formData]);
           if(result.affectedRows){
             return res.status(200).json({ message: "Successfully" });
+          }else{
+            return res.status(403).json({ message: "Error While Insterting" });
+          } 
+      }else if(Object.keys(req.body).length >=6 && id){
+        let formData = {
+          user_id: req.body.merchantId,
+          mer_name: req.body.merchantName,
+          recieved_date: req.body.receivedDate,
+          currency: req.body.Currency,
+          bank_name:req.body.bankName,
+          trx_type:req.body.TransactionType,
+          trx_id:req.body.transactionid,
+          deposit_recieved:req.body.depositsReceived,
+          bank_charge:req.body.BankCharges,
+          tax:req.body.Tax,
+          total_charges:req.body.TotalCharges,
+          amount:req.body.NetDepositsReceived,
+          auth:req.body.authorizer,
+        };
+          let sql = "Update tbl_bank_deposites_receive SET ? WHERE id = ?"
+          let result = await mysqlcon(sql, [formData,id]);
+          if(result.affectedRows){
+            return res.status(200).json({ message: "Successfully Data Update" });
           }else{
             return res.status(403).json({ message: "Error While Insterting" });
           } 

@@ -52,7 +52,6 @@ const tableHeading = ['Merchant Id','Merchant','Currency','Previous Balance','Am
     
     <section> 
     <h4 style={{fontWeight:"bold",marginBottom:"20px"}}>Add Funds</h4>
-    
     <Card carddata={data}/>
     <br /> <br />
     {/* FILTER SECTION */}
