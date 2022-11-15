@@ -1,5 +1,6 @@
 import React, { useState,useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
+import jwtDecode from "jwt-decode";
 import { useStateContext } from "../../context/ContextProvider";
 import Login from "../Login/Login";
 import Sidebar from "../Sidebar/Sidebar";
@@ -86,15 +87,22 @@ import Commissions from "../SettlementComp/Commissions/Commissions";
 import Reports from "../SettlementComp/Reports/Reports";
 
 //<><><><><><><><><><><><><><><>🤓Settlement Dashboard End🤓<><><><><><><><><><><><><>
-
 function Routers() {
   const [modulePesmission, setModulePesmission] = useState([]);
   const { isLoginUser,setIsLoginUser,role, setRole } = useStateContext();
+  const location = useLocation();
   useEffect(() => {
+   if(localStorage.getItem('admin')){
+      fetchData();
+      const { exp } = jwtDecode(localStorage.getItem('admin'))
+      const expirationTime = (exp * 1000) - 60000
+      if (Date.now() >= expirationTime) {
+        return localStorage.clear()
+      }
+    }
     setIsLoginUser(localStorage.getItem('admin'))
     setRole(localStorage.getItem('role'))
-    fetchData();
-  }, [isLoginUser,role]);
+  }, [location.pathname,isLoginUser,role]);
   const fetchData = async () => {
     try {
       let formData = new FormData();

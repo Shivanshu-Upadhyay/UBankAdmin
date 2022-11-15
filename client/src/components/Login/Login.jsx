@@ -25,12 +25,12 @@ function Login() {
       let result = await axios.post(`${baseUrl}/login`, formData, config);
       console.log(result.data);
       if (result.data.token && (result.data.role===1||result.data.role===2)) {
+        localStorage.setItem("admin", result.data.token);
+        localStorage.setItem("role", result.data.role);
         setToggel(true);
         setActive(-1);
         setIsLoginUser(result.data.token);
         setRole(result.data.role)
-        localStorage.setItem("admin", result.data.token);
-        localStorage.setItem("role", result.data.role);
         navigate("/");
       } else {
         toast.error(result.data.message, {

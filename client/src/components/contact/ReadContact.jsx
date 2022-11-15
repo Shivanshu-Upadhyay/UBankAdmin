@@ -47,7 +47,7 @@ function ReadContact() {
   return (
     <>
       <Header title=" Manage Contact-Us > Details" path="/contact" />
-      <table class="table table-striped my-4">
+      <table className="table table-striped my-4">
  
   <tbody>
     <tr>

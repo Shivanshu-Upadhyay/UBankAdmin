@@ -14,7 +14,6 @@ function ContextProvider({ children }) {
         setActive,
         toggel,
         setToggel,role, setRole
-        
       }}
     >
       {children}

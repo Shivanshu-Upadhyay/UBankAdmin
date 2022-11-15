@@ -349,7 +349,6 @@
 
 /* settelment css */
 
-
 /* CSS */
 .button-SETTELMENT {
   background: rgb(227, 15, 15);
@@ -357,10 +356,6 @@
   padding: 3px;
   border-radius: 5px;
 }
-
-
-
-
 
 /* CSS */
 .button-SETTELMENT-PENDING {
@@ -370,74 +365,65 @@
   border-radius: 5px;
 }
 
-
-
-
-
-
-
 /* settelment css END */
 
-
-input[type="checkbox"]{
+input[type="checkbox"] {
   width: 20px;
   height: 20px;
 }
 
 /* Table style all */
-.tablecontainer2{
-  background: #FFFFFF;
+.tablecontainer2 {
+  background: #ffffff;
   box-shadow: 0px 18px 26px rgb(0 0 0 / 5%);
   border-radius: 20px;
-  width:100% !important;
+  width: 100% !important;
   overflow: auto;
   max-height: calc(100vh - 200px);
-  
 }
 
 .tablebold {
-white-space: nowrap;
-font-family: "Mulish";
-font-style: normal;
-font-weight: 700 !important;
-font-size: 14px;
-line-height: 23px;
-color: #000000;
-width: 400px;
+  white-space: nowrap;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700 !important;
+  font-size: 14px;
+  line-height: 23px;
+  color: #000000;
+  width: 400px;
 }
 
 .waiting {
-border-radius: 30px;
-font-family: "Mulish";
-font-style: normal;
-font-weight: 700;
-background: transparent;
-height: 30px;
-line-height: 0px;
+  border-radius: 30px;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  background: transparent;
+  height: 30px;
+  line-height: 0px;
 }
 
 .showingdata {
-font-family: "Mulish";
-font-style: normal;
-font-weight: 700;
-font-size: 14px;
-line-height: 20px;
-color: #000000;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  color: #000000;
 }
 
-.tablestatusbuttonPend{
-border: 1px solid #F9501A;
-  color: #F9501A;
+.tablestatusbuttonPend {
+  border: 1px solid #f9501a;
+  color: #f9501a;
   padding: 7px 30px;
   width: 100%;
   background-color: transparent;
   border-radius: 20px;
   font-size: 14px;
   font-weight: 400;
-
 }
-.tablestatusbuttonComp{
-border: 1px solid #2bc155;
+.tablestatusbuttonComp {
+  border: 1px solid #2bc155;
   color: #2bc155;
   padding: 7px 30px;
   width: 100%;
@@ -445,21 +431,19 @@ border: 1px solid #2bc155;
   border-radius: 20px;
   font-size: 14px;
   font-weight: 400;
-
 }
-.tablestatusbuttonWait{
-border: 1px solid #F9501A;
-  color: #F9501A;
+.tablestatusbuttonWait {
+  border: 1px solid #f9501a;
+  color: #f9501a;
   padding: 7px 30px;
   width: 100%;
   background-color: transparent;
   border-radius: 20px;
   font-size: 14px;
   font-weight: 400;
-
 }
-.tablestatusbuttonFail{
-border: 1px solid red;
+.tablestatusbuttonFail {
+  border: 1px solid red;
   color: red;
   padding: 7px 30px;
   width: 100%;
@@ -467,39 +451,36 @@ border: 1px solid red;
   border-radius: 20px;
   font-size: 14px;
   font-weight: 400;
-
 }
-.tablestatusbuttonRef{
-border: 1px solid #F9501A;
-  color: #F9501A;
+.tablestatusbuttonRef {
+  border: 1px solid #f9501a;
+  color: #f9501a;
   padding: 7px 30px;
   width: 100%;
   background-color: transparent;
   border-radius: 20px;
   font-size: 14px;
   font-weight: 400;
-
 }
 
-.dilogrefund{
-    background: rgba(30, 170, 231, 0.2);
-    border: none;
-    padding: 10px 20px;
-    border-radius: 30px;
-    box-shadow: 0px 2px 5px rgb(0 0 0 / 25%);
-   font-weight: 700;
-   cursor: pointer;
- 
+.dilogrefund {
+  background: rgba(30, 170, 231, 0.2);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 30px;
+  box-shadow: 0px 2px 5px rgb(0 0 0 / 25%);
+  font-weight: 700;
+  cursor: pointer;
 }
 
-.dilogfirstbutton{
+.dilogfirstbutton {
   background: rgba(30, 170, 231, 0.2);
   border-radius: 10px;
   padding: 10px 20px;
 }
 
-.forminputDeposite{
-font-family: 'Mulish';
+.forminputDeposite {
+  font-family: "Mulish";
   font-style: normal;
   font-weight: 600;
   font-size: 12px;
@@ -519,63 +500,57 @@ font-family: 'Mulish';
 
 /* Track */
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey; 
+  box-shadow: inset 0 0 5px grey;
   border-radius: 10px;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background:#99b5a2 ;
+  background: #99b5a2;
   border-radius: 10px;
 }
-
-
 
 /* <>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>scrollbar css <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
 
-.addTransaction{
+.addTransaction {
   display: flex;
-   padding: 10px 20px;
-   background: #1eaae7;
-   color: #fff;
-   font-weight: 600;
-   border-radius: 30px;
-   
+  padding: 10px 20px;
+  background: #1eaae7;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 30px;
 }
 .input1 {
   border: none;
   outline: none;
   text-align: center;
-  color: #000000 ;
+  color: #000000;
   font-weight: 700;
   font-size: 15px;
   margin-bottom: 10px;
 }
 
-.forminputDeposite{
-  font-family: 'Mulish';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 18px;
-    color: rgba(0, 0, 0, 0.6);
-    padding-bottom: 4px;
-    margin-bottom: 0;
+.forminputDeposite {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+  color: rgba(0, 0, 0, 0.6);
+  padding-bottom: 4px;
+  margin-bottom: 0;
 }
-
-
-
 
 select.form-select.form-select-sm.mb-3.boldOption {
   border: none;
   box-shadow: none;
 }
 
-.boldOption{
+.boldOption {
   width: 70% !important;
 }
 
-.penddingBtn{
+.penddingBtn {
   width: 100px;
   padding: 8px 20px;
   border-radius: 30px;
@@ -583,7 +558,7 @@ select.form-select.form-select-sm.mb-3.boldOption {
   color: #fff;
   font-weight: 500;
 }
-.successBtn{
+.successBtn {
   width: 100px;
   padding: 8px 20px;
   border-radius: 30px;
@@ -591,7 +566,7 @@ select.form-select.form-select-sm.mb-3.boldOption {
   color: #fff;
   font-weight: 500;
 }
-.failedBtn{
+.failedBtn {
   width: 100px;
   padding: 8px 20px;
   border-radius: 30px;
@@ -600,7 +575,7 @@ select.form-select.form-select-sm.mb-3.boldOption {
   color: #fff;
   font-weight: 500;
 }
-.approveBtn{
+.approveBtn {
   width: 100px;
   padding: 8px 20px;
   border-radius: 30px;
@@ -609,18 +584,88 @@ select.form-select.form-select-sm.mb-3.boldOption {
   font-weight: 500;
 }
 
-
-.golakrnewalaprofile{
+.golakrnewalaprofile {
   border-radius: 50%;
   border: 1px solid blueviolet;
   overflow: hidden;
 }
 
-
-
-.totalBankdeposite{
+.totalBankdeposite {
   background-color: rgba(30, 170, 231, 0.2);
   width: 35%;
   padding: 20px 20px;
   border-radius: 15px;
+}
+
+.addfundBlock {
+  background-color: #bae5f8;
+  border-radius: 5px;
+  width: 250px;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.addfundBlock > label {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.addfundBlock > input {
+  border: none;
+  outline: none;
+  padding: 5px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.addFundSelext {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.addFundSelext > label {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.addfundBlockAddSub {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.addfundBlockAddSub > label {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.addfundBlockAddSub > input {
+  border: none;
+  outline: none;
+  background: #eee;
+  text-align: center;
+  padding: 2px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.MuiAutocomplete-listbox {
+  height: 120px;
+  font-size: 14px;
+}
+
+.addfundntn {
+  display: flex;
+  padding: 7px 20px;
+  background: #1eaae7;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 30px;
+}
+.MuiAutocomplete-hasPopupIcon.MuiAutocomplete-hasClearIcon.css-15mnk20-MuiAutocomplete-root .MuiOutlinedInput-root {
+  padding-right: 65px;
+  font-size: 14px !important;
 }

@@ -7,6 +7,7 @@ import PaginationComp from '../../../commonComp/Pagination/PaginationComp'
 import axios from 'axios'
 import baseUrl from '../../config/baseUrl'
 import SearchItem from '../../../commonComp/SearchItem/SearchItem'
+import AddNewFund from './AddNewFund'
 function AddFunds() {
   const [page,setPage]=useState(1)
   const [totalPage,setTotalPage]=useState(1)
@@ -59,7 +60,7 @@ const tableHeading = ['Merchant Id','Merchant','Currency','Previous Balance','Am
       <div className="col-9 row align-items-center justify-content-around">
         <div className='col-5'> <SearchItem searchItem={searchItem} setSearchItem={setSearchItem}  /> </div>
         <div className="col-3 centerDiv"><FilterDateMax setDate={setDate} setTo={setTo} setFrom={setFrom}/></div>
-        <div className="col-3 centerDiv"> <button className={styles.addTransaction} >Add Funds</button></div>
+        <div className="col-3 centerDiv"> <AddNewFund/></div>
       </div>
     </div>
      {/* FILTER SECTION END*/}
