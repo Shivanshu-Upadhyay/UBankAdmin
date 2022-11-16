@@ -9,7 +9,8 @@ import baseUrl from "../../config/baseUrl";
 const AddNewFund = ({ edit, readData, fetchData }) => {
   const [open, setOpen] = React.useState(false);
   const auth = localStorage.getItem("admin");
-
+  const [merchantList,setMerchantList] = useState([])
+  const [currencyList,setCurrencyList] = useState([])
   const [formDataAll, setFormDataAll] = useState({
     id: readData?.id,
     merchantId: readData?.user_id,
@@ -29,29 +30,18 @@ const AddNewFund = ({ edit, readData, fetchData }) => {
       },
     };
     let { data } = await axios.post(
-      `${baseUrl}/api/settelment/bankDeposit/createAndUpdate`,
+      `${baseUrl}/api/settelment/addFunds/merAndCurr`,
       {},
       config
     );
-    setFormDataAll({ ...formDataAll, authorizer: data.authorizer });
-
+    console.log(data);
+    setMerchantList(data.merchant);
+    setCurrencyList(data.currency)
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
-
-  const top100Films = [
-    { label: "The Shawshank Redemption", year: 1994 },
-    { label: "The Godfather", year: 1972 },
-    { label: "The Godfather: Part II", year: 1974 },
-    { label: "The Dark Knight", year: 2008 },
-    { label: "12 Angry Men", year: 1957 },
-    { label: "Schindler's List", year: 1993 },
-    { label: "Pulp Fiction", year: 1994 },
-   
-   
-  ];
 
   return (
     <>
@@ -109,7 +99,7 @@ const AddNewFund = ({ edit, readData, fetchData }) => {
                   <Autocomplete
                     disablePortal
                     id="combo-box-demo"
-                    options={top100Films}
+                    options={merchantList}
                     sx={{ width: '75%' }}
                     renderInput={(params) => (
                       <TextField {...params} label="Merchant" size="small" className="addfundinput" />
@@ -123,7 +113,7 @@ const AddNewFund = ({ edit, readData, fetchData }) => {
                   <Autocomplete
                     disablePortal
                     id="combo-box-demo"
-                    options={top100Films}
+                    options={currencyList}
                     sx={{ width: '75%' }}
                     renderInput={(params) => (
                       <TextField {...params} label="Currency" size="small" />

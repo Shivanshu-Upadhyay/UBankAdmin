@@ -32,8 +32,8 @@ settelmentRoute.post('/api/settelment/refunds',helper.verify,Refunds.default)
 settelmentRoute.post('/api/settelment/commissions',helper.verify,Commissions.default)
 
 // 2-> CREATE AND UPDATE API --->
-
 settelmentRoute.post('/api/settelment/bankDeposit/createAndUpdate',helper.verify,BankDeposit.createAndUpdate)
+settelmentRoute.post('/api/settelment/addFunds/merAndCurr',helper.verify,AddFund.curMer)
 
 
 

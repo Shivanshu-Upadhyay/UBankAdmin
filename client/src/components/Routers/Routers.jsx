@@ -128,7 +128,6 @@ function Routers() {
   };
   
   return (
-    <>
       <Routes>
         {isLoginUser && role==='1' ? (
           <Route
@@ -556,14 +555,10 @@ function Routers() {
           <Route path="/Commissions" element={<Commissions/>} />
           <Route path="/Reports" element={<Reports/>} />
           <Route path="/ChangePassword" element={<ChangePassword/>} />
-        </Route>) : (
-          <>
-          <Route path="/login-admin" element={<Login />} />
-          </>
-        )}
-        <Route path="*" element={isLoginUser?<Error />:<Login/>} />
+        </Route>):<Route path="/login-admin" element={<Login />} />
+         }
+        <Route path="*" element={isLoginUser && role?<Error />:<Login/>} />
       </Routes>
-    </>
   );
 }
 
