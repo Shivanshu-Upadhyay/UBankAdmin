@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import { useStateContext } from "../../context/ContextProvider";
 import Login from "../Login/Login";
@@ -91,13 +91,16 @@ function Routers() {
   const [modulePesmission, setModulePesmission] = useState([]);
   const { isLoginUser,setIsLoginUser,role, setRole } = useStateContext();
   const location = useLocation();
+  const reactNavigate = useNavigate()
   useEffect(() => {
    if(localStorage.getItem('admin')){
       fetchData();
       const { exp } = jwtDecode(localStorage.getItem('admin'))
       const expirationTime = (exp * 1000) - 60000
       if (Date.now() >= expirationTime) {
-        return localStorage.clear()
+        localStorage.clear(); 
+        reactNavigate('/login-admin')
+        return;
       }
     }
     setIsLoginUser(localStorage.getItem('admin'))
