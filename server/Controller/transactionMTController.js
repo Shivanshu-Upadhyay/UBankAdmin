@@ -7,7 +7,6 @@ var formatted_date = dt.format("Y-m-d H:M:S");
 let pagination = (total, page, limit) => {
   let numOfPages = Math.ceil(total / limit);
   let start = page * limit - limit;
-
   return { limit, start, numOfPages };
 };
 
@@ -254,23 +253,15 @@ module.exports.defaultMT = async function (req, res) {
 module.exports.getIdMT = async function (req, res) {
   try {
     let { id } = req.body;
-    console.log(id)
-
     let sql = "SELECT * FROM tbl_merchant_transaction WHERE invoice_id = ?";
-
     let result = await mysqlcon(sql, [id]);
     let od_id = result[0].new_trx === 1 ? result[0].txn_id : result[0].order_no;
-
-
     let sql1 = "SELECT * FROM tbl_payin_request WHERE order_id = ?";
     let sql2 = "SELECT * FROM tbl_payment_gate_response_tale WHERE order_id = ?";
     let sql3 = `SELECT * FROM tbl_cron_log WHERE data LIKE '{"order_id":"${od_id}%'`;
-
-
     let request_data = await mysqlcon(sql1, [result[0].order_no]);
     let bank_data = await mysqlcon(sql2, [result[0].order_no]);
     let cron_data = await mysqlcon(sql3);
-
     if (result.length !== 0) {
       return res.json(200, {
         message: `Records for id =  ${id}`,
@@ -297,18 +288,13 @@ module.exports.getIdMT = async function (req, res) {
 module.exports.toggleStatusMT = async function (req, res) {
   try {
     let { status, id } = req.body;
-   
-
     if (status > 5 || status < 0) {
       return res.json(201, {
         message: `Status Not Updated`,
       });
     }
-
-    let sql =
-      "UPDATE tbl_merchant_transaction SET status = ? WHERE invoice_id = ?";
+    let sql ="UPDATE tbl_merchant_transaction SET status = ? WHERE invoice_id = ?";
     let result = await mysqlcon(sql, [status, id]);
-
     if (result.affectedRows > 0) {
       return res.json(200, {
         message: `Status ${
@@ -344,15 +330,10 @@ module.exports.toggleStatusMT = async function (req, res) {
 
 module.exports.createMT = async function (req, res) {
   try {
-    let { merchantId, currency_id, trx_type, transaction_id, name, amount } =
-      req.body;
-    
-
+    let { merchantId, currency_id, trx_type, transaction_id, name, amount } = req.body;
     let sqlF = "SELECT * FROM tbl_merchant_charges WHERE currency_id = ?";
     let resultF = await mysqlcon(sqlF, [currency_id]);
-
     let charge = 0;
-
     if (resultF.length === 0) {
       let sqlU = "SELECT * FROM tbl_user WHERE user_id = ?";
       let resultU = await mysqlcon(sqlU, [merchantId]);
@@ -366,16 +347,12 @@ module.exports.createMT = async function (req, res) {
     } else {
       charge = resultF[0].payin_amount;
     }
-
     let akonto_charge = (amount * charge) / 100;
     let gst_amount = 0;
-
     if (currency_id === "53") {
       gst_amount = (amount * 18) / 100;
     }
-
     let settle_amount = amount - akonto_charge + gst_amount;
-
     let details = {
       ammount: amount,
       user_id: merchantId,
@@ -395,7 +372,6 @@ module.exports.createMT = async function (req, res) {
       updated_on: formatted_date,
       settlement_on: formatted_date,
     };
-
     if (
       merchantId !== undefined &&
       trx_type !== undefined &&
@@ -404,9 +380,7 @@ module.exports.createMT = async function (req, res) {
       amount !== undefined
     ) {
       let sql = "INSERT INTO tbl_merchant_transaction SET ?";
-
       let result = await mysqlcon(sql, [details]);
-
       if (result.affectedRows > 0) {
         return res.json(200, {
           message: "Row Created",
@@ -430,40 +404,28 @@ module.exports.createMT = async function (req, res) {
     });
   }
 };
-
 module.exports.getCurrencyMT = async function (req, res) {
   try {
     let { id } = req.body;
-
     let sql = "SELECT * FROM tbl_user WHERE id = ?";
-
     let result = await mysqlcon(sql, [id]);
-
     let currencyId = "";
-
     if (result.length !== 0) {
       currencyId += result[0].solution_apply_for_country;
     }
-
     let currA = currencyId.split(",");
-
     let sql1 = "SELECT id as currencyID,sortname FROM countries WHERE id IN (";
-
     for (let i = 0; i < currA.length; i++) {
       sql1 += "'";
       sql1 += currA[i];
       sql1 += "',";
     }
-
     sql1 = sql1.slice(0, -1);
     sql1 += ")";
-
     let result1 = await mysqlcon(sql1);
-
     if (result1.length !== 0) {
       return res.json(200, {
         message: `Currency for merchant id = ${id} are ${currA.length}`,
-
         data: result1,
       });
     } else {
@@ -479,7 +441,6 @@ module.exports.getCurrencyMT = async function (req, res) {
     });
   }
 };
-
 module.exports.allMerchant = async function (req, res) {
   try{
     const {adminfilter} = req.body

@@ -60,7 +60,7 @@ const tableHeading = ['Merchant Id','Merchant','Currency','Previous Balance','Am
       <div className="col-9 row align-items-center justify-content-around">
         <div className='col-5'> <SearchItem searchItem={searchItem} setSearchItem={setSearchItem}  /> </div>
         <div className="col-3 centerDiv"><FilterDateMax setDate={setDate} setTo={setTo} setFrom={setFrom}/></div>
-        <div className="col-3 centerDiv"> <AddNewFund/></div>
+        <div className="col-3 centerDiv"> <AddNewFund fetchData={fetchData}/></div>
       </div>
     </div>
      {/* FILTER SECTION END*/}

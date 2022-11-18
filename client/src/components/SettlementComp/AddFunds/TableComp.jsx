@@ -6,9 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Popover from "@mui/material/Popover";
-import Dialog from "@mui/material/Dialog";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
+import AddNewFund from "./AddNewFund";
 
 export default function TableComp({ tableBodyData, setXlData,tableHeading }) {
   return (
@@ -34,9 +32,9 @@ export default function TableComp({ tableBodyData, setXlData,tableHeading }) {
                   <TableCell>{item.merchant_name}</TableCell>
                   <TableCell>{item.currency}</TableCell>
                   <TableCell>{item.available_balance}</TableCell>
-                  <TableCell>{item.add_amount}</TableCell>
+                  <TableCell>{Number(item.type)===1?"+":"-"}{item.add_amount}</TableCell>
                   <TableCell>{item.current_amount}</TableCell>
-                  <TableCell>{item.funds_added_by}</TableCell>
+                  <TableCell>{item.funds_added_by} </TableCell>
                   <TableCell>{item.created_on}</TableCell>
                   <TableCell align="center">
                     <PopUp formData={item} />
@@ -89,246 +87,9 @@ const PopUp = ({ formData }) => {
           }}
         >
           <div style={{ padding: "10px 20px" }}>
-            <DialogOpenModel formData={formData} />
+            <AddNewFund formData={formData} edit={true}/>
           </div>
         </Popover>
-      </div>
-    </>
-  );
-};
-
-const DialogOpenModel = ({ formData }) => {
-  const [open, setOpen] = React.useState(false);
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
-  return (
-    <>
-      <div>
-        <h6
-          onClick={handleClickOpen}
-          style={{ cursor: "pointer", fontWeight: "700", marginTop: "10px" }}
-        >
-          View Details
-        </h6>
-        <Dialog
-          open={open}
-          onClose={handleClose}
-          fullWidth={false}
-          maxWidth={"md"}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
-          <DialogTitle
-            id="alert-dialog-title"
-            style={{ fontWeight: "700", fontSize: "20px" }}
-          >
-            Transactions View
-          </DialogTitle>
-          <DialogContent>
-            <div className="row">
-              <div className="col-12 dialogBlock1">
-                <form action="" className="row justify-content-around">
-                  <div className=" col-md-3 d-flex flex-column text-center">
-                    <label htmlFor="" className="forminputDeposite">
-                      ID Invoice
-                    </label>
-                    <input
-                      type="text"
-                      className="input1"
-                      value={formData.order_no}
-                    />
-                  </div>
-                  <div className="col-md-3 d-flex flex-column text-center">
-                    <label htmlFor="" className="forminputDeposite">
-                      Telephone
-                    </label>
-                    <input
-                      type="text"
-                      className="input1"
-                      value={formData.i_number}
-                    />
-                  </div>
-                  <div className="col-md-3 d-flex flex-column text-center">
-                    <label htmlFor="" className="forminputDeposite">
-                      Email
-                    </label>
-                    <input
-                      type="text"
-                      className="input1"
-                      value={formData.i_email}
-                    />
-                  </div>
-                  <div className="col-md-3 d-flex flex-column text-center">
-                    <label htmlFor="" className="forminputDeposite">
-                      Name
-                    </label>
-                    <input
-                      type="text"
-                      className="input1"
-                      value={formData.i_flname}
-                    />
-                  </div>
-                  <hr style={{ width: "95%" }} />
-                  <div className="col-md-4 d-flex flex-column text-center">
-                    <label htmlFor="" className="forminputDeposite">
-                      Payment Method
-                    </label>
-                    <input
-                      type="text"
-                      className="input1"
-                      value={formData.payment_type}
-                    />
-                  </div>
-                  <div className="col-md-4 d-flex flex-column text-center">
-                    <label htmlFor="" className="forminputDeposite">
-                      Transaction Date
-                    </label>
-                    <input
-                      type="text"
-                      className="input1"
-                      value={formData.created_on}
-                    />
-                  </div>
-                  <div className="col-md-4 d-flex flex-column text-center">
-                    <label htmlFor="" className="forminputDeposite">
-                      Settled Date
-                    </label>
-                    <input
-                      type="text"
-                      className="input1"
-                      value={formData.settlement_on}
-                    />
-                  </div>
-
-                  <hr style={{ width: "95%" }} />
-
-                  <div className=" col-md-2 d-flex flex-column text-center  ">
-                    <label htmlFor="" className="forminputDeposite">
-                      Gross Amount
-                    </label>
-                    <input
-                      type="text"
-                      className="input1"
-                      value={formData.ammount}
-                    />
-                  </div>
-                  <div className=" col-md-4 d-flex flex-column text-center  ">
-                    <label htmlFor="" className="forminputDeposite">
-                      Rolling Reserve Amount
-                    </label>
-                    <input
-                      type="text"
-                      className="input1"
-                      value={formData.rolling_reverse_amount}
-                    />
-                  </div>
-                  <div className=" col-md-2 d-flex flex-column text-center  ">
-                    <label htmlFor="" className="forminputDeposite">
-                      Commissions
-                    </label>
-                    <input
-                      type="text"
-                      className="input1"
-                      value={formData.payin_charges}
-                    />
-                  </div>
-                  <div className=" col-md-2 d-flex flex-column text-center  ">
-                    <label htmlFor="" className="forminputDeposite">
-                      Net Amount
-                    </label>
-                    <input
-                      type="text"
-                      className="input1"
-                      value={formData.settle_amount}
-                    />
-                  </div>
-                  <div className="col-md-2 d-flex flex-column text-center  ">
-                    <label htmlFor="" className="forminputDeposite">
-                      Settled Amount
-                    </label>
-                    <input
-                      type="text"
-                      className="input1"
-                      value={formData.settle_amount}
-                    />
-                  </div>
-
-                  <hr style={{ width: "95%" }} />
-
-                  <div className="col-md-3 d-flex flex-column text-center  ">
-                    <label htmlFor="" className="forminputDeposite">
-                      Sold By
-                    </label>
-                    <input type="text" className="input1" value="" />
-                  </div>
-                  <div className="col-md-3 d-flex flex-column text-center  ">
-                    <label htmlFor="" className="forminputDeposite">
-                      Card
-                    </label>
-                    <input
-                      type="text"
-                      className="input1"
-                      value={formData.payment_type}
-                    />
-                  </div>
-                  <div className="col-md-3 d-flex flex-column text-center  ">
-                    <label htmlFor="" className="forminputDeposite">
-                      Card No.
-                    </label>
-                    <input
-                      type="text"
-                      className="input1"
-                      value={formData.card_4_4}
-                    />
-                  </div>
-                  <div className="col-md-3 d-flex flex-column text-center  ">
-                    <label htmlFor="" className="forminputDeposite">
-                      Message
-                    </label>
-                    <input
-                      type="text"
-                      className="input1"
-                      value={formData.discription}
-                    />
-                  </div>
-                  <hr style={{ width: "95%" }} />
-                  <div className="col-md-3">
-                    <div
-                      onClick={handleClose}
-                      className="dilogfirstbutton d-flex justify-content-center align-items-center"
-                    >
-                      <img
-                        src="https://www.bankconnect.online/assets/merchants/img/dollor.svg"
-                        alt=""
-                        width="45px"
-                      />
-                      <div className="mx-2">
-                        <h6 style={{ color: "#000009" }}>Amount</h6>
-                        <h6 style={{ fontWeight: "600", fontSize: "18px" }}>
-                          {formData.settle_amount}
-                        </h6>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-8 d-flex align-items-center justify-content-end">
-                    <div>
-                      <span onClick={handleClose} className="dilogrefund">
-                        Refund Transaction
-                      </span>
-                      <span onClick={handleClose} className="dilogrefund mx-3">
-                        Close
-                      </span>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </DialogContent>
-        </Dialog>
       </div>
     </>
   );
