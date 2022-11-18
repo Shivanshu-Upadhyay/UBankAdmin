@@ -9,7 +9,6 @@ let pagination = (total, page, limit) => {
   let start = page * limit - limit;
   return { limit, start, numOfPages };
 };
-
 //completed with the serach filter module
 module.exports.defaultMT = async function (req, res) {
   try {
@@ -249,7 +248,6 @@ module.exports.defaultMT = async function (req, res) {
     });
   }
 };
-
 module.exports.getIdMT = async function (req, res) {
   try {
     let { id } = req.body;
@@ -284,7 +282,6 @@ module.exports.getIdMT = async function (req, res) {
     });
   }
 };
-
 module.exports.toggleStatusMT = async function (req, res) {
   try {
     let { status, id } = req.body;
@@ -327,7 +324,6 @@ module.exports.toggleStatusMT = async function (req, res) {
     });
   }
 };
-
 module.exports.createMT = async function (req, res) {
   try {
     let { merchantId, currency_id, trx_type, transaction_id, name, amount } = req.body;
