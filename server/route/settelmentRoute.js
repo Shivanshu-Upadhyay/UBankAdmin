@@ -36,6 +36,7 @@ settelmentRoute.post('/api/settelment/bankDeposit/createAndUpdate',helper.verify
 settelmentRoute.post('/api/settelment/addFunds/merAndCurr',helper.verify,AddFund.curMer)
 settelmentRoute.post('/api/settelment/addFunds/preBal',helper.verify,AddFund.murAndCurSelect)
 settelmentRoute.post('/api/settelment/addFunds/addFund',helper.verify,AddFund.addFund)
+settelmentRoute.post('/api/settelment/addFunds/updateFund',helper.verify,AddFund.updateFund)
 
 
 

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import Card from '../../../commonComp/Card/Card'
 import FilterDateMax from '../../../commonComp/filterDateMax/FilterDateMax'
 import TableComp from './TableComp'
-import styles from './style.module.css'
 import PaginationComp from '../../../commonComp/Pagination/PaginationComp'
 import axios from 'axios'
 import baseUrl from '../../config/baseUrl'
@@ -65,7 +64,7 @@ const tableHeading = ['Merchant Id','Merchant','Currency','Previous Balance','Am
     </div>
      {/* FILTER SECTION END*/}
     <br /><br />
-    <TableComp  tableHeading={tableHeading} tableBodyData={tableBodyData}/>
+    <TableComp  tableHeading={tableHeading} tableBodyData={tableBodyData} fetchData={fetchData}/>
     <PaginationComp
           setPage={setPage}
           page={page}

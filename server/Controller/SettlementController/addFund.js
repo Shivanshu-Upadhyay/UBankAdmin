@@ -146,5 +146,67 @@ class AddFund {
       res.status(500).json(error);
     }
   }
+  async updateFund(req, res) {
+    try {
+      const {
+        id,
+        selectMer,
+        merchant_name,
+        current_amount,
+        currency,
+        addBal,
+        option,
+        available_balance,
+        wallet_current_amount,
+      } = req.body;
+      if (
+        !selectMer ||
+        !merchant_name ||
+        !current_amount ||
+        !currency ||
+        !addBal ||
+        !option ||
+        !available_balance ||
+        !wallet_current_amount||
+        !id
+      ) {
+        return res.status(400).json({ message: "All Field Required" });
+      }
+      let { firstname,lastname } = req.user;
+      const insertData = {
+        merchant_id: selectMer,
+        merchant_name,
+        current_amount,
+        currency,
+        wallet_current_amount,
+        add_amount: addBal,
+        available_balance,
+        funds_added_by: `${firstname} ${lastname}` ,
+        type: option,
+      };
+      const sqlSettCurr =
+        "Select settle_currency,wallet from tbl_user where id=? ";
+      const sqlSettRate =
+        "Select rate from tbl_user_settled_currency where deposit_currency=? AND settled_currency= ? ";
+      const result = await mysqlcon(sqlSettCurr, [15]);
+      const result2 = await mysqlcon(sqlSettRate, [
+        currency,
+        result[0].settle_currency,
+      ]);
+      const FinalDataForWallet =
+        Number(option) === 1
+          ? result[0].wallet +
+            (Number(addBal) / result2[0]?.rate ? result2[0].rate : 1)
+          : result[0].wallet -
+            (Number(addBal) / result2[0]?.rate ? result2[0].rate : 1);
+      const sqlForWall = "Update tbl_user SET wallet = ? WHERE id = ?";
+      await mysqlcon(sqlForWall, [FinalDataForWallet, selectMer]);
+      const sqlForAddFund = "Update tbl_add_settlement_fund SET ? where id = ?";
+      await mysqlcon(sqlForAddFund, [insertData,id]);
+      res.status(200).json({ message: "Fund Update Successfully✅" });
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  }
 }
 module.exports = new AddFund();

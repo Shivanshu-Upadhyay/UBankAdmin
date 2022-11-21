@@ -8,7 +8,6 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import baseUrl from "../../config/baseUrl";
 const AddNewFund = ({ edit, formData, fetchData }) => {
-  console.log(formData);
   const [open, setOpen] = React.useState(false);
   const auth = localStorage.getItem("admin");
   const [merchantList, setMerchantList] = useState([]);
@@ -74,7 +73,23 @@ const AddNewFund = ({ edit, formData, fetchData }) => {
     console.log(data);
     handleClose()
   };
-
+  const handleSubmit2 = async (e) => {
+    e.preventDefault();
+    const config = {
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${auth}`,
+      },
+    };
+    let { data } = await axios.post(
+      `${baseUrl}/api/settelment/addFunds/updateFund`,
+      {selectMer,merchant_name,current_amount:totalCurrBal,wallet_current_amount:totalCurrBal,addBal:currBal,option:selectAddSub,available_balance:preBal,currency:selectCur,id:formData.id},
+      config
+    );
+    fetchData()
+    console.log(data);
+    handleClose()
+  };
   const totalcurBalFun = (val) => {
     if (!selectCur || !selectMer) {
       return toast.error("Select Merchant and currency", {
@@ -130,7 +145,7 @@ const AddNewFund = ({ edit, formData, fetchData }) => {
             Add Funds
           </DialogTitle>
           <DialogContent className="mt-3">
-            <form action="" onSubmit={handleSubmit}>
+            <form>
               <div className="row d-flex justify-content-around">
                 <div className="col-6">
                   <div className="addfundBlock d-flex flex-column text-center">
@@ -218,11 +233,11 @@ const AddNewFund = ({ edit, formData, fetchData }) => {
               <div className="d-flex align-items-center  mt-4 justify-content-end">
                 <div>
                   {formData ? (
-                    <button className="addfundntn" type="submit">
+                    <button className="addfundntn" type="submit" onClick={handleSubmit2}>
                       Update
                     </button>
                   ) : (
-                    <button className="addfundntn" type="submit">
+                    <button className="addfundntn" type="submit" onClick={handleSubmit}>
                       Add Funds
                     </button>
                   )}

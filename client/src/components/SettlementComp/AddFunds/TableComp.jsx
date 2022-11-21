@@ -8,7 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import Popover from "@mui/material/Popover";
 import AddNewFund from "./AddNewFund";
 
-export default function TableComp({ tableBodyData, setXlData,tableHeading }) {
+export default function TableComp({ tableBodyData, setXlData,tableHeading ,fetchData}) {
   return (
     <>
       <TableContainer className="tablecontainer2 ">
@@ -37,7 +37,7 @@ export default function TableComp({ tableBodyData, setXlData,tableHeading }) {
                   <TableCell>{item.funds_added_by} </TableCell>
                   <TableCell>{item.created_on}</TableCell>
                   <TableCell align="center">
-                    <PopUp formData={item} />
+                    <PopUp formData={item} fetchData={fetchData} />
                   </TableCell>
                 </TableRow>
               );
@@ -49,7 +49,7 @@ export default function TableComp({ tableBodyData, setXlData,tableHeading }) {
   );
 }
 
-const PopUp = ({ formData }) => {
+const PopUp = ({ formData,fetchData }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -87,7 +87,7 @@ const PopUp = ({ formData }) => {
           }}
         >
           <div style={{ padding: "10px 20px" }}>
-            <AddNewFund formData={formData} edit={true}/>
+            <AddNewFund formData={formData} edit={true} fetchData={fetchData}/>
           </div>
         </Popover>
       </div>

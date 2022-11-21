@@ -1,9 +1,7 @@
 var dateTime = require("node-datetime");
 const mysqlcon = require("../config/db_connection");
-
 var dt = dateTime.create();
 var formatted_date = dt.format("Y-m-d H:M:S");
-
 let pagination = (total, page, limit) => {
   let numOfPages = Math.ceil(total / limit);
   let start = page * limit - limit;
