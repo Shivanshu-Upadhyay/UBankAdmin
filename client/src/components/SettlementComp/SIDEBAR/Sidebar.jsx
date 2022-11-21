@@ -229,7 +229,7 @@ export default function SettlementSidebar() {
                       : " settlementiconcontainer mx-2"
                   }
                 >
-                  <img src={item.iconUrl} alt="" className="settlementiconstyle" />
+                  <img src={item.iconUrl} alt="" className="settlementiconstyle"  onClick={() => (item.name === "Logout" ? logout() : null)} />
                 </NavLink>
 
                 <div>
