@@ -3,7 +3,6 @@ const config = require("../config/config");
 const jwt = require("jsonwebtoken");
 const emailvalidator = require("email-validator");
 var md5 = require("md5");
-
 module.exports.login = async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -52,7 +51,6 @@ module.exports.login = async (req, res) => {
     });
   }
 };
-
 module.exports.modulePesmission = async (req, res) => {
   try {
     const { token } = req.body;
