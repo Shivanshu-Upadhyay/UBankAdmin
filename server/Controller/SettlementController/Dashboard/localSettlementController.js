@@ -1,5 +1,4 @@
 const mysqlcon = require('../../../config/db_connection')
-
 module.exports.yesterdaySettlement = async (req, res) => {
     try {
         let yesterdaySettlement = [0, 0, 0, 0, 0, 0];

@@ -456,6 +456,8 @@ export default function Sidebar({ modulePesmission }) {
               width="30px"
               height="30px"
               className="m-3"
+              onClick={logout}
+              style={{cursor:"pointer"}}
             />
             <div className="linkNAme mx-2" onClick={logout}>
               Logout

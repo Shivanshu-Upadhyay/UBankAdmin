@@ -159,16 +159,17 @@ class AddFund {
         available_balance,
         wallet_current_amount,
       } = req.body;
+      console.log(req.body);
       if (
-        !selectMer ||
-        !merchant_name ||
-        !current_amount ||
-        !currency ||
-        !addBal ||
-        !option ||
-        !available_balance ||
-        !wallet_current_amount||
-        !id
+        selectMer===undefined ||
+        merchant_name ===undefined||
+        current_amount ===undefined||
+        currency ===undefined||
+        addBal ===undefined||
+        option ===undefined||
+        available_balance ===undefined||
+        wallet_current_amount===undefined||
+        id===undefined
       ) {
         return res.status(400).json({ message: "All Field Required" });
       }
@@ -184,6 +185,7 @@ class AddFund {
         funds_added_by: `${firstname} ${lastname}` ,
         type: option,
       };
+     
       const sqlSettCurr =
         "Select settle_currency,wallet from tbl_user where id=? ";
       const sqlSettRate =
