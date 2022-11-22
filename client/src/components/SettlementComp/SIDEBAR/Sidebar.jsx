@@ -91,12 +91,14 @@ export default function SettlementSidebar() {
   const sidebarLink = [
     {
       name: "Dashboard",
-      iconUrl:"https://www.bankconnect.online/assets/merchants/img/virtual-terminal.svg",
+      iconUrl:
+        "https://www.bankconnect.online/assets/merchants/img/virtual-terminal.svg",
       path: "/",
     },
     {
       name: "Bank Deposit Received",
-      iconUrl:"https://www.bankconnect.online/assets/merchants/img/sattlement.svg",
+      iconUrl:
+        "https://www.bankconnect.online/assets/merchants/img/sattlement.svg",
       path: "/BankDepositReceived",
     },
     {
@@ -106,12 +108,14 @@ export default function SettlementSidebar() {
     },
     {
       name: "Add Funds",
-      iconUrl:"https://www.bankconnect.online/assets/merchants/img/employes.svg",
+      iconUrl:
+        "https://www.bankconnect.online/assets/merchants/img/employes.svg",
       path: "/AddFunds",
     },
     {
       name: "Local Settlement",
-      iconUrl:"https://www.payoway.com/web/assets/admin/icons/internationalsettlement.svg",
+      iconUrl:
+        "https://www.payoway.com/web/assets/admin/icons/internationalsettlement.svg",
       path: "/LocalSettlement",
     },
     {
@@ -121,38 +125,45 @@ export default function SettlementSidebar() {
     },
     {
       name: "Disputes/Chargeback",
-      iconUrl:"https://www.payoway.com/web/assets/admin/icons/disputes.svg",
+      iconUrl:
+        "https://www.payoway.com/web/assets/admin/icons/disputes.svg",
       path: "/DisputesChargebacks",
     },
     {
       name: "Refunds",
-      iconUrl:"https://www.payoway.com/web/assets/admin/icons/refund.svg",
+      iconUrl:
+        "https://www.payoway.com/web/assets/admin/icons/refund.svg",
       path: "/Refunds",
     },
     {
       name: "Commissions",
-      iconUrl:"https://www.payoway.com/web/assets/admin/icons/commission.png",
+      iconUrl:
+        "	https://www.payoway.com/web/assets/admin/icons/commission.png",
       path: "/Commissions",
     },
     {
       name: "Reports",
-      iconUrl:"https://www.payoway.com/web/assets/admin/icons/reports.svg",
+      iconUrl:
+        "https://www.payoway.com/web/assets/admin/icons/reports.svg",
       path: "/Reports",
     },
     {
       name: "Settings",
-      iconUrl:"https://www.payoway.com/web/assets/admin/icons/setting.svg",
+      iconUrl:
+        "https://www.payoway.com/web/assets/admin/icons/setting.svg",
       path: "/Settings",
     },
     {
       name: "Change Password",
-      iconUrl:"https://www.payoway.com/web/assets/admin/icons/password.svg",
+      iconUrl:
+        "https://www.payoway.com/web/assets/admin/icons/password.svg",
       path: "/ChangePassword",
     },
 
     {
       name: "Logout",
-      iconUrl:"https://www.bankconnect.online/assets/merchants/img/log-out.svg",
+      iconUrl:
+        "https://www.bankconnect.online/assets/merchants/img/log-out.svg",
       path: "/login-admin",
     },
   ];
@@ -218,7 +229,7 @@ export default function SettlementSidebar() {
                       : " settlementiconcontainer mx-2"
                   }
                 >
-                  <img src={item.iconUrl} alt="" className="settlementiconstyle"  onClick={() => (item.name === "Logout" ? logout() : null)} />
+                  <img src={item.iconUrl} alt="" className="settlementiconstyle" />
                 </NavLink>
 
                 <div>
