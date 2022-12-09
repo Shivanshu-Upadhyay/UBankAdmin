@@ -560,7 +560,7 @@ function Routers() {
           <Route path="/ChangePassword" element={<ChangePassword/>} />
         </Route>):<Route path="/login-admin" element={<Login />} />
          }
-        <Route path="*" element={isLoginUser && role?<Error />:<Login/>} />
+        {/* <Route path="*" element={isLoginUser && role?<Error />:<Login/>} /> */}
       </Routes>
   );
 }
