@@ -186,15 +186,10 @@ class AddFund {
         type: option,
       };
      
-      const sqlSettCurr =
-        "Select settle_currency,wallet from tbl_user where id=? ";
-      const sqlSettRate =
-        "Select rate from tbl_user_settled_currency where deposit_currency=? AND settled_currency= ? ";
+      const sqlSettCurr="Select settle_currency,wallet from tbl_user where id=? ";
+      const sqlSettRate ="Select rate from tbl_user_settled_currency where deposit_currency=? AND settled_currency= ? ";
       const result = await mysqlcon(sqlSettCurr, [15]);
-      const result2 = await mysqlcon(sqlSettRate, [
-        currency,
-        result[0].settle_currency,
-      ]);
+      const result2 = await mysqlcon(sqlSettRate, [currency,result[0].settle_currency,]);
       const FinalDataForWallet =
         Number(option) === 1
           ? result[0].wallet +
