@@ -20,6 +20,7 @@ function MerchantTrans({ authCreate, authRead, authUpdate, authDelete }) {
   const tableHeading = [
     "Merchant Name",
     "Mid",
+    "Details",
     "Action",
     "Status",
     "MOrder No",
@@ -37,7 +38,6 @@ function MerchantTrans({ authCreate, authRead, authUpdate, authDelete }) {
     "RR Amount",
     "Net Amt",
     "Create",
-    "Details",
   ];
 
   const [page, setPage] = useState(1);
@@ -86,42 +86,6 @@ function MerchantTrans({ authCreate, authRead, authUpdate, authDelete }) {
     ReadData();
   }, [page, searchVal, limitVal,to,from,merchantSelect]);
 
-  const toggleStatus = async (user_id, status) => {
-    try {
-      let formData = new FormData();
-      formData.append("user_id", user_id);
-      if (status === 0) {
-        formData.append("status", 1);
-      }
-      const config = {
-        headers: {
-          "content-type": "multipart/form-data",
-          Authorization: `Bearer ${auth}`,
-        },
-      };
-
-      let result = await axios.post(
-        `${baseUrl}/toggleChinese`,
-        formData,
-        config
-      );
-      console.log(result);
-      toast.success(result.data.message, {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      ReadData();
-      console.log(result);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const changeStatus = async (id) => {
     try {
       let formData = new FormData();
@@ -164,9 +128,22 @@ if(loading){
                   <TableCell align="center">{item.i_fname}</TableCell>
                   <TableCell align="center">{item.user_id}</TableCell>
                   <TableCell align="center">
+                    {authRead ? (
+                      <Link to={`/ViewMerchant/${item.invoice_id}`}>
+                        <button style={{ background: "transparent" }}>
+                          <img
+                            src="./imges/eye.png"
+                            alt="not"
+                            style={{ width: "25px" }}
+                          />
+                        </button>
+                      </Link>
+                    ) : null}
+                  </TableCell>
+                  <TableCell align="center">
                     {item.status === 1}
                     <button
-                      className="btn btn-success"
+                      className="enableStatus"
                       onClick={() => changeStatus(item.invoice_id)}
                     >
                       Success
@@ -174,17 +151,17 @@ if(loading){
                   </TableCell>
                   <TableCell align="center">
                     {item.status === 0 ? (
-                      <button className="btn btn-danger">Failed</button>
+                      <h6>Failed</h6>
                     ) : item.status === 1 ? (
-                      <button className="btn btn-success">Success</button>
+                      <h6>Success</h6>
                     ) : item.status === 2 ? (
-                      <button className="btn btn-info">Waiting</button>
+                      <h6>Waiting</h6>
                     ) : item.status === 3 ? (
-                      <button className="btn btn-warning">Pending</button>
+                      <h6>Pending</h6>
                     ) : item.status === 4 ? (
-                      <button className="btn btn-primary">Refund</button>
+                      <h6>Refund</h6>
                     ) : (
-                      <button className="btn btn-secondary">ChargeBack</button>
+                      <h6>ChargeBack</h6>
                     )}
                   </TableCell>
                   <TableCell align="center">{item.txn_id}</TableCell>
@@ -206,19 +183,6 @@ if(loading){
                   </TableCell>
                   <TableCell align="center">{item.settle_amount}</TableCell>
                   <TableCell align="center">{item.created_on}</TableCell>
-                  <TableCell align="center">
-                    {authRead ? (
-                      <Link to={`/ViewMerchant/${item.invoice_id}`}>
-                        <button style={{ background: "transparent" }}>
-                          <img
-                            src="./imges/eye.png"
-                            alt="not"
-                            style={{ width: "25px" }}
-                          />
-                        </button>
-                      </Link>
-                    ) : null}
-                  </TableCell>
                 </TableRow>
               );
             })
@@ -297,7 +261,6 @@ const FilterField = ({ setFrom, setTo,setMerchantSelect,xlData }) => {
               <Export xlData={xlData} />
             </div>
             <div className="col-3">
-             
               <FilterDate setTo={setTo} setFrom={setFrom} />
             </div>
             <div className="col-3">

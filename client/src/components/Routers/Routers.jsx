@@ -85,6 +85,32 @@ import DisputesChargebacks from "../SettlementComp/DisputesChargebacks/DisputesC
 import Refunds from "../SettlementComp/Refunds/Refunds";
 import Commissions from "../SettlementComp/Commissions/Commissions";
 import Reports from "../SettlementComp/Reports/Reports";
+import Banner from "../Setting/Banner/Banner";
+import CMS from "../Setting/CMS/CMS";
+import ViewCMS from "../Setting/CMS/ViewCMS";
+import Meta from "../Setting/MetaModule/Meta";
+import EditMeta from "../Setting/MetaModule/EditMeta";
+import IPWhitelist from "../Setting/IPWhitelist/IPWhitelist";
+import Limit from "../Setting/SetLimit/Limit";
+import Cron from "../Setting/CronSetup/Cron";
+import Currency from "../Setting/NewCurrency/Currency";
+import Countries from "../Setting/Countries/Countries";
+import NewCurrencyAdd from "../Setting/NewCurrency/NewCurrencyAdd";
+import NewCountry from "../Setting/Countries/NewCountry";
+import NewBanner from "../Setting/Banner/NewBanner";
+import EditCMS from "../Setting/CMS/EditCMS";
+import Charges from "../Setting/CronSetup/Charges";
+import EditIP from "../Setting/IPWhitelist/EditIP";
+import NewIP from "../Setting/IPWhitelist/NewIP";
+import AddLimit from "../Setting/SetLimit/AddLimit";
+import EditLimit from "../Setting/SetLimit/EditLimit";
+import SandBoxDeposits from "../SandBox/Deposits/SandBoxDeposits";
+import SandBoxPayout from "../SandBox/Payouts/SandboxPayout";
+import SubMerchant from "../SubMerchant/SubMerchant";
+import NewSubmerchant from "../SubMerchant/NewSubmerchant";
+import UpdateSubmerchant from "../SubMerchant/UpdateSubmerchant";
+import ViewSandboxDeposits from "../SandBox/Deposits/ViewSandboxDeposits";
+import ViewSandboxPayout from "../SandBox/Payouts/ViewSandboxPayout";
 
 //<><><><><><><><><><><><><><><>🤓Settlement Dashboard End🤓<><><><><><><><><><><><><>
 function Routers() {
@@ -138,6 +164,11 @@ function Routers() {
             element={<Sidebar modulePesmission={modulePesmission} />}
           >
             <Route path="/" element={<Dashboard />} />
+            <>
+              <Route path="/SubMerchant" element={<SubMerchant />} />
+              <Route path="/NewSubmerchant" element={<NewSubmerchant />} />
+              <Route path="/UpdateSubmerchant/:id" element={<UpdateSubmerchant />} />
+            </>
 
             {Object.keys(modulePesmission).length > 0
               ? modulePesmission.map((item, index) => {
@@ -398,10 +429,38 @@ function Routers() {
                         </>
                       ) : item.module === "SandBox Module" &&
                         item.status === 1 ? (
-                        <></>
+                        <>
+                          <Route
+                            path="/SandBoxDeposits"
+                            element={
+                              <SandBoxDeposits
+                              authCreate={item.m_add}
+                              authRead={item.m_view}
+                              authUpdate={item.m_edit}
+                              authDelete={item.m_delete}
+                              />
+                            }
+                          />
+                          <Route path="/ViewSandboxDeposits/:invoice_id" element={<ViewSandboxDeposits />} />
+                          <Route
+                            path="/SandBoxPayout"
+                            element={
+                              <SandBoxPayout 
+                              authCreate={item.m_add}
+                              authRead={item.m_view}
+                              authUpdate={item.m_edit}
+                              authDelete={item.m_delete}
+                              />
+                            }
+                          />
+                          <Route path="/ViewSandboxPayout/:id" element={<ViewSandboxPayout />} />
+                        </>
                       ) : item.module === "Banner Module" &&
                         item.status === 1 ? (
-                        <></>
+                        <>
+                          <Route path="/Banner" element={<Banner />} />                        
+                          <Route path="/NewBanner" element={<NewBanner />} />                        
+                        </>
                       ) : item.module === "Settlement Module" &&
                         item.status === 1 ? (
                         <>
@@ -448,9 +507,16 @@ function Routers() {
                           ) : null}
                         </>
                       ) : item.module === "CMS Module" && item.status === 1 ? (
-                        <></>
+                        <>
+                        <Route path="/CMS" element={<CMS />} />
+                        <Route path="/EditCMS/:id" element={<EditCMS />} />
+                        <Route path="/ViewCMS/:id" element={<ViewCMS />} />
+                        </>
                       ) : item.module === "Meta Module" && item.status === 1 ? (
-                        <></>
+                        <>
+                        <Route path="/Meta" element={<Meta />} />
+                        <Route path="/EditMeta/:meta_id" element={<EditMeta />} />
+                        </>
                       ) : item.module === "Setting Module" &&
                         item.status === 1 ? (
                         <>
@@ -530,6 +596,67 @@ function Routers() {
                                 authDelete={item.m_delete}
                               />
                             }
+                          />
+                          {/* IP Whitelist */}
+                          <Route
+                            path="/IPWhitelist"
+                            element={
+                              <IPWhitelist />}
+                          />
+                          <Route
+                              path="/EditIP/:id"
+                              element={<EditIP />}
+                            />
+                          <Route
+                              path="NewIP"
+                              element={<NewIP />}
+                            />
+                          {/* Set Limit */}
+                          <Route
+                            path="/Limit"
+                            element={
+                              <Limit />}
+                          />
+                          <Route
+                            path="/AddLimit"
+                            element={
+                              <AddLimit />}
+                          />
+                          <Route
+                            path="/EditLimit/:id"
+                            element={<EditLimit />}
+                          />
+                          {/* Cron Setup */}
+                          <Route
+                            path="/Cron"
+                            element={
+                              <Cron />}
+                          />
+                          <Route
+                              path="/Charges/:id"
+                              element={<Charges />}
+                            />
+                          {/* Currency */}
+                          <Route
+                            path="/Currency"
+                            element={
+                              <Currency />}
+                          />
+                          <Route
+                            path="/NewCurrencyAdd"
+                            element={
+                              <NewCurrencyAdd />}
+                          />
+                          {/* Countries */}
+                          <Route
+                            path="/Countries"
+                            element={
+                              <Countries />}
+                          />
+                          <Route
+                            path="/NewCountry"
+                            element={
+                              <NewCountry />}
                           />
                         </>
                       ) : item.module === "Change Password" &&

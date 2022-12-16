@@ -1,0 +1,901 @@
+/* Login start  */
+
+.quote-section {
+  background-image: url(../public/Imgs/login-bg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 100vh;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+}
+
+@media (max-width: 575px) {
+  .quote-section {
+    min-height: auto;
+    padding: 24px;
+  }
+}
+
+.quote-section .blockquote {
+  width: 307px;
+  font-size: 26px;
+  font-weight: bold;
+  line-height: 1.15;
+  color: #000000;
+}
+
+.quote-section .blockquote .blockquote-text {
+  margin-bottom: 24px;
+}
+
+.quote-section .blockquote .blockquote-footer {
+  font-size: 18px;
+  color: #000000;
+  font-weight: normal;
+}
+
+.form-section {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+}
+
+@media (max-width: 575px) {
+  .form-section {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
+
+.login-wrapper {
+  width: 370px;
+  max-width: 100%;
+  margin: auto;
+}
+
+.login-wrapper .form-group {
+  margin-bottom: 26px;
+}
+
+.login-wrapper .form-control {
+  min-height: 55px;
+  padding: 18px 25px;
+  border-radius: 27.5px;
+  border: solid 1px #d5dae2;
+  font-size: 15px;
+}
+
+.login-wrapper .form-control::-webkit-input-placeholder {
+  color: #919aa3;
+}
+
+.login-wrapper .form-control::-moz-placeholder {
+  color: #919aa3;
+}
+
+.login-wrapper .form-control:-ms-input-placeholder {
+  color: #919aa3;
+}
+
+.login-wrapper .form-control::-ms-input-placeholder {
+  color: #919aa3;
+}
+
+.login-wrapper .form-control::placeholder {
+  color: #919aa3;
+}
+
+.login-wrapper .login-btn {
+  width: 100%;
+  border-radius: 27.5px;
+  background-color: #000000;
+  font-size: 17px;
+  font-weight: bold;
+  color: #ffffff;
+  padding: 18px 20px;
+  height: 55px;
+  line-height: 20px;
+  margin-bottom: 28px;
+}
+
+@media (max-width: 575px) {
+  .login-wrapper .login-btn {
+    margin-bottom: 24px;
+  }
+}
+
+.login-wrapper .login-btn:hover {
+  border: 1px solid #000;
+  color: #000;
+  background-color: transparent;
+}
+
+.login-wrapper .forgot-password-link {
+  font-size: 14px;
+  color: #919aa3;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 575px) {
+  .login-wrapper .forgot-password-link {
+    margin-bottom: 6px;
+  }
+}
+
+.login-img {
+  width: 100%;
+  border-radius: 50%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  margin-bottom: 26px;
+}
+
+.login-wrapper-footer-text {
+  font-size: 18px;
+  color: #0d2366;
+  text-align: center;
+}
+
+@media (max-width: 575px) {
+  .login-wrapper-footer-text {
+    margin-bottom: 12px;
+  }
+}
+
+.footer-nav {
+  font-size: 14px;
+  color: #919aa3;
+  text-align: center;
+  margin-top: auto;
+  padding-bottom: 100px;
+}
+
+.footer-nav a {
+  color: inherit;
+}
+
+@media (max-width: 575px) {
+  .footer-nav {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+/* Login End  */
+
+/* *****************************************Sidebar  start********************************/
+.appBar {
+  border: 1px solid #ced4da;
+  -webkit-box-shadow: none;
+  box-shadow: none !important;
+  background-color: #f9f9f9 !important;
+}
+.appBarcom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.css-1hsz34s-MuiDrawer-docked .MuiDrawer-paper {
+  background-color: #f9f9f9 !important;
+}
+
+.navLeft {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: black;
+}
+
+.username {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.sidebarcontainer {
+  display: flex;
+  align-items: center;
+}
+
+.linkNAme {
+  width: 175px !important;
+  font-family: "Mulish";
+  cursor: pointer;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #bfbfbf;
+  width: 100%;
+  margin: 5px 0px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.chileldText {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  word-wrap: break-word;
+  cursor: pointer;
+  margin: 40px;
+  text-decoration: none;
+  color: #000;
+}
+.chileldTextActive {
+  font-size: 16px;
+  font-weight: 800;
+  word-wrap: break-word;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.linkNAme:hover {
+  color: #000 !important;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 18px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.marginleft {
+  margin-left: 20px;
+  margin-right: 5px;
+}
+.iconstyle {
+  width: 20px;
+}
+.iconcontainer {
+  border-radius: 50%;
+}
+
+.iconActive {
+  background: #ff6600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  padding: 10px 20px;
+  transition: 0.5s;
+}
+
+.activeClass {
+  color: #000 !important;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 16px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.openClose {
+  position: absolute;
+  top: 20rem;
+  z-index: 9999;
+  left: 215px;
+}
+.openClose2 {
+  position: absolute;
+  top: 20rem;
+  z-index: 9999;
+  left: 45px;
+}
+
+.parentAll {
+  position: relative;
+}
+
+.bgcolor {
+  background-color: #f9f9f9 !important;
+}
+
+/* width */
+.css-1hsz34s-MuiDrawer-docked .MuiDrawer-paper::-webkit-scrollbar {
+  width: 0px !important;
+}
+/* width */
+.css-2dum1v-MuiDrawer-docked .MuiDrawer-paper::-webkit-scrollbar {
+  width: 0px !important;
+}
+
+.mainBlockSideBar {
+  width: 80%;
+}
+
+.showcom {
+  display: flex;
+  margin-left: 2.5rem;
+}
+.hidecom {
+  display: none;
+}
+
+/* Sidebar End*/
+
+.headingAll {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 43px;
+  color: #000000;
+}
+
+.SvaeButtonAdmin {
+  background-color: #ccc466;
+  border-radius: 30px;
+  color: #fff;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 24px;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 30px;
+}
+
+/* settelment css */
+
+/* CSS */
+.button-SETTELMENT {
+  background: rgb(227, 15, 15);
+  color: white;
+  padding: 3px;
+  border-radius: 5px;
+}
+
+/* CSS */
+.button-SETTELMENT-PENDING {
+  color: white;
+  background: rgb(122, 121, 171);
+  padding: 3px;
+  border-radius: 5px;
+}
+
+/* settelment css END */
+
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}
+
+/* Table style all */
+.tablecontainer2 {
+  background: #ffffff;
+  box-shadow: 0px 18px 26px rgb(0 0 0 / 5%);
+  border-radius: 20px;
+  width: 100% !important;
+  overflow: auto;
+  max-height: calc(100vh - 200px);
+}
+
+.tablebold {
+  white-space: nowrap;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700 !important;
+  font-size: 14px;
+  line-height: 23px;
+  color: #000000;
+  width: 400px;
+}
+
+.waiting {
+  border-radius: 30px;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  background: transparent;
+  height: 30px;
+  line-height: 0px;
+}
+
+.showingdata {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  color: #000000;
+}
+
+.tablestatusbuttonPend {
+  border: 1px solid #f9501a;
+  color: #f9501a;
+  padding: 7px 30px;
+  width: 100%;
+  background-color: transparent;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 400;
+}
+.tablestatusbuttonComp {
+  border: 1px solid #2bc155;
+  color: #2bc155;
+  padding: 7px 30px;
+  width: 100%;
+  background-color: transparent;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 400;
+}
+.tablestatusbuttonWait {
+  border: 1px solid #f9501a;
+  color: #f9501a;
+  padding: 7px 30px;
+  width: 100%;
+  background-color: transparent;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 400;
+}
+.tablestatusbuttonFail {
+  border: 1px solid red;
+  color: red;
+  padding: 7px 30px;
+  width: 100%;
+  background-color: transparent;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 400;
+}
+.tablestatusbuttonRef {
+  border: 1px solid #f9501a;
+  color: #f9501a;
+  padding: 7px 30px;
+  width: 100%;
+  background-color: transparent;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.dilogrefund {
+  background: rgba(30, 170, 231, 0.2);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 30px;
+  box-shadow: 0px 2px 5px rgb(0 0 0 / 25%);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.dilogfirstbutton {
+  background: rgb(255 140 64 / 30%);
+  border-radius: 10px;
+  padding: 10px 20px;
+  height: 80px;
+  float: left;
+}
+
+.forminputDeposite {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+  color: rgba(0, 0, 0, 0.6);
+  padding-bottom: 4px;
+  margin-bottom: 0;
+}
+/* Table style all  End*/
+
+/* <>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>scrollbar css <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #99b5a2;
+  border-radius: 10px;
+}
+
+/* <>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>scrollbar css <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
+
+.addTransaction {
+  display: flex;
+  padding: 10px 20px;
+  background: #1eaae7;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 30px;
+}
+.input1 {
+  border: none;
+  outline: none;
+  text-align: center;
+  color: #000;
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.forminputDeposite {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 18px;
+  color: #bfbfbf;
+  padding-bottom: 4px;
+  margin-bottom: 0;
+}
+
+select.form-select.form-select-sm.mb-3.boldOption {
+  border: none;
+  box-shadow: none;
+}
+
+.boldOption {
+  width: 70% !important;
+}
+
+.penddingBtn {
+  width: 100px;
+  padding: 8px 20px;
+  border-radius: 30px;
+  background-image: linear-gradient(135deg, #1eef2c 40%, #ffa500);
+  color: #fff;
+  font-weight: 500;
+}
+.successBtn {
+  width: 100px;
+  padding: 8px 20px;
+  border-radius: 30px;
+  background: green;
+  color: #fff;
+  font-weight: 500;
+}
+.failedBtn {
+  width: 100px;
+  padding: 8px 20px;
+  border-radius: 30px;
+  background: red;
+  background-image: linear-gradient(135deg, rgb(221, 59, 59) 40%, red);
+  color: #fff;
+  font-weight: 500;
+}
+.approveBtn {
+  width: 100px;
+  padding: 8px 20px;
+  border-radius: 30px;
+  background-image: linear-gradient(135deg, #f34079 40%, #15e37c);
+  color: #fff;
+  font-weight: 500;
+}
+
+.golakrnewalaprofile {
+  border-radius: 50%;
+  border: 1px solid blueviolet;
+  overflow: hidden;
+}
+
+.totalBankdeposite {
+  background-color: rgba(30, 170, 231, 0.2);
+  width: 35%;
+  padding: 20px 20px;
+  border-radius: 15px;
+}
+
+.addfundBlock {
+  background-color: #bae5f8;
+  border-radius: 5px;
+  width: 250px;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.addfundBlock > label {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.addfundBlock > input {
+  border: none;
+  outline: none;
+  padding: 5px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.addFundSelext {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.addFundSelext > label {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.addfundBlockAddSub {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.addfundBlockAddSub > label {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.addfundBlockAddSub > input {
+  border: none;
+  outline: none;
+  background: #eee;
+  text-align: center;
+  padding: 2px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.MuiAutocomplete-listbox {
+  height: 120px;
+  font-size: 14px;
+}
+
+.addfundntn {
+  display: flex;
+  padding: 7px 20px;
+  background: #1eaae7;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 30px;
+}
+.MuiAutocomplete-hasPopupIcon.MuiAutocomplete-hasClearIcon.css-15mnk20-MuiAutocomplete-root .MuiOutlinedInput-root {
+  padding-right: 65px;
+  font-size: 14px !important;
+}
+
+.css-3bmhjh-MuiPaper-root-MuiPopover-paper {
+  opacity: 1;
+  transform: none;
+  transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 133ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  top: 428px;
+  left: 1430px!important;
+  transform-origin: 16.3375px 124.812px;
+}
+
+.css-8u39c-MuiTypography-root{
+  margin-left: -18px !important;
+}
+
+.table-box{
+  background: #FFFFFF;
+  box-shadow: rgb(0 0 0 / 12%) 0px 1px 4px 1px;
+  border: 1px solid #ced4da;
+    padding: 20px;
+}
+
+.whitelistBtn{
+  background: #ff6600;
+  border-radius: 30px;
+  color: #fff;
+  width: 150px;
+  height: 36px;
+  cursor: pointer;
+  margin-left: auto;
+  display: block;
+}
+
+.modal-backdrop{
+  z-index: 999999999;
+}
+
+.modal{
+  z-index: 999999999;
+}
+
+/* .switch {
+  display: inline-flex;
+  margin: 0 10px;
+  float: right;
+}
+
+.switch h4{
+  margin-right: 10px;
+  font-weight: 500;
+} */
+
+.css-zw3mfo-MuiModal-root-MuiDialog-root{
+  z-index: 999999 !important;
+}
+
+.css-1t1j96h-MuiPaper-root-MuiDialog-paper{
+  width: 500px !important;
+  height: 270px !important;
+}
+
+.ipBtn{
+  background: #ff6600;
+  border-radius: 30px;
+  color: #fff;
+  width: 120px;
+  height: 40px;
+  margin-left: auto;
+  display: block;
+}
+
+/* Switch */
+
+.switchBox{
+  background: #FFFFFF;
+  box-shadow: rgb(0 0 0 / 12%) 0px 1px 4px 1px;
+  border: 1px solid #ced4da;
+  border-radius: 20px;
+  padding: 20px;
+  width: 65%;
+  height: 80px;
+  margin-left: auto;
+}
+
+.content{
+	cursor:pointer;
+  display: flex;
+}
+
+.content .toggle{
+	--size:4em;
+	width:var(--size);
+	height:calc(var(--size) / 2);
+	position:relative;
+	background:#fff;
+	border-radius:var(--size);
+  margin-left: auto;
+  display: block;
+  border: 1px solid #bfbfbf;
+  margin-right: 10px;
+}
+
+.content .switch{
+  font-size: 20px;
+  font-weight: 800;
+  cursor: default;
+}
+
+.content .toggle .btn{
+	width:calc(var(--size) / 2);
+	height:100%;
+	position:absolute;
+	left:0;
+	background:#bbb;
+	border-radius:50%;
+	transition:all ease 0.5s;
+}
+
+.content input:checked + .toggle .btn{
+	left:50%;
+	background:#008000;
+}
+
+/* upload image button */
+
+.input-file .button input {  
+  position: absolute;  
+  top: 0;  
+  right: 0;  
+  padding: 0;  
+  font-size: 30px;  
+  cursor: pointer;  
+  opacity: 0;  
+}  
+.input input {  
+  display: block;  
+  box-sizing: border-box;  
+  -moz-box-sizing: border-box;  
+  width: 100%;  
+  height: 28px;  
+  padding: 8px 10px;  
+  outline: 0;  
+  border-width: 1px;  
+  border-style: solid;  
+  border-radius: 0;  
+  background: #fff;  
+  font: 13px/16px 'Open Sans', Helvetica,Arial, sans-serif;  
+  color: #404040;  
+  appearance: normal;  
+  -moz-appearance: none;  
+  -webkit-appearance: none;  
+}  
+
+.custom-file {
+  display: block;
+  width: 100%;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  appearance: none;
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.formBox {
+  background: #FFFFFF;
+  box-shadow: rgb(0 0 0 / 12%) 0px 1px 4px 1px;
+  border: 1px solid #ced4da;
+  border-radius: 20px;
+  padding: 20px;
+  width: 50%;
+  margin: auto;
+}
+
+.iconBtn {
+  background: transparent;
+  color: #fff;
+  width: 90px;
+  height: 35px;
+  border-radius: 20px;
+  margin-bottom: 17px;
+}
+
+.enableStatus{
+  background: #10ac14;
+  border-radius: 50px;
+  height: 40px;
+  width: 120px;
+  color: #fff;
+}
+
+.disableStatus{
+  background: #c10000;
+  border-radius: 50px;
+  height: 40px;
+  width: 120px;
+  color: #fff;
+}
+
+.tablebox{
+  background: #FFFFFF;
+  box-shadow: rgb(0 0 0 / 12%) 0px 1px 4px 1px;
+  border: 1px solid #ced4da;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.test{
+  width: 90px;
+  height: 36px;
+}
+
+.test:hover {
+  font-size: 0;
+}
+
+.test:hover:before {
+  font-size: 15px;
+  content: attr(data-hover);
+}
+
+th.MuiTableCell-root.MuiTableCell-head.MuiTableCell-alignCenter.MuiTableCell-sizeMedium.css-1ndpvdd-MuiTableCell-root {
+  white-space: nowrap;
+}

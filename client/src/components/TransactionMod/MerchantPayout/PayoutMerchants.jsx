@@ -159,21 +159,21 @@ function PayoutMerchants({ authCreate, authRead, authUpdate, authDelete }) {
                   <TableCell align="center">
                     <div className="d-flex  align-items-center justify-content-around">
                       <button
-                        className="enableStatus btn btn-secondary"
+                        className="btn btn-success"
                         style={{ boxShadow: "none" }}
                         onClick={() => toggleStatus(item.id, "SUCCESS")}
                       >
                         S
                       </button>
                       <button
-                        className="disableStatus mx-2 btn btn-danger"
+                        className="mx-2 btn btn-danger"
                         style={{ boxShadow: "none" }}
                         onClick={() => toggleStatus(item.id, "FAILURE")}
                       >
                         F
                       </button>
                       <button
-                        className="pendingB btn btn-warning"
+                        className="btn btn-warning"
                         style={{ boxShadow: "none" }}
                         onClick={() => toggleStatus(item.id, "PENDING")}
                       >

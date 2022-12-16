@@ -100,14 +100,12 @@ function Common({
           >
           <option value="-1">Select Currency</option>
           {
-          
             pass.map((item,index)=>{
-            return(
-              
+              return(
                 <option key={index} value={item.currencyID}>
-                {item.sortname}
+                  {item.sortname}
                 </option>
-            );
+              );
             })
           }        
           </Form.Select>

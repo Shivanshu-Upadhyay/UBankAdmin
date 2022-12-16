@@ -195,6 +195,37 @@ export default function Sidebar({ modulePesmission }) {
       ],
       authPermission: modulePesmission[7] ? modulePesmission[7].status : 0,
     },
+    {
+      name: "Sub Merchant",
+      iconUrl:
+        "https://payoway.com/web/assets/admin/icons/merchantchild.png",
+      path: "/SubMerchant",
+      children: [
+        { name: "Sub Merchant", path: "/SubMerchant" },
+      ],
+      // authPermission: modulePesmission[7] ? modulePesmission[7].status : 0,
+      authPermission:1,
+    },
+    {
+      name: "SandBox Deposits",
+      iconUrl:
+        "https://payoway.com/web/assets/admin/icons/sanddeposit.png",
+      path: "/SandBoxDeposits",
+      children: [
+        { name: "SandBox Deposits", path: "/SandBoxDeposits" },
+      ],
+      authPermission: modulePesmission[9] ? modulePesmission[9].status : 0,
+    },
+    {
+      name: "SandBox Payouts",
+      iconUrl:
+        "https://payoway.com/web/assets/admin/icons/sandpayout.png",
+      path: "/SandBoxPayout",
+      children: [
+        { name: "SandBox Payouts", path: "/SandBoxPayout" },
+      ],
+      authPermission: modulePesmission[9] ? modulePesmission[9].status : 0,
+    },
     // {
     //   name: "Transaction Module",
     //   iconUrl:
@@ -294,9 +325,15 @@ export default function Sidebar({ modulePesmission }) {
         { name: "Currency Exchange", path: "/CurrencyRate" },
         { name: "Exchange", path: "/Exchange" },
         { name: "Block User", path: "/AllUpi" },
-        { name: "Banner Module ", path: "/MerchantsTransaction" },
-        { name: "CMS Module", path: "/MerchantsTransaction" },
-        { name: "Meta Module", path: "/MerchantsTransaction" }
+        { name: "Banner Module ", path: "/Banner" },
+        { name: "CMS Module", path: "/CMS" },
+        { name: "Meta Module", path: "/Meta" },
+        { name: "Ip WhiteList", path: "/IPWhitelist" },
+        { name: "Set Limit", path: "/Limit" },
+        { name: "Cron Setup", path: "/Cron" },
+        { name: "Net Profit", path: "/MerchantsTransaction" },
+        { name: "Currency", path: "/Currency" },
+        { name: "Countries", path: "/Countries" },
       ],
       authPermission: modulePesmission[15] ? modulePesmission[15].status : 0,
     },

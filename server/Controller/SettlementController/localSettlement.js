@@ -18,13 +18,15 @@ class LocalSettlement{
             let sqlDate = 'select * from tbl_settlement where DATE(created_on) = ? AND settlement_mode = 2 ORDER BY created_on DESC limit ?,?'
             let sqlToFrom = 'select * from tbl_settlement where DATE(created_on)  >= ? AND DATE(created_on) <= ? AND settlement_mode = 2 ORDER BY created_on DESC limit ?,?'
             let sqlSearch = `select * from tbl_settlement where settlementId LIKE '%${searchItem}%'AND settlement_mode = 2 ORDER BY created_on DESC limit ?,?`
+
             const data = await mysqlcon(date?sqlDate:(to&&from)?sqlToFrom:searchItem?sqlSearch:sql,date?[date,start,limit]:(to&&from)?[from,to,start,limit]:[start,limit]);
             res.status(200).json({
             result:data,
             numOfPages
             })
+          
         } catch (error) {
-         res.status(500).json({message:"Something went wrong",
+            res.status(500).json({message:"Something went wrong",
         error})
         }
       

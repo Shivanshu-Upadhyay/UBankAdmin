@@ -474,9 +474,11 @@ input[type="checkbox"] {
 }
 
 .dilogfirstbutton {
-  background: rgba(30, 170, 231, 0.2);
+  background: rgb(255 140 64 / 30%);
   border-radius: 10px;
   padding: 10px 20px;
+  height: 80px;
+  float: left;
 }
 
 .forminputDeposite {
@@ -524,19 +526,20 @@ input[type="checkbox"] {
   border: none;
   outline: none;
   text-align: center;
-  color: #000000;
-  font-weight: 700;
-  font-size: 15px;
+  color: #000;
+  font-weight: 500;
+  font-size: 14px;
   margin-bottom: 10px;
+  background: transparent;
 }
 
 .forminputDeposite {
   font-family: "Mulish";
   font-style: normal;
-  font-weight: 600;
-  font-size: 12px;
+  font-weight: 700;
+  font-size: 15px;
   line-height: 18px;
-  color: rgba(0, 0, 0, 0.6);
+  color: #bfbfbf;
   padding-bottom: 4px;
   margin-bottom: 0;
 }
@@ -677,4 +680,223 @@ select.form-select.form-select-sm.mb-3.boldOption {
   top: 428px;
   left: 1430px!important;
   transform-origin: 16.3375px 124.812px;
+}
+
+.css-8u39c-MuiTypography-root{
+  margin-left: -18px !important;
+}
+
+.table-box{
+  background: #FFFFFF;
+  box-shadow: rgb(0 0 0 / 12%) 0px 1px 4px 1px;
+  border: 1px solid #ced4da;
+    padding: 20px;
+}
+
+.whitelistBtn{
+  background: #ff6600;
+  border-radius: 30px;
+  color: #fff;
+  width: 150px;
+  height: 36px;
+  cursor: pointer;
+  margin-left: auto;
+  display: block;
+}
+
+.modal-backdrop{
+  z-index: 999999999;
+}
+
+.modal{
+  z-index: 999999999;
+}
+
+/* .switch {
+  display: inline-flex;
+  margin: 0 10px;
+  float: right;
+}
+
+.switch h4{
+  margin-right: 10px;
+  font-weight: 500;
+} */
+
+.css-zw3mfo-MuiModal-root-MuiDialog-root{
+  z-index: 999999 !important;
+}
+
+.css-1t1j96h-MuiPaper-root-MuiDialog-paper{
+  width: 500px !important;
+  height: 270px !important;
+}
+
+.ipBtn{
+  background: #ff6600;
+  border-radius: 30px;
+  color: #fff;
+  width: 120px;
+  height: 40px;
+  margin-left: auto;
+  display: block;
+}
+
+/* Switch */
+
+.switchBox{
+  background: #FFFFFF;
+  box-shadow: rgb(0 0 0 / 12%) 0px 1px 4px 1px;
+  border: 1px solid #ced4da;
+  border-radius: 20px;
+  padding: 20px;
+  width: 65%;
+  height: 80px;
+  margin-left: auto;
+}
+
+.content{
+	cursor:pointer;
+  display: flex;
+}
+
+.content .toggle{
+	--size:4em;
+	width:var(--size);
+	height:calc(var(--size) / 2);
+	position:relative;
+	background:#fff;
+	border-radius:var(--size);
+  margin-left: auto;
+  display: block;
+  border: 1px solid #bfbfbf;
+  margin-right: 10px;
+}
+
+.content .switch{
+  font-size: 20px;
+  font-weight: 800;
+  cursor: default;
+}
+
+.content .toggle .btn{
+	width:calc(var(--size) / 2);
+	height:100%;
+	position:absolute;
+	left:0;
+	background:#bbb;
+	border-radius:50%;
+	transition:all ease 0.5s;
+}
+
+.content input:checked + .toggle .btn{
+	left:50%;
+	background:#008000;
+}
+
+/* upload image button */
+
+.input-file .button input {  
+  position: absolute;  
+  top: 0;  
+  right: 0;  
+  padding: 0;  
+  font-size: 30px;  
+  cursor: pointer;  
+  opacity: 0;  
+}  
+.input input {  
+  display: block;  
+  box-sizing: border-box;  
+  -moz-box-sizing: border-box;  
+  width: 100%;  
+  height: 28px;  
+  padding: 8px 10px;  
+  outline: 0;  
+  border-width: 1px;  
+  border-style: solid;  
+  border-radius: 0;  
+  background: #fff;  
+  font: 13px/16px 'Open Sans', Helvetica,Arial, sans-serif;  
+  color: #404040;  
+  appearance: normal;  
+  -moz-appearance: none;  
+  -webkit-appearance: none;  
+}  
+
+.custom-file {
+  display: block;
+  width: 100%;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  appearance: none;
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.formBox {
+  background: #FFFFFF;
+  box-shadow: rgb(0 0 0 / 12%) 0px 1px 4px 1px;
+  border: 1px solid #ced4da;
+  border-radius: 20px;
+  padding: 20px;
+  width: 50%;
+  margin: auto;
+}
+
+.iconBtn {
+  background: transparent;
+  color: #fff;
+  width: 90px;
+  height: 35px;
+  border-radius: 20px;
+  margin-bottom: 17px;
+}
+
+.enableStatus{
+  background: #10ac14;
+  border-radius: 50px;
+  height: 40px;
+  width: 120px;
+  color: #fff;
+}
+
+.disableStatus{
+  background: #c10000;
+  border-radius: 50px;
+  height: 40px;
+  width: 120px;
+  color: #fff;
+}
+
+.tablebox{
+  background: #FFFFFF;
+  box-shadow: rgb(0 0 0 / 12%) 0px 1px 4px 1px;
+  border: 1px solid #ced4da;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.test{
+  width: 90px;
+  height: 36px;
+}
+
+.test:hover {
+  font-size: 0;
+}
+
+.test:hover:before {
+  font-size: 15px;
+  content: attr(data-hover);
+}
+
+th.MuiTableCell-root.MuiTableCell-head.MuiTableCell-alignCenter.MuiTableCell-sizeMedium.css-1ndpvdd-MuiTableCell-root {
+  white-space: nowrap;
 }

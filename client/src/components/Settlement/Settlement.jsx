@@ -119,9 +119,9 @@ function Settlement({ authCreate, authRead, authUpdate, authDelete }) {
                 >
                   <TableCell align="center">
                     {item.status === 1 ? (
-                      <div className="button-SETTELMENT">Approved</div>
+                      <h6>Approved</h6>
                     ) : (
-                      <div className="button-SETTELMENT-PENDING">Pendding</div>
+                      <h6>Pendding</h6>
                     )}
                   </TableCell>
                   <TableCell align="center">
