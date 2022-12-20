@@ -99,14 +99,14 @@ class AddFund {
         wallet_current_amount,
       } = req.body;
       if (
-        !selectMer ||
-        !merchant_name ||
-        !current_amount ||
-        !currency ||
-        !addBal ||
-        !option ||
-        !available_balance ||
-        !wallet_current_amount
+        selectMer===undefined ||
+        merchant_name ===undefined||
+        current_amount ===undefined||
+        currency ===undefined||
+        addBal ===undefined||
+        option ===undefined||
+        available_balance ===undefined||
+        wallet_current_amount===undefined
       ) {
         return res.status(400).json({ message: "All Field Required" });
       }
