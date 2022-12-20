@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useLayoutEffect } from "react";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import { useStateContext } from "../../context/ContextProvider";
@@ -118,7 +118,9 @@ function Routers() {
   const { isLoginUser,setIsLoginUser,role, setRole } = useStateContext();
   const location = useLocation();
   const reactNavigate = useNavigate()
-  useEffect(() => {
+  useLayoutEffect(() => {
+      setIsLoginUser(localStorage.getItem('admin'))
+      setRole(localStorage.getItem('role'))
    if(localStorage.getItem('admin')){
       fetchData();
       const { exp } = jwtDecode(localStorage.getItem('admin'))
@@ -129,8 +131,6 @@ function Routers() {
         return;
       }
     }
-    setIsLoginUser(localStorage.getItem('admin'))
-    setRole(localStorage.getItem('role'))
   }, [location.pathname,isLoginUser,role]);
   const fetchData = async () => {
     try {
@@ -211,6 +211,14 @@ function Routers() {
                               element={<ViewSubAdmin />}
                             />
                           ) : null}
+                        </>
+                      ) : item.module === "PG Module" && item.status === 1 ? (
+                        <>
+                          {/* settlement */}
+                          <Route path="/AddFunds" element={<AddFunds/>} />
+                          <Route path="/LocalSettlement" element={<LocalSettlement/>} />
+                          <Route path="/InternationalSettlement" element={<InternationalSettlement/>} />
+                          {/* End settlement */}
                         </>
                       ) : item.module === "PG Module" && item.status === 1 ? (
                         <>

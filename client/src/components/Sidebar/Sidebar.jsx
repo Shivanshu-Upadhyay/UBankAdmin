@@ -125,6 +125,29 @@ export default function Sidebar({ modulePesmission }) {
       authPermission: modulePesmission[1] ? modulePesmission[1].status : 0,
     },
     {
+      name: "Add Funds",
+      iconUrl:
+        "https://www.bankconnect.online/assets/merchants/img/employes.svg",
+      path: "/AddFunds",
+      children: [{ name: "Payment Gates", path: "/PGMod" }],
+      authPermission: modulePesmission[1] ? modulePesmission[1].status : 0,
+    },
+    {
+      name: "Local Settlement",
+      iconUrl:
+        "https://www.payoway.com/web/assets/admin/icons/internationalsettlement.svg",
+      path: "/LocalSettlement",
+      children: [{ name: "Payment Gates", path: "/PGMod" }],
+      authPermission: modulePesmission[1] ? modulePesmission[1].status : 0,
+    },
+    {
+      name: "International Settlement ",
+      iconUrl:"https://www.payoway.com/web/assets/admin/icons/world.png",
+      path: "/InternationalSettlement",
+      children: [{ name: "Payment Gates", path: "/PGMod" }],
+      authPermission: modulePesmission[1] ? modulePesmission[1].status : 0,
+    },
+    {
       name: "Merchants Info",
       iconUrl:
         "	https://payoway.com/web/assets/admin/icons/merinfo.svg",
