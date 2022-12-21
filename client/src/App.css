@@ -281,13 +281,13 @@
 }
 
 .openClose {
-  position: absolute;
+  position: fixed;
   top: 20rem;
   z-index: 9999;
   left: 215px;
 }
 .openClose2 {
-  position: absolute;
+  position: fixed;
   top: 20rem;
   z-index: 9999;
   left: 45px;

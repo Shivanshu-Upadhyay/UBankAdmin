@@ -119,8 +119,6 @@ function Routers() {
   const location = useLocation();
   const reactNavigate = useNavigate()
   useLayoutEffect(() => {
-      setIsLoginUser(localStorage.getItem('admin'))
-      setRole(localStorage.getItem('role'))
    if(localStorage.getItem('admin')){
       fetchData();
       const { exp } = jwtDecode(localStorage.getItem('admin'))
@@ -130,6 +128,8 @@ function Routers() {
         reactNavigate('/login-admin')
         return;
       }
+      setIsLoginUser(localStorage.getItem('admin'))
+      setRole(localStorage.getItem('role'))
     }
   }, [location.pathname,isLoginUser,role]);
   const fetchData = async () => {
@@ -212,15 +212,9 @@ function Routers() {
                             />
                           ) : null}
                         </>
-                      ) : item.module === "PG Module" && item.status === 1 ? (
-                        <>
-                          {/* settlement */}
-                          <Route path="/AddFunds" element={<AddFunds/>} />
-                          <Route path="/LocalSettlement" element={<LocalSettlement/>} />
-                          <Route path="/InternationalSettlement" element={<InternationalSettlement/>} />
-                          {/* End settlement */}
-                        </>
-                      ) : item.module === "PG Module" && item.status === 1 ? (
+                      )
+                    
+                      : item.module === "PG Module" && item.status === 1 ? (
                         <>
                           {/* PG Module */}
                           <Route
@@ -236,6 +230,9 @@ function Routers() {
                           />
                           <Route path="/NewPg" element={<NewPg />} />
                           <Route path="/EditGate/:id" element={<EditGate />} />
+                          <Route path="/AddFunds" element={<AddFunds/>} />
+                          <Route path="/LocalSettlement" element={<LocalSettlement/>} />
+                          <Route path="/InternationalSettlement" element={<InternationalSettlement/>} />
                           {/* End PG Module */}
                         </>
                       ) : item.module ==="MID Module" && item.status === 1 ? (

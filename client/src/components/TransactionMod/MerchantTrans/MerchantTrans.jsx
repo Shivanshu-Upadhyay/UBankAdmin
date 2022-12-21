@@ -43,11 +43,10 @@ function MerchantTrans({ authCreate, authRead, authUpdate, authDelete }) {
   const [page, setPage] = useState(1);
   const [tableData, setTableData] = useState([]);
   const [totalPage, setTotalPage] = useState(1);
-
+  const [searchDate, setSearchDate] = useState("");
   const [to, setTo] = useState("");
   const [from, setFrom] = useState("");
   const [merchantSelect, setMerchantSelect] = useState("");
-
   const [searchVal, setSearchval] = useState("");
   const [limitVal, setLimitVal] = useState(10);
   const [message, setMessage] = useState("");
@@ -60,6 +59,7 @@ function MerchantTrans({ authCreate, authRead, authUpdate, authDelete }) {
       let formData = new FormData();
       formData.append("page", page);
       formData.append("searchText", searchVal);
+      formData.append("searchDate",searchDate)
       formData.append("limit", limitVal);
       formData.append("to",from );
       formData.append("from",to );
@@ -73,7 +73,7 @@ function MerchantTrans({ authCreate, authRead, authUpdate, authDelete }) {
       };
 
       let result = await axios.post(`${baseUrl}/defaultMT`, formData, config);
-      console.log(merchantSelect);
+      console.log(result.data);
       setMessage(result.data.message);
       setTableData(result.data.data);
       setTotalPage(Number(result.data.totalPages));
@@ -125,7 +125,7 @@ if(loading){
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   key={index}
                 >
-                  <TableCell align="center">{item.i_fname}</TableCell>
+                  <TableCell align="center">{item.name}</TableCell>
                   <TableCell align="center">{item.user_id}</TableCell>
                   <TableCell align="center">
                     {authRead ? (
@@ -203,8 +203,8 @@ if(loading){
         <div className="row d-flex justify-content-center align-items-lg-center">
           <h4 className="mb-3 headingAll">Merchants Transaction</h4>
           <FilterField  setTo={setTo}  setFrom={setFrom} setMerchantSelect={setMerchantSelect} xlData={tableData}/>
-          <div className="col-6 mb-3">
-            <Search searchVal={searchVal} setSearchval={setSearchval} />
+          <div className="col-6 mb-3 d-flex justify-content-center align-items-center">
+            <Search searchVal={searchVal} setSearchval={setSearchval} /> <input type="date" value={searchDate} onChange={(e)=>setSearchDate(e.target.value)}  className="mx-2 p-2" />
           </div>
           <div className="col-3 mb-3">
             <span style={{ marginLeft: "25px" }}>Show</span>

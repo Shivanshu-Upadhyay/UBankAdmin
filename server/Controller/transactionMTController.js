@@ -2,244 +2,59 @@ var dateTime = require("node-datetime");
 const mysqlcon = require("../config/db_connection");
 var dt = dateTime.create();
 var formatted_date = dt.format("Y-m-d H:M:S");
-let pagination = (total, page, limit) => {
-  let numOfPages = Math.ceil(total / limit);
-  let start = page * limit - limit;
-  return { limit, start, numOfPages };
-};
-//completed with the serach filter module
+
 module.exports.defaultMT = async function (req, res) {
+  let pagination = (total, page, limit) => {
+    let numOfPages = Math.ceil(total / limit);
+    let start = page * limit - limit;
+    return { limit, start, numOfPages };
+  };
   try {
-    let { from, to, merchantName, status, statusType, searchText } = req.body;
+    let {searchText,searchDate} = req.body;
+    
+    let sql = "select count (*) as Total from tbl_user INNER JOIN tbl_merchant_transaction ON tbl_user.id = tbl_merchant_transaction.user_id WHERE tbl_user.status = 1 AND tbl_user.complete_profile = 1";
+    let sqlCount =
+      "select count (*) as Total FROM tbl_user INNER JOIN tbl_merchant_transaction ON tbl_user.id = tbl_merchant_transaction.user_id WHERE  DATE(tbl_merchant_transaction.created_on)=? AND tbl_user.status = 1 AND tbl_user.complete_profile = 1 AND  tbl_merchant_transaction.order_no LIKE '%" +
+      searchText +
+      "%' OR  tbl_merchant_transaction.txn_id  LIKE '%" +
+      searchText +
+      "%'";
 
-    let sqlM =
-      "SELECT id,name from tbl_user WHERE status = 1 AND complete_profile = 1";
-    let resultM = await mysqlcon(sqlM);
-
-    let sqld;
-
-    if (from && to) {
-      sqld = "";
-      sqld +=
-        " WHERE DATE(created_on) >= '" +
-        from +
-        "' AND DATE(created_on) <= '" +
-        to +
-        "'";
-
-      if (merchantName) {
-        sqld += " AND user_id = '" + merchantName + "'";
-
-        if (status && statusType === "0") {
-          sqld += " AND status = '" + status + "'";
-        } else if (status && statusType === "1") {
-          sqld +=
-            " AND status = '" + status + "' AND pending_hit_response_by = 1";
-        } else if (status && statusType === "2") {
-          sqld +=
-            " AND status = '" + status + "' AND pending_hit_response_by = 2";
-        }
-      }
-      if (status && statusType === "0") {
-        sqld += " AND status = '" + status + "'";
-      } else if (status && statusType === "1") {
-        sqld +=
-          " AND status = '" + status + "' AND pending_hit_response_by = 1";
-      } else if (status && statusType === "2") {
-        sqld +=
-          " AND status = '" + status + "' AND pending_hit_response_by = 2";
-      }
-    } else if (merchantName) {
-      sqld = "";
-
-      sqld += " WHERE user_id = '" + merchantName + "'";
-      if (status && statusType === "0") {
-        sqld += " AND status = '" + status + "'";
-      } else if (status && statusType === "1") {
-        sqld +=
-          " AND status = '" + status + "' AND pending_hit_response_by = 1";
-      } else if (status && statusType === "2") {
-        sqld +=
-          " AND status = '" + status + "' AND pending_hit_response_by = 2";
-      }
-    } else if (status && statusType === "0") {
-      sqld = "";
-      sqld += " WHERE status = '" + status + "'";
-    } else if (status && statusType === "1") {
-      sqld = "";
-      sqld +=
-        " WHERE status = '" + status + "' AND pending_hit_response_by = 1";
-    } else if (status && statusType === "2") {
-      sqld = "";
-      sqld +=
-        " WHERE status = '" + status + "' AND pending_hit_response_by = 2";
-    }
-
-    let sql = "SELECT COUNT(*) as Total FROM tbl_merchant_transaction";
-
-    if (from || to || merchantName || status) {
-      sql += sqld;
-    }
-
-    if (searchText) {
-      if (from || to || merchantName || status) {
-        sql +=
-          " AND ((order_no LIKE '%" +
-          searchText +
-          "%') OR (payment_type LIKE '%" +
-          searchText +
-          "%') OR (transaction_id LIKE '%" +
-          searchText +
-          "%') OR (ammount_type LIKE '%" +
-          searchText +
-          "%'))";
-      } else {
-        sql +=
-          " WHERE ((order_no LIKE '%" +
-          searchText +
-          "%') OR (payment_type LIKE '%" +
-          searchText +
-          "%') OR (transaction_id LIKE '%" +
-          searchText +
-          "%') OR (ammount_type LIKE '%" +
-          searchText +
-          "%'))";
-      }
-    }
-
-    let result = await mysqlcon(sql);
-
+    let result = await mysqlcon(searchText ? sqlCount : sql,searchDate && [searchDate]);
     let total = result[0].Total;
-    let Page = req.body.page ? Number(req.body.page) : 1;
+    let page = req.body.page ? Number(req.body.page) : 1;
     let limit = req.body.limit ? Number(req.body.limit) : 10;
+    let { start, numOfPages } = pagination(total, page, limit);
 
-    let page = pagination(total, Page, limit);
+    let sql1 = "SELECT tbl_user.name,tbl_merchant_transaction.* FROM tbl_user INNER JOIN tbl_merchant_transaction ON tbl_user.id = tbl_merchant_transaction.user_id WHERE tbl_user.status = 1 AND tbl_user.complete_profile = 1 LIMIT ?,?";
+    let sql2 =
+      "SELECT tbl_user.name,tbl_merchant_transaction.* FROM tbl_user INNER JOIN tbl_merchant_transaction ON tbl_user.id = tbl_merchant_transaction.user_id WHERE  DATE(tbl_merchant_transaction.created_on)=? AND tbl_user.status = 1 AND tbl_user.complete_profile = 1 AND  tbl_merchant_transaction.order_no LIKE '%" +
+      searchText +
+      "%' OR  tbl_merchant_transaction.txn_id  LIKE '%" +
+      searchText +
+      "%'  LIMIT ?,?";
 
-    let sql1 = "SELECT * FROM tbl_merchant_transaction";
-
-    if (from || to || merchantName || status) {
-      sql1 += sqld;
-    }
-
-    if (searchText) {
-      if (from || to || merchantName || status) {
-        sql1 +=
-          " AND ((order_no LIKE '%" +
-          searchText +
-          "%') OR (payment_type LIKE '%" +
-          searchText +
-          "%') OR (transaction_id LIKE '%" +
-          searchText +
-          "%') OR (ammount_type LIKE '%" +
-          searchText +
-          "%'))";
-      } else {
-        sql1 +=
-          " WHERE ((order_no LIKE '%" +
-          searchText +
-          "%') OR (payment_type LIKE '%" +
-          searchText +
-          "%') OR (transaction_id LIKE '%" +
-          searchText +
-          "%') OR (ammount_type LIKE '%" +
-          searchText +
-          "%'))";
-      }
-    }
-
-    sql1 += " ORDER BY created_on DESC LIMIT ?,?";
-
-    let result1 = await mysqlcon(sql1, [page.start, page.limit]);
-
+    let result1 = await mysqlcon(searchText ? sql2 : sql1,searchDate? [searchDate,start, limit]:[start,limit]);
+ 
     if (result1.length === 0) {
       return res.json(201, {
-        message: `No Record Found`,
+        message: `Showing ${result1.length} from ${total} data `,
+        currentPage: page,
+        totalPages: numOfPages,
+        pageLimit: limit,
         data: result1,
       });
     } else {
-      if (from && to) {
-        if (merchantName) {
-          if (status) {
-            return res.json(200, {
-              message: `All Records are ${total} from date ${from} to ${to} for merchant id ${merchantName} and status ${status}`,
-              currentPage: Page,
-              totalPages: page.numOfPages,
-              pageLimit: page.limit,
-              merchants: resultM,
-              data: result1,
-            });
-          } else {
-            return res.json(200, {
-              message: `All Records are ${total} from date ${from} to ${to} for merchant id ${merchantName}`,
-              currentPage: Page,
-              totalPages: page.numOfPages,
-              pageLimit: page.limit,
-              merchants: resultM,
-              data: result1,
-            });
-          }
-        } else if (status) {
-          return res.json(200, {
-            message: `All Records are ${total} from date ${from} to ${to} for status ${status}`,
-            currentPage: Page,
-            totalPages: page.numOfPages,
-            pageLimit: page.limit,
-            merchants: resultM,
-            data: result1,
-          });
-        }
-
-        return res.json(200, {
-          message: `All Records are ${total} from date ${from} to ${to}`,
-          currentPage: Page,
-          totalPages: page.numOfPages,
-          pageLimit: page.limit,
-          merchants: resultM,
-          data: result1,
-        });
-      } else if (merchantName) {
-        if (status) {
-          return res.json(200, {
-            message: `All Records are ${total} for merchant id ${merchantName} and status ${status}`,
-            currentPage: Page,
-            totalPages: page.numOfPages,
-            pageLimit: page.limit,
-            merchants: resultM,
-            data: result1,
-          });
-        } else {
-          return res.json(200, {
-            message: `All Records are ${total} for merchant id ${merchantName} `,
-            currentPage: Page,
-            totalPages: page.numOfPages,
-            pageLimit: page.limit,
-            merchants: resultM,
-            data: result1,
-          });
-        }
-      } else if (status) {
-        return res.json(200, {
-          message: `All Records are ${total} for status ${status}`,
-          currentPage: Page,
-          totalPages: page.numOfPages,
-          pageLimit: page.limit,
-          merchants: resultM,
-          data: result1,
-        });
-      }
-
       return res.json(200, {
-        message: `All Records are ${total}`,
-        currentPage: Page,
-        totalPages: page.numOfPages,
-        pageLimit: page.limit,
-        merchants: resultM,
+        message: `Showing ${result1.length} from ${total} data `,
+        currentPage: page,
+        totalPages: numOfPages,
+        pageLimit: limit,
         data: result1,
       });
     }
   } catch (error) {
     console.log(error);
-
     return res.json(500, {
       message: "error occurered",
       error: error,
@@ -252,20 +67,20 @@ module.exports.getIdMT = async function (req, res) {
     let { id } = req.body;
     let sql = "SELECT * FROM tbl_merchant_transaction WHERE invoice_id = ?";
     let result = await mysqlcon(sql, [id]);
-    // let od_id = result[0].new_trx === 1 ? result[0].txn_id : result[0].order_no;
-    // let sql1 = "SELECT * FROM tbl_payin_request WHERE order_id = ?";
-    // let sql2 = "SELECT * FROM tbl_payment_gate_response_tale WHERE order_id = ?";
-    // let sql3 = `SELECT * FROM tbl_cron_log WHERE data LIKE '{"order_id":"${od_id}%'`;
-    // let request_data = await mysqlcon(sql1, [result[0].order_no]);
-    // let bank_data = await mysqlcon(sql2, [result[0].order_no]);
-    // let cron_data = await mysqlcon(sql3);
+    let od_id = result[0].new_trx === 1 ? result[0].txn_id : result[0].order_no;
+    let sql1 = "SELECT * FROM tbl_payin_request WHERE order_id = ?";
+    let sql2 = "SELECT * FROM tbl_payment_gate_response_tale WHERE order_id = ?";
+    let sql3 = `SELECT * FROM tbl_cron_log WHERE data LIKE '{"order_id":"${od_id}%'`;
+    let request_data = await mysqlcon(sql1, [result[0].order_no]);
+    let bank_data = await mysqlcon(sql2, [result[0].order_no]);
+    let cron_data = await mysqlcon(sql3);
     if (result.length !== 0) {
       return res.json(200, {
         message: `Records for id =  ${id}`,
         data: result,
-        // request_data: request_data,
-        // bank_data: bank_data,
-        // cron_data: cron_data
+        request_data: request_data,
+        bank_data: bank_data,
+        cron_data: cron_data
       });
     } else {
       return res.json(201, {

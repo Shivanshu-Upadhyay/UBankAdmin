@@ -120,7 +120,7 @@ class AddFund {
         add_amount: addBal,
         available_balance,
         funds_added_by: `${firstname} ${lastname}` ,
-        type: option,
+        // type: option,
       };
       const sqlSettCurr =
         "Select settle_currency,wallet from tbl_user where id=? ";

@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './search.css'
-function Search({ searchVal,setSearchval }) {
-  
+function Search({ setSearchval }) {
+  const [search,setSearch] = useState('')
 
   return (
     <>
@@ -10,14 +10,15 @@ function Search({ searchVal,setSearchval }) {
           type="search"
           placeholder="Search"
           className="search"
-          value={searchVal}
-          onChange={(e) => setSearchval(e.target.value)}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
         <img
           src="https://www.bankconnect.online/assets/merchants/img/search.svg"
           alt=""
           className="icon"
           style={{ cursor: "pointer" }}
+          onClick={()=>setSearchval(search)}
         />
       </div>
     </>
